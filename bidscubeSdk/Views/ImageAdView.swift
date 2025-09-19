@@ -165,10 +165,9 @@ public final class ImageAdView: UIView {
     
     private func extractClickURLFromHTML(_ htmlContent: String) {
         let patterns = [
-            "https://[^\"'\\s]+",
-            "http://[^\"'\\s]+",
-            "curl=([^&\"'\\s]+)"
-        ]
+            "https?://[^\"'\\\\s]+",
+            "curl=([^&\"'\\\\s]+)"
+            ]
         
         for pattern in patterns {
             if let regex = try? NSRegularExpression(pattern: pattern, options: []) {
