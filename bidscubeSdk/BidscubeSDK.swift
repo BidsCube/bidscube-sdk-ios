@@ -9,10 +9,28 @@ public final class BidscubeSDK {
     private static var hasAdsConsentFlag: Bool = false
     private static var hasAnalyticsConsentFlag: Bool = false
     private static var consentDebugDeviceId: String?
+    
+    
+    private static var activeBanners: [BannerAdView] = []
 
-    // Initialization
+    
     public static func initialize(config: SDKConfig) {
         self.configuration = config
+        Logger.configure(from: config)
+        Logger.info("BidsCube SDK initialized with configuration")
+    }
+    
+    
+    public static func initialize() {
+        let config = SDKConfig.Builder()
+            .enableLogging(true)
+            .enableDebugMode(false)
+            .defaultAdTimeout(Constants.defaultTimeoutMs)
+            .defaultAdPosition(Constants.defaultAdPosition)
+            .baseURL(Constants.baseURL)
+            .build()
+        
+        initialize(config: config)
     }
 
     private static func createOnMainThread<T>(_ make: () -> T) -> T {
@@ -32,6 +50,9 @@ public final class BidscubeSDK {
     }
 
     public static func cleanup() {
+        
+        removeAllBanners()
+        
         configuration = nil
         manualAdPosition = nil
         responseAdPosition = .unknown
@@ -41,7 +62,7 @@ public final class BidscubeSDK {
         consentDebugDeviceId = nil
     }
 
-    // Ad Positioning
+    
     public static func setAdPosition(_ position: AdPosition) {
         manualAdPosition = position
     }
@@ -53,20 +74,24 @@ public final class BidscubeSDK {
     public static func getResponseAdPosition() -> AdPosition {
         return responseAdPosition
     }
+    
+    public static func setResponseAdPosition(_ position: AdPosition) {
+        responseAdPosition = position
+    }
 
     public static func getEffectiveAdPosition() -> AdPosition {
         return manualAdPosition ?? responseAdPosition
     }
 
     public static func requestConsentInfoUpdate(callback: ConsentCallback) {
-        // emulate async update
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             callback.onConsentInfoUpdated()
         }
     }
 
     public static func showConsentForm(_ callback: ConsentCallback) {
-        // Stubbed: fake form then grant
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             callback.onConsentFormShown()
             self.hasAdsConsentFlag = true
@@ -102,14 +127,19 @@ public final class BidscubeSDK {
         return "required=\(consentRequired), ads=\(hasAdsConsentFlag), analytics=\(hasAnalyticsConsentFlag)"
     }
 
-    // Ad URL Builder
-    public static func buildRequestURL(base: String, placementId: String, adType: AdType, ctaText: String? = nil) -> URL? {
-        let config = configuration
-        let timeout = config?.defaultAdTimeoutMs ?? 30_000
-        let debug = config?.enableDebugMode ?? false
+    
+    public static func buildRequestURL(placementId: String, adType: AdType, ctaText: String? = nil) -> URL? {
+        guard let config = configuration else {
+            Logger.error("SDK not initialized")
+            return nil
+        }
+        
+        let timeout = config.defaultAdTimeoutMs
+        let debug = config.enableDebugMode
         let position = getEffectiveAdPosition()
+        
         return URLBuilder.buildAdRequestURL(
-            base: base,
+            base: config.baseURL,
             placementId: placementId,
             adType: adType,
             position: position,
@@ -120,60 +150,445 @@ public final class BidscubeSDK {
     }
     public static func showImageAd(_ placementId: String, _ callback: AdCallback?) {
         callback?.onAdLoading(placementId)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.responseAdPosition = .unknown
-            callback?.onAdLoaded(placementId)
-            callback?.onAdDisplayed(placementId)
+        
+        
+        guard let url = buildRequestURL(placementId: placementId, adType: .image) else {
+            callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
+            return
+        }
+        
+        
+        NetworkManager.shared.get(url: url) { result in
+            switch result {
+            case .success(let data):
+                guard let htmlContent = String(data: data, encoding: .utf8) else {
+                    callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidResponse, errorMessage: Constants.ErrorMessages.invalidResponse)
+                    return
+                }
+                
+                
+                do {
+                    if let jsonData = htmlContent.data(using: .utf8),
+                       let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
+                       let positionValue = json["position"] as? Int,
+                       let position = AdPosition(rawValue: positionValue) {
+                        self.responseAdPosition = position
+                    }
+                } catch {
+                    
+                    self.responseAdPosition = .unknown
+                }
+                
+                callback?.onAdLoaded(placementId)
+                callback?.onAdDisplayed(placementId)
+                
+            case .failure(let error):
+                callback?.onAdFailed(placementId, errorCode: error.errorCode, errorMessage: error.localizedDescription)
+            }
         }
     }
 
     public static func getImageAdView(_ placementId: String, _ callback: AdCallback?) -> UIView {
-        let view = createOnMainThread { ImageAdView() }
-        showImageAd(placementId, callback)
+        Logger.info("getImageAdView called for placement: \(placementId)")
+        
+        
+        let effectivePosition = getEffectiveAdPosition()
+        let view: UIView
+        
+        if effectivePosition == .header || effectivePosition == .footer || effectivePosition == .sidebar {
+            view = createOnMainThread { BannerAdView(position: effectivePosition) }
+        } else {
+            view = createOnMainThread { ImageAdView() }
+        }
+        
+        callback?.onAdLoading(placementId)
+        
+        
+        guard let url = buildRequestURL(placementId: placementId, adType: .image) else {
+            Logger.error("Failed to build request URL for image ad")
+            callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
+            return view
+        }
+        
+        
+        if let imageAdView = view as? ImageAdView {
+            imageAdView.setPlacementInfo(placementId, callback: callback)
+            imageAdView.loadAdFromURL(url)
+        } else if let bannerAdView = view as? BannerAdView {
+            bannerAdView.setPlacementInfo(placementId, callback: callback)
+            bannerAdView.loadAdFromURL(url)
+        }
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.responseAdPosition = .unknown
+            callback?.onAdLoaded(placementId)
+            callback?.onAdDisplayed(placementId)
+        }
+        
         return view
     }
 
     public static func showVideoAd(_ placementId: String, _ callback: AdCallback?) {
         callback?.onAdLoading(placementId)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        
+        
+        guard let url = buildRequestURL(placementId: placementId, adType: .video) else {
+            callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
+            return
+        }
+        
+        
+        NetworkManager.shared.get(url: url) { result in
+            switch result {
+            case .success(let data):
+                guard let content = String(data: data, encoding: .utf8) else {
+                    callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidResponse, errorMessage: Constants.ErrorMessages.invalidResponse)
+                    return
+                }
+                
+                
+                do {
+                    if let jsonData = content.data(using: .utf8),
+                       let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
+                       let positionValue = json["position"] as? Int,
+                       let position = AdPosition(rawValue: positionValue) {
+                        self.responseAdPosition = position
+                    }
+                } catch {
+                    
+                    self.responseAdPosition = .fullScreen
+                }
+                
+                callback?.onAdLoaded(placementId)
+                callback?.onAdDisplayed(placementId)
+                callback?.onVideoAdStarted(placementId)
+                callback?.onVideoAdCompleted(placementId)
+                
+            case .failure(let error):
+                callback?.onAdFailed(placementId, errorCode: error.errorCode, errorMessage: error.localizedDescription)
+            }
+        }
+    }
+
+    public static func getVideoAdView(
+        _ placementId: String,
+        _ callback: AdCallback?
+    ) -> UIView {
+       
+        let view = createOnMainThread { VideoAdView() }
+        
+        callback?.onAdLoading(placementId)
+        
+        
+        let adType: AdType = .video
+        guard let url = buildRequestURL(placementId: placementId, adType: adType) else {
+            Logger.error("Failed to build request URL for \(adType)")
+            callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
+            return view
+        }
+        
+        
+        if let videoAdView = view as? VideoAdView {
+            videoAdView.setPlacementInfo(placementId, callback: callback)
+            videoAdView.loadVideoAdFromURL(url)
+        }
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.responseAdPosition = .fullScreen
             callback?.onAdLoaded(placementId)
             callback?.onAdDisplayed(placementId)
             callback?.onVideoAdStarted(placementId)
+            
+           
             callback?.onVideoAdCompleted(placementId)
         }
-    }
-
-    public static func showSkippableVideoAd(_ placementId: String, _ ctaText: String, _ callback: AdCallback?) {
-        callback?.onAdLoading(placementId)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.responseAdPosition = .fullScreen
-            callback?.onAdLoaded(placementId)
-            callback?.onAdDisplayed(placementId)
-            callback?.onVideoAdSkippable(placementId)
-            callback?.onInstallButtonClicked(placementId, buttonText: ctaText)
-        }
-    }
-
-    public static func getVideoAdView(_ placementId: String, _ callback: AdCallback?) -> UIView {
-        let view = createOnMainThread { VideoAdView() }
-        showVideoAd(placementId, callback)
+        
         return view
     }
 
+
     public static func showNativeAd(_ placementId: String, _ callback: AdCallback?) {
         callback?.onAdLoading(placementId)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.responseAdPosition = .unknown
-            callback?.onAdLoaded(placementId)
-            callback?.onAdDisplayed(placementId)
+        
+        
+        guard let url = buildRequestURL(placementId: placementId, adType: .native) else {
+            callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
+            return
+        }
+        
+        
+        NetworkManager.shared.get(url: url) { result in
+            switch result {
+            case .success(let data):
+                guard let content = String(data: data, encoding: .utf8) else {
+                    callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidResponse, errorMessage: Constants.ErrorMessages.invalidResponse)
+                    return
+                }
+                
+                
+                do {
+                    if let jsonData = content.data(using: .utf8),
+                       let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
+                       let positionValue = json["position"] as? Int,
+                       let position = AdPosition(rawValue: positionValue) {
+                        self.responseAdPosition = position
+                    }
+                } catch {
+                    
+                    self.responseAdPosition = .unknown
+                }
+                
+                callback?.onAdLoaded(placementId)
+                callback?.onAdDisplayed(placementId)
+                
+            case .failure(let error):
+                callback?.onAdFailed(placementId, errorCode: error.errorCode, errorMessage: error.localizedDescription)
+            }
         }
     }
 
     public static func getNativeAdView(_ placementId: String, _ callback: AdCallback?) -> UIView {
+        Logger.info("getNativeAdView called for placement: \(placementId)")
+        
         let view: NativeAdView = createOnMainThread { NativeAdView() }
-        showNativeAd(placementId, callback)
+        
+        callback?.onAdLoading(placementId)
+        
+        
+        guard let url = buildRequestURL(placementId: placementId, adType: .native) else {
+            Logger.error("Failed to build request URL for native ad")
+            callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
+            return view
+        }
+        
+        
+        view.setPlacementInfo(placementId, callback: callback)
+        view.loadNativeAdFromURL(url)
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.responseAdPosition = .unknown
+            callback?.onAdLoaded(placementId)
+            callback?.onAdDisplayed(placementId)
+        }
+        
         return view
+    }
+    
+    
+    
+    
+    public static func presentImageAd(_ placementId: String, from viewController: UIViewController, callback: AdCallback? = nil) {
+        AdViewController.presentAd(placementId: placementId, adType: .image, from: viewController, callback: callback)
+    }
+    
+    
+    public static func pushImageAd(_ placementId: String, onto navigationController: UINavigationController, callback: AdCallback? = nil) {
+        AdViewController.pushAd(placementId: placementId, adType: .image, onto: navigationController, callback: callback)
+    }
+    
+    
+    public static func presentVideoAd(_ placementId: String, from viewController: UIViewController, callback: AdCallback? = nil) {
+        AdViewController.presentAd(placementId: placementId, adType: .video, from: viewController, callback: callback)
+    }
+    
+    
+    public static func pushVideoAd(_ placementId: String, onto navigationController: UINavigationController, callback: AdCallback? = nil) {
+        AdViewController.pushAd(placementId: placementId, adType: .video, onto: navigationController, callback: callback)
+    }
+    
+    
+    public static func presentNativeAd(_ placementId: String, from viewController: UIViewController, callback: AdCallback? = nil) {
+        AdViewController.presentAd(placementId: placementId, adType: .native, from: viewController, callback: callback)
+    }
+    
+    
+    public static func pushNativeAd(_ placementId: String, onto navigationController: UINavigationController, callback: AdCallback? = nil) {
+        AdViewController.pushAd(placementId: placementId, adType: .native, onto: navigationController, callback: callback)
+    }
+    
+    
+    
+    
+    public static func getAdViewController(_ placementId: String, _ adType: AdType, _ callback: AdCallback?) -> UIViewController {
+        Logger.info("getAdViewController called for placement: \(placementId), type: \(adType)")
+        
+        return createOnMainThread {
+            AdViewController(placementId: placementId, adType: adType, callback: callback)
+        }
+    }
+    
+    
+    public static func presentAd(_ placementId: String, _ adType: AdType, from viewController: UIViewController, _ callback: AdCallback?) {
+        Logger.info("presentAd called for placement: \(placementId), type: \(adType)")
+        
+        AdViewController.presentAd(placementId: placementId, adType: adType, from: viewController, callback: callback)
+    }
+    
+    
+    public static func shouldPresentFullScreen(_ placementId: String, _ adType: AdType, _ callback: AdCallback?) -> Bool {
+        
+        if let manualPosition = manualAdPosition, manualPosition == .fullScreen {
+            return true
+        }
+        
+        
+        if responseAdPosition == .fullScreen {
+            return true
+        }
+        
+        
+        
+        return responseAdPosition == .unknown
+    }
+    
+    
+    
+    
+    public static func getBannerAdView(_ placementId: String, position: AdPosition, callback: AdCallback?) -> BannerAdView {
+        Logger.info("getBannerAdView called for placement: \(placementId), position: \(position)")
+        
+        let bannerView = createOnMainThread { BannerAdView(position: position) }
+        
+        callback?.onAdLoading(placementId)
+        
+        
+        guard let url = buildRequestURL(placementId: placementId, adType: .image) else {
+            Logger.error("Failed to build request URL for banner ad")
+            callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
+            return bannerView
+        }
+        
+        
+        bannerView.setPlacementInfo(placementId, callback: callback)
+        bannerView.loadAdFromURL(url)
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.responseAdPosition = position
+            callback?.onAdLoaded(placementId)
+            callback?.onAdDisplayed(placementId)
+        }
+        
+        return bannerView
+    }
+    
+    
+    public static func showHeaderBanner(_ placementId: String, in viewController: UIViewController, callback: AdCallback? = nil) {
+        Logger.info("showHeaderBanner called for placement: \(placementId)")
+        
+        let bannerView = getBannerAdView(placementId, position: .header, callback: callback)
+        trackBanner(bannerView)
+        bannerView.attachToScreen(in: viewController)
+    }
+    
+    
+    public static func showFooterBanner(_ placementId: String, in viewController: UIViewController, callback: AdCallback? = nil) {
+        Logger.info("showFooterBanner called for placement: \(placementId)")
+        
+        let bannerView = getBannerAdView(placementId, position: .footer, callback: callback)
+        trackBanner(bannerView)
+        bannerView.attachToScreen(in: viewController)
+    }
+    
+    
+    public static func showSidebarBanner(_ placementId: String, in viewController: UIViewController, callback: AdCallback? = nil) {
+        Logger.info("showSidebarBanner called for placement: \(placementId)")
+        
+        let bannerView = getBannerAdView(placementId, position: .sidebar, callback: callback)
+        trackBanner(bannerView)
+        bannerView.attachToScreen(in: viewController)
+    }
+    
+    
+    public static func showCustomBanner(_ placementId: String, position: AdPosition, width: CGFloat, height: CGFloat, in viewController: UIViewController, callback: AdCallback? = nil) {
+        Logger.info("showCustomBanner called for placement: \(placementId), position: \(position), size: \(width)x\(height)")
+        
+        let bannerView = getBannerAdView(placementId, position: position, callback: callback)
+        trackBanner(bannerView)
+        bannerView.setBannerDimensions(width: width, height: height)
+        bannerView.attachToScreen(in: viewController)
+    }
+    
+    
+    public static func getBannerAdView(_ placementId: String, position: AdPosition, cornerRadius: CGFloat, callback: AdCallback?) -> BannerAdView {
+        Logger.info("getBannerAdView called for placement: \(placementId), position: \(position), cornerRadius: \(cornerRadius)")
+        
+        let bannerView = createOnMainThread { BannerAdView(position: position, cornerRadius: cornerRadius) }
+        
+        callback?.onAdLoading(placementId)
+        
+        
+        guard let url = buildRequestURL(placementId: placementId, adType: .image) else {
+            Logger.error("Failed to build request URL for banner ad")
+            callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
+            return bannerView
+        }
+        
+        
+        bannerView.setPlacementInfo(placementId, callback: callback)
+        bannerView.loadAdFromURL(url)
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.responseAdPosition = position
+            callback?.onAdLoaded(placementId)
+            callback?.onAdDisplayed(placementId)
+        }
+        
+        return bannerView
+    }
+    
+    
+    public static func showBannerWithCornerRadius(_ placementId: String, position: AdPosition, cornerRadius: CGFloat, in viewController: UIViewController, callback: AdCallback? = nil) {
+        Logger.info("showBannerWithCornerRadius called for placement: \(placementId), position: \(position), cornerRadius: \(cornerRadius)")
+        
+        let bannerView = getBannerAdView(placementId, position: position, cornerRadius: cornerRadius, callback: callback)
+        trackBanner(bannerView)
+        bannerView.attachToScreen(in: viewController)
+    }
+    
+    
+    public static func showCustomBanner(_ placementId: String, position: AdPosition, width: CGFloat, height: CGFloat, cornerRadius: CGFloat, in viewController: UIViewController, callback: AdCallback? = nil) {
+        Logger.info("showCustomBanner called for placement: \(placementId), position: \(position), size: \(width)x\(height), cornerRadius: \(cornerRadius)")
+        
+        let bannerView = getBannerAdView(placementId, position: position, cornerRadius: cornerRadius, callback: callback)
+        trackBanner(bannerView)
+        bannerView.setBannerDimensions(width: width, height: height)
+        bannerView.attachToScreen(in: viewController)
+    }
+    
+    
+    
+    
+    private static func trackBanner(_ banner: BannerAdView) {
+        activeBanners.append(banner)
+        Logger.debug("Tracking banner ad. Total active banners: \(activeBanners.count)")
+    }
+    
+    
+    public static func untrackBanner(_ banner: BannerAdView) {
+        activeBanners.removeAll { $0 === banner }
+        Logger.debug("Untracking banner ad. Total active banners: \(activeBanners.count)")
+    }
+    
+    
+    public static func removeAllBanners() {
+        Logger.debug("Removing all active banners. Count: \(activeBanners.count)")
+        
+        for banner in activeBanners {
+            banner.detachFromScreen()
+        }
+        
+        activeBanners.removeAll()
+        Logger.debug("All banners removed")
+    }
+    
+    
+    public static func getActiveBannerCount() -> Int {
+        return activeBanners.count
     }
 }
 

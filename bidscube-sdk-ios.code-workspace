@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../bidscube-sdk"
+		},
+		{
+			"path": "../BidsCube-testApp"
+		},
+		{
+			"path": "../bidscube-backend-mock"
+		}
+	],
+	"settings": {}
+}

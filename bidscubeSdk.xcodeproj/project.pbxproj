@@ -7,10 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041A52092E70143D00DC462A /* bidscubeSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A38F6E2E69C68500FC2662 /* bidscubeSdk.framework */; };
+		041A520A2E70143D00DC462A /* bidscubeSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04A38F6E2E69C68500FC2662 /* bidscubeSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04A38F792E69C68500FC2662 /* bidscubeSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A38F6E2E69C68500FC2662 /* bidscubeSdk.framework */; };
+		85448C0EF6391F2DDA41227A /* Pods_bidscubeSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AA1D06D7DDE80EB7B01C30 /* Pods_bidscubeSdk.framework */; };
+		F203F154D65F48AD9EECBADB /* Pods_testApp_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC1FF7AE42E6B912D9D4CBF /* Pods_testApp_ios.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		041A51EE2E7013FC00DC462A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04A38F652E69C68500FC2662 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 041A51DD2E7013FA00DC462A;
+			remoteInfo = "testApp-ios";
+		};
+		041A51F82E7013FC00DC462A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04A38F652E69C68500FC2662 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 041A51DD2E7013FA00DC462A;
+			remoteInfo = "testApp-ios";
+		};
+		041A520B2E70143D00DC462A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04A38F652E69C68500FC2662 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04A38F6D2E69C68500FC2662;
+			remoteInfo = bidscubeSdk;
+		};
 		04A38F7A2E69C68500FC2662 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 04A38F652E69C68500FC2662 /* Project object */;
@@ -20,9 +45,32 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		041A520D2E70143D00DC462A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				041A520A2E70143D00DC462A /* bidscubeSdk.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		041A51DE2E7013FA00DC462A /* testApp-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "testApp-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		041A51ED2E7013FC00DC462A /* testApp-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "testApp-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		041A51F72E7013FC00DC462A /* testApp-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "testApp-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A38F6E2E69C68500FC2662 /* bidscubeSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = bidscubeSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A38F782E69C68500FC2662 /* bidscubeSdkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bidscubeSdkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		15C415F0AA61BF2D21006DE4 /* Pods-testApp-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp-ios.debug.xcconfig"; path = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		407CD84F681494B744C8A29E /* Pods-bidscubeSdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bidscubeSdk.release.xcconfig"; path = "Target Support Files/Pods-bidscubeSdk/Pods-bidscubeSdk.release.xcconfig"; sourceTree = "<group>"; };
+		464F057DEC84650EABE83A3E /* Pods-testApp-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp-ios.release.xcconfig"; path = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios.release.xcconfig"; sourceTree = "<group>"; };
+		61AA1D06D7DDE80EB7B01C30 /* Pods_bidscubeSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bidscubeSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		66746E2E1AD9E9421C482E7C /* Pods-bidscubeSdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bidscubeSdk.debug.xcconfig"; path = "Target Support Files/Pods-bidscubeSdk/Pods-bidscubeSdk.debug.xcconfig"; sourceTree = "<group>"; };
+		CCC1FF7AE42E6B912D9D4CBF /* Pods_testApp_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testApp_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,6 +84,21 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		041A51DF2E7013FA00DC462A /* testApp-ios */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "testApp-ios";
+			sourceTree = "<group>";
+		};
+		041A51F02E7013FC00DC462A /* testApp-iosTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "testApp-iosTests";
+			sourceTree = "<group>";
+		};
+		041A51FA2E7013FC00DC462A /* testApp-iosUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "testApp-iosUITests";
+			sourceTree = "<group>";
+		};
 		04A38F702E69C68500FC2662 /* bidscubeSdk */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -52,10 +115,34 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		041A51DB2E7013FA00DC462A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				041A52092E70143D00DC462A /* bidscubeSdk.framework in Frameworks */,
+				F203F154D65F48AD9EECBADB /* Pods_testApp_ios.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		041A51EA2E7013FC00DC462A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		041A51F42E7013FC00DC462A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04A38F6B2E69C68500FC2662 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85448C0EF6391F2DDA41227A /* Pods_bidscubeSdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,7 +162,12 @@
 			children = (
 				04A38F702E69C68500FC2662 /* bidscubeSdk */,
 				04A38F7C2E69C68500FC2662 /* bidscubeSdkTests */,
+				041A51DF2E7013FA00DC462A /* testApp-ios */,
+				041A51F02E7013FC00DC462A /* testApp-iosTests */,
+				041A51FA2E7013FC00DC462A /* testApp-iosUITests */,
 				04A38F6F2E69C68500FC2662 /* Products */,
+				E532E2464039B8FF080F6614 /* Pods */,
+				6CC2E2A6DC67467EA91C0309 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,8 +176,31 @@
 			children = (
 				04A38F6E2E69C68500FC2662 /* bidscubeSdk.framework */,
 				04A38F782E69C68500FC2662 /* bidscubeSdkTests.xctest */,
+				041A51DE2E7013FA00DC462A /* testApp-ios.app */,
+				041A51ED2E7013FC00DC462A /* testApp-iosTests.xctest */,
+				041A51F72E7013FC00DC462A /* testApp-iosUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6CC2E2A6DC67467EA91C0309 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				61AA1D06D7DDE80EB7B01C30 /* Pods_bidscubeSdk.framework */,
+				CCC1FF7AE42E6B912D9D4CBF /* Pods_testApp_ios.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E532E2464039B8FF080F6614 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				66746E2E1AD9E9421C482E7C /* Pods-bidscubeSdk.debug.xcconfig */,
+				407CD84F681494B744C8A29E /* Pods-bidscubeSdk.release.xcconfig */,
+				15C415F0AA61BF2D21006DE4 /* Pods-testApp-ios.debug.xcconfig */,
+				464F057DEC84650EABE83A3E /* Pods-testApp-ios.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -101,10 +216,74 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		041A51DD2E7013FA00DC462A /* testApp-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 041A52052E7013FC00DC462A /* Build configuration list for PBXNativeTarget "testApp-ios" */;
+			buildPhases = (
+				24341970C97604490625864B /* [CP] Check Pods Manifest.lock */,
+				041A51DA2E7013FA00DC462A /* Sources */,
+				041A51DB2E7013FA00DC462A /* Frameworks */,
+				041A51DC2E7013FA00DC462A /* Resources */,
+				041A520D2E70143D00DC462A /* Embed Frameworks */,
+				684BE4779A0D2F4DCE80AADF /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				041A520C2E70143D00DC462A /* PBXTargetDependency */,
+			);
+			name = "testApp-ios";
+			productName = "testApp-ios";
+			productReference = 041A51DE2E7013FA00DC462A /* testApp-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+		041A51EC2E7013FC00DC462A /* testApp-iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 041A52062E7013FC00DC462A /* Build configuration list for PBXNativeTarget "testApp-iosTests" */;
+			buildPhases = (
+				041A51E92E7013FC00DC462A /* Sources */,
+				041A51EA2E7013FC00DC462A /* Frameworks */,
+				041A51EB2E7013FC00DC462A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				041A51EF2E7013FC00DC462A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				041A51F02E7013FC00DC462A /* testApp-iosTests */,
+			);
+			name = "testApp-iosTests";
+			productName = "testApp-iosTests";
+			productReference = 041A51ED2E7013FC00DC462A /* testApp-iosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		041A51F62E7013FC00DC462A /* testApp-iosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 041A52072E7013FC00DC462A /* Build configuration list for PBXNativeTarget "testApp-iosUITests" */;
+			buildPhases = (
+				041A51F32E7013FC00DC462A /* Sources */,
+				041A51F42E7013FC00DC462A /* Frameworks */,
+				041A51F52E7013FC00DC462A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				041A51F92E7013FC00DC462A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				041A51FA2E7013FC00DC462A /* testApp-iosUITests */,
+			);
+			name = "testApp-iosUITests";
+			productName = "testApp-iosUITests";
+			productReference = 041A51F72E7013FC00DC462A /* testApp-iosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		04A38F6D2E69C68500FC2662 /* bidscubeSdk */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04A38F812E69C68500FC2662 /* Build configuration list for PBXNativeTarget "bidscubeSdk" */;
 			buildPhases = (
+				7A9077067B06C08ECF615784 /* [CP] Check Pods Manifest.lock */,
 				04A38F692E69C68500FC2662 /* Headers */,
 				04A38F6A2E69C68500FC2662 /* Sources */,
 				04A38F6B2E69C68500FC2662 /* Frameworks */,
@@ -115,11 +294,10 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				041A51DF2E7013FA00DC462A /* testApp-ios */,
 				04A38F702E69C68500FC2662 /* bidscubeSdk */,
 			);
 			name = bidscubeSdk;
-			packageProductDependencies = (
-			);
 			productName = bidscubeSdk;
 			productReference = 04A38F6E2E69C68500FC2662 /* bidscubeSdk.framework */;
 			productType = "com.apple.product-type.framework";
@@ -141,8 +319,6 @@
 				04A38F7C2E69C68500FC2662 /* bidscubeSdkTests */,
 			);
 			name = bidscubeSdkTests;
-			packageProductDependencies = (
-			);
 			productName = bidscubeSdkTests;
 			productReference = 04A38F782E69C68500FC2662 /* bidscubeSdkTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -157,6 +333,17 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					041A51DD2E7013FA00DC462A = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					041A51EC2E7013FC00DC462A = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 041A51DD2E7013FA00DC462A;
+					};
+					041A51F62E7013FC00DC462A = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 041A51DD2E7013FA00DC462A;
+					};
 					04A38F6D2E69C68500FC2662 = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -174,6 +361,9 @@
 			);
 			mainGroup = 04A38F642E69C68500FC2662;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0472A3532E744D02000D1D0B /* XCRemoteSwiftPackageReference "googleads-ima-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 04A38F6F2E69C68500FC2662 /* Products */;
 			projectDirPath = "";
@@ -181,11 +371,35 @@
 			targets = (
 				04A38F6D2E69C68500FC2662 /* bidscubeSdk */,
 				04A38F772E69C68500FC2662 /* bidscubeSdkTests */,
+				041A51DD2E7013FA00DC462A /* testApp-ios */,
+				041A51EC2E7013FC00DC462A /* testApp-iosTests */,
+				041A51F62E7013FC00DC462A /* testApp-iosUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		041A51DC2E7013FA00DC462A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		041A51EB2E7013FC00DC462A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		041A51F52E7013FC00DC462A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04A38F6C2E69C68500FC2662 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -202,7 +416,92 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		24341970C97604490625864B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-testApp-ios-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		684BE4779A0D2F4DCE80AADF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-testApp-ios/Pods-testApp-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-testApp-ios/Pods-testApp-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-testApp-ios/Pods-testApp-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7A9077067B06C08ECF615784 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bidscubeSdk-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		041A51DA2E7013FA00DC462A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		041A51E92E7013FC00DC462A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		041A51F32E7013FC00DC462A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04A38F6A2E69C68500FC2662 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -220,6 +519,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		041A51EF2E7013FC00DC462A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 041A51DD2E7013FA00DC462A /* testApp-ios */;
+			targetProxy = 041A51EE2E7013FC00DC462A /* PBXContainerItemProxy */;
+		};
+		041A51F92E7013FC00DC462A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 041A51DD2E7013FA00DC462A /* testApp-ios */;
+			targetProxy = 041A51F82E7013FC00DC462A /* PBXContainerItemProxy */;
+		};
+		041A520C2E70143D00DC462A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04A38F6D2E69C68500FC2662 /* bidscubeSdk */;
+			targetProxy = 041A520B2E70143D00DC462A /* PBXContainerItemProxy */;
+		};
 		04A38F7B2E69C68500FC2662 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 04A38F6D2E69C68500FC2662 /* bidscubeSdk */;
@@ -228,8 +542,157 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		041A51FF2E7013FC00DC462A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15C415F0AA61BF2D21006DE4 /* Pods-testApp-ios.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"testApp-ios/Preview Content\"";
+				DEVELOPMENT_TEAM = VN7YM4R7N7;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bidscube.ios.testApp-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Debug;
+		};
+		041A52002E7013FC00DC462A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 464F057DEC84650EABE83A3E /* Pods-testApp-ios.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"testApp-ios/Preview Content\"";
+				DEVELOPMENT_TEAM = VN7YM4R7N7;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bidscube.ios.testApp-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		041A52012E7013FC00DC462A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VN7YM4R7N7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bidscube.ios.testApp-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testApp-ios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/testApp-ios";
+			};
+			name = Debug;
+		};
+		041A52022E7013FC00DC462A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VN7YM4R7N7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bidscube.ios.testApp-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testApp-ios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/testApp-ios";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		041A52032E7013FC00DC462A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VN7YM4R7N7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bidscube.ios.testApp-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "testApp-ios";
+			};
+			name = Debug;
+		};
+		041A52042E7013FC00DC462A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VN7YM4R7N7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bidscube.ios.testApp-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "testApp-ios";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		04A38F822E69C68500FC2662 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66746E2E1AD9E9421C482E7C /* Pods-bidscubeSdk.debug.xcconfig */;
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
@@ -241,6 +704,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -253,6 +717,14 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/bidscubeSdk/bidscube-backend-mock/node_modules/@img/sharp-libvips-darwin-arm64/lib",
+					"$(PROJECT_DIR)/bidscubeSdk/bidscube-backend-mock/node_modules/@unrs/resolver-binding-darwin-arm64",
+					"$(PROJECT_DIR)/bidscubeSdk/bidscube-backend-mock/node_modules/@next/swc-darwin-arm64",
+					"$(PROJECT_DIR)/bidscubeSdk/bidscube-backend-mock/node_modules/lightningcss-darwin-arm64",
+					"$(PROJECT_DIR)/bidscubeSdk/bidscube-backend-mock/node_modules/@tailwindcss/oxide-darwin-arm64",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
@@ -261,7 +733,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
@@ -272,6 +744,7 @@
 		};
 		04A38F832E69C68500FC2662 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 407CD84F681494B744C8A29E /* Pods-bidscubeSdk.release.xcconfig */;
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
@@ -283,6 +756,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -295,6 +769,14 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/bidscubeSdk/bidscube-backend-mock/node_modules/@img/sharp-libvips-darwin-arm64/lib",
+					"$(PROJECT_DIR)/bidscubeSdk/bidscube-backend-mock/node_modules/@unrs/resolver-binding-darwin-arm64",
+					"$(PROJECT_DIR)/bidscubeSdk/bidscube-backend-mock/node_modules/@next/swc-darwin-arm64",
+					"$(PROJECT_DIR)/bidscubeSdk/bidscube-backend-mock/node_modules/lightningcss-darwin-arm64",
+					"$(PROJECT_DIR)/bidscubeSdk/bidscube-backend-mock/node_modules/@tailwindcss/oxide-darwin-arm64",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
@@ -303,7 +785,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
@@ -368,7 +850,8 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -426,6 +909,8 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -479,6 +964,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		041A52052E7013FC00DC462A /* Build configuration list for PBXNativeTarget "testApp-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				041A51FF2E7013FC00DC462A /* Debug */,
+				041A52002E7013FC00DC462A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		041A52062E7013FC00DC462A /* Build configuration list for PBXNativeTarget "testApp-iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				041A52012E7013FC00DC462A /* Debug */,
+				041A52022E7013FC00DC462A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		041A52072E7013FC00DC462A /* Build configuration list for PBXNativeTarget "testApp-iosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				041A52032E7013FC00DC462A /* Debug */,
+				041A52042E7013FC00DC462A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		04A38F682E69C68500FC2662 /* Build configuration list for PBXProject "bidscubeSdk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -507,6 +1019,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0472A3532E744D02000D1D0B /* XCRemoteSwiftPackageReference "googleads-ima-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/googleads-ima-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.25.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 04A38F652E69C68500FC2662 /* Project object */;
 }
