@@ -319,11 +319,10 @@ public final class BannerAdView: UIView {
     }
     
     private func extractClickURLFromHTML(_ htmlContent: String) {
-        let patterns = [
-            "https://[^\"'\\s]+",
-            "http://[^\"'\\s]+",
-            "curl=([^&\"'\\s]+)"
-        ]
+       let patterns = [
+    "https?://[^\"'\\\\s]+",
+    "curl=([^&\"'\\\\s]+)"
+]
         
         for pattern in patterns {
             if let regex = try? NSRegularExpression(pattern: pattern, options: []) {

@@ -16,13 +16,13 @@ public struct DeviceInfo {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0"
     }
     
-    public static var appStoreURL: String {
-        if let appStoreURL = Bundle.main.object(forInfoDictionaryKey: "AppStoreURL") as? String {
-            return appStoreURL
-        }
-        
-        return "https://apps.apple.com"
+   public static var appStoreURL: String {
+    if let appStoreURL = Bundle.main.object(forInfoDictionaryKey: "AppStoreURL") as? String {
+        return appStoreURL
     }
+    
+    return "https://apps.apple.com"
+}
     
     public static var deviceWidth: Int {
         Int(UIScreen.main.bounds.width * UIScreen.main.scale)
