@@ -6,15 +6,18 @@ public final class SDKConfig {
     public let enableDebugMode: Bool
     public let defaultAdTimeoutMs: Int
     public let defaultAdPosition: AdPosition
+    public let baseURL: String
 
     private init(enableLogging: Bool,
                  enableDebugMode: Bool,
                  defaultAdTimeoutMs: Int,
-                 defaultAdPosition: AdPosition) {
+                 defaultAdPosition: AdPosition,
+                 baseURL: String) {
         self.enableLogging = enableLogging
         self.enableDebugMode = enableDebugMode
         self.defaultAdTimeoutMs = defaultAdTimeoutMs
         self.defaultAdPosition = defaultAdPosition
+        self.baseURL = baseURL
     }
 
     public final class Builder {
@@ -22,6 +25,7 @@ public final class SDKConfig {
         private var enableDebugMode: Bool = false
         private var defaultAdTimeoutMs: Int = 30000
         private var defaultAdPosition: AdPosition = .unknown
+        private var baseURL: String = Constants.baseURL
 
         public init() {}
 
@@ -49,12 +53,19 @@ public final class SDKConfig {
             return self
         }
 
+        @discardableResult
+        public func baseURL(_ url: String) -> Builder {
+            self.baseURL = url
+            return self
+        }
+
         public func build() -> SDKConfig {
             SDKConfig(
                 enableLogging: enableLogging,
                 enableDebugMode: enableDebugMode,
                 defaultAdTimeoutMs: defaultAdTimeoutMs,
-                defaultAdPosition: defaultAdPosition
+                defaultAdPosition: defaultAdPosition,
+                baseURL: baseURL
             )
         }
     }
@@ -83,5 +94,6 @@ public final class SDKConfig {
         return "BidscubeSDK-iOS/1.0 (iOS \(systemVersion); \(model))"
     }
 }
+
 
 
