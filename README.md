@@ -326,7 +326,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
-### Version 0.0.1
+### Version 0.1
+- Automated release via GitHub Actions
+- Bug fixes and improvements
+
+### Version 0.0.2
 - Initial release
 - Image, Video, and Native ad support
 - Multiple ad positions

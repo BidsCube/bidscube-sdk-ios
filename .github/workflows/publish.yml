@@ -1,0 +1,169 @@
+name: Publish SDK
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish-spm:
+    name: Publish to Swift Package Manager
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Swift
+        uses: swift-actions/setup-swift@v1
+        with:
+          swift-version: "6.0"
+
+      - name: Extract version from tag
+        id: version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Extracted version: $VERSION"
+
+      - name: Update Package.swift version
+        run: |
+          # Update the swift-tools-version if needed
+          sed -i "s/swift-tools-version:.*/swift-tools-version:6.0/" Package.swift
+          echo "Package.swift updated for version ${{ steps.version.outputs.version }}"
+
+      - name: Validate Package.swift
+        run: |
+          swift package resolve
+          swift package describe --type json > /dev/null
+          echo "Package.swift validation successful"
+
+      - name: Run tests
+        run: |
+          swift test
+
+      - name: Build package
+        run: |
+          swift build
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ steps.version.outputs.version }}
+          body: |
+            ## Bidscube iOS SDK v${{ steps.version.outputs.version }}
+            
+            ### Changes
+            - Automated release via GitHub Actions
+            
+            ### Installation
+            
+            #### Swift Package Manager
+            ```swift
+            .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "${{ steps.version.outputs.version }}")
+            ```
+            
+            #### CocoaPods
+            ```ruby
+            pod 'bidscubeSdk', '~> ${{ steps.version.outputs.version }}'
+            ```
+          draft: false
+          prerelease: false
+
+  publish-cocoapods:
+    name: Publish to CocoaPods
+    runs-on: ubuntu-latest
+    needs: publish-spm
+    environment: bidscube_env
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+
+      - name: Extract version from tag
+        id: version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Extracted version: $VERSION"
+
+      - name: Update podspec version
+        run: |
+          # Update the version in podspec
+          sed -i "s/spec.version.*=.*/spec.version      = \"${{ steps.version.outputs.version }}\"/" bidscubeSdk.podspec
+          echo "Updated podspec version to ${{ steps.version.outputs.version }}"
+          
+      - name: Update Constants.swift version
+        run: |
+          # Update SDK version in Constants.swift files
+          if [ -f "bidscubeSdk/Core/Constants.swift" ]; then
+            sed -i "s/public static let sdkVersion = \".*\"/public static let sdkVersion = \"${{ steps.version.outputs.version }}\"/" bidscubeSdk/Core/Constants.swift
+            echo "Updated bidscubeSdk/Core/Constants.swift"
+          fi
+          if [ -f "Sources/bidscubeSdk/Core/Constants.swift" ]; then
+            sed -i "s/public static let sdkVersion = \".*\"/public static let sdkVersion = \"${{ steps.version.outputs.version }}\"/" Sources/bidscubeSdk/Core/Constants.swift
+            echo "Updated Sources/bidscubeSdk/Core/Constants.swift"
+          fi
+          
+      - name: Update changelog version
+        run: |
+          # Update changelog in README.md
+          if [ -f "README.md" ]; then
+            # Add new version entry to changelog
+            sed -i "/## Changelog/a\\
+\\
+### Version ${{ steps.version.outputs.version }}\\
+- Automated release via GitHub Actions\\
+- Bug fixes and improvements\\
+" README.md
+            echo "Updated README.md changelog"
+          fi
+ 
+        - name: Validate podspec
+        run: |
+          gem install cocoapods
+          pod spec lint bidscubeSdk.podspec --allow-warnings
+
+      - name: Setup Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Commit version changes
+        run: |
+          git add bidscubeSdk.podspec
+          git commit -m "Bump version to ${{ steps.version.outputs.version }}" || echo "No changes to commit"
+          git push origin HEAD:${{ github.ref_name }} || echo "No changes to push"
+
+      - name: Publish to CocoaPods
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+        run: |
+          gem install cocoapods
+          pod trunk push bidscubeSdk.podspec --allow-warnings
+
+  notify:
+    name: Notify completion
+    runs-on: ubuntu-latest
+    needs: [publish-spm, publish-cocoapods]
+    if: always()
+    steps:
+      - name: Notify success
+        if: needs.publish-spm.result == 'success' && needs.publish-cocoapods.result == 'success'
+        run: |
+          echo "Successfully published bidscubeSdk v${{ github.ref_name }} to both SPM and CocoaPods!"
+          
+      - name: Notify failure
+        if: needs.publish-spm.result == 'failure' || needs.publish-cocoapods.result == 'failure'
+        run: |
+          echo "Publishing failed. Check the logs for details."
+          exit 1
