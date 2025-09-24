@@ -87,9 +87,13 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Swift
-        uses: swift-actions/setup-swift@v1
-        with:
-          swift-version: "5.8"
+        run: |
+          curl -O https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz && \
+          tar zxf swiftly-$(uname -m).tar.gz && \
+          ./swiftly init --quiet-shell-followup && \
+          . "${SWIFTLY_HOME_DIR:-$HOME/.local/share/swiftly}/env.sh" && \
+          hash -r && \
+          swiftly install 6.0
 
       - name: Extract version from tag
         id: version
@@ -98,7 +102,7 @@ jobs:
             VERSION=${GITHUB_REF#refs/tags/v}
           else
             # For manual dispatch, use a default version or extract from git
-            VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "0.0.3")
+            VERSION=$(git describe --tags --abbrev=0 2>/dev/null")
             # Remove 'v' prefix if present
             VERSION=${VERSION#v}
           fi
@@ -108,7 +112,7 @@ jobs:
       - name: Update Package.swift version
         run: |
           # Update the swift-tools-version if needed
-          sed -i "s/swift-tools-version:.*/swift-tools-version:5.8/" Package.swift
+          sed -i "s/swift-tools-version:.*/swift-tools-version:6.0/" Package.swift
           echo "Package.swift updated for version ${{ steps.version.outputs.version }}"
 
       - name: Validate Package.swift
