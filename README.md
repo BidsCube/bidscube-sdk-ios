@@ -14,11 +14,27 @@ A comprehensive iOS SDK for displaying image, video, and native ads in iOS appli
 ## Requirements
 
 - iOS 13.0+
-- Xcode 12.0+
-- Swift 5.0+
+- Xcode 15.0+
+- Swift 6.0+
 - CocoaPods 1.10.0+
-
+- Swift Package Manager (recommended)
+ 
 ## Installation
+
+### Swift Package Manager (Recommended)
+
+1. In Xcode, go to **File** → **Add Package Dependencies**
+2. Enter the repository URL: `https://github.com/bidscube/bidscube-sdk-ios.git`
+3. Select the version you want to use
+4. Click **Add Package**
+
+Alternatively, add it to your `Package.swift`:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "0.0.1")
+]
+```
 
 ### CocoaPods
 
@@ -285,6 +301,24 @@ let config = SDKConfig.Builder()
     .enableDebugMode(true)
     .build()
 ```
+
+## Building the Package
+
+**Important**: This is an iOS-only package and cannot be built from the command line using `swift build` because UIKit is iOS-only. This is expected behavior.
+
+### To Build and Test:
+
+1. **Using Xcode** (Recommended):
+   - Create a new iOS project
+   - File → Add Package Dependencies
+   - Enter: `https://github.com/bidscube/bidscube-sdk-ios.git`
+   - Build the project
+
+2. **Using existing workspace**:
+   ```bash
+   open bidscubeSdk.xcworkspace
+   # Select bidscubeSdk scheme and build
+   ```
 
 ## License
 

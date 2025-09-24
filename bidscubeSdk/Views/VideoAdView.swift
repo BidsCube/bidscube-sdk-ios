@@ -121,7 +121,7 @@ public final class VideoAdView: UIView {
             self.loadingLabel.isHidden = true
         }
         
-        print("✅ VideoAdView: Loading VAST XML content with IMA SDK")
+        print(" VideoAdView: Loading VAST XML content with IMA SDK")
         print("⚠️ VideoAdView: For SwiftUI apps, consider using IMAVideoAdView instead for better view controller hierarchy")
     }
     

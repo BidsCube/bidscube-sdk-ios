@@ -91,7 +91,7 @@ public struct DeviceInfo {
         return "wifi" 
     }
     
-    public static var debugInfo: [String: Any] {
+    public static var debugInfo:[String: Any] {
         return [
             "bundleId": bundleId,
             "appName": appName,

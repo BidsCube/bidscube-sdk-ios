@@ -197,7 +197,7 @@ public final class NativeAdView: UIView {
             
             if let outerJson = try JSONSerialization.jsonObject(with: data) as? [String: Any],
                let admString = outerJson["adm"] as? String {
-                print("✅ NativeAdView: Found adm field in outer JSON")
+                print(" NativeAdView: Found adm field in outer JSON")
                 print("📄 NativeAdView: ADM content: \(admString)")
                 
                 parseAdmField(admString)
@@ -208,8 +208,8 @@ public final class NativeAdView: UIView {
             }
             
         } catch {
-            print("❌ NativeAdView: Error parsing native ad JSON: \(error)")
-            print("❌ NativeAdView: JSON string was: \(jsonString)")
+            print("Error: NativeAdView: Error parsing native ad JSON: \(error)")
+            print("Error: NativeAdView: JSON string was: \(jsonString)")
             loadingLabel.text = "Error loading ad"
         }
     }
@@ -218,27 +218,27 @@ public final class NativeAdView: UIView {
         print("🔍 NativeAdView: Parsing ADM field: \(String(admString.prefix(100)))...")
         
         guard let admData = admString.data(using: .utf8) else {
-            print("❌ NativeAdView: Failed to convert ADM string to data")
+            print("Error: NativeAdView: Failed to convert ADM string to data")
             loadingLabel.text = "Error: Invalid ADM data"
             return
         }
         
         do {
             guard let admJson = try JSONSerialization.jsonObject(with: admData) as? [String: Any] else {
-                print("❌ NativeAdView: ADM is not a valid JSON object")
+                print("Error: NativeAdView: ADM is not a valid JSON object")
                 loadingLabel.text = "Error: Invalid ADM JSON"
                 return
             }
             
-            print("✅ NativeAdView: Successfully parsed ADM JSON")
+            print(" NativeAdView: Successfully parsed ADM JSON")
             
             guard let nativeJson = admJson["native"] as? [String: Any] else {
-                print("❌ NativeAdView: ADM does not contain native ad data")
+                print("Error: NativeAdView: ADM does not contain native ad data")
                 loadingLabel.text = "Error: No native data"
                 return
             }
             
-            print("✅ NativeAdView: Found native object with keys: \(Array(nativeJson.keys))")
+            print(" NativeAdView: Found native object with keys: \(Array(nativeJson.keys))")
             
             if let version = nativeJson["ver"] as? String {
                 print("🔍 NativeAdView: Native ad version: \(version)")
@@ -268,7 +268,7 @@ public final class NativeAdView: UIView {
             }
             
         } catch {
-            print("❌ NativeAdView: Failed to parse native ad from ADM: \(error)")
+            print("Error: NativeAdView: Failed to parse native ad from ADM: \(error)")
             loadingLabel.text = "Error parsing ADM"
         }
     }
@@ -291,7 +291,7 @@ public final class NativeAdView: UIView {
                 print("🔍 NativeAdView: Asset \(index) title: \(titleText)")
                 if assetId == 2 { 
                     titleLabel.text = titleText
-                    print("✅ NativeAdView: Set title: \(titleText)")
+                    print(" NativeAdView: Set title: \(titleText)")
                 }
             }
             
@@ -302,10 +302,10 @@ public final class NativeAdView: UIView {
                 print("🔍 NativeAdView: Asset \(index) image: \(imageUrl) (\(width)x\(height))")
                 
                 if assetId == 4 { 
-                    print("✅ NativeAdView: Found main image asset (ID: 4): \(imageUrl)")
+                    print(" NativeAdView: Found main image asset (ID: 4): \(imageUrl)")
                     loadImage(from: imageUrl, into: adImageView)
                 } else if assetId == 3 { 
-                    print("✅ NativeAdView: Found icon image asset (ID: 3): \(imageUrl)")
+                    print(" NativeAdView: Found icon image asset (ID: 3): \(imageUrl)")
                     loadImage(from: imageUrl, into: iconImageView)
                     iconImageView.isHidden = false
                 }
@@ -317,21 +317,21 @@ public final class NativeAdView: UIView {
                 
                 if assetId == 6 { 
                     priceLabel.text = dataValue
-                    print("✅ NativeAdView: Set price: \(dataValue)")
+                    print(" NativeAdView: Set price: \(dataValue)")
                 } else if assetId == 1 { 
                     ctaButton.setTitle(dataValue, for: .normal)
-                    print("✅ NativeAdView: Set CTA text: \(dataValue)")
+                    print(" NativeAdView: Set CTA text: \(dataValue)")
                 }
             }
         }
         
-        print("✅ NativeAdView: Successfully parsed \(assetsArray.count) assets")
+        print(" NativeAdView: Successfully parsed \(assetsArray.count) assets")
     }
     
     private func parseLink(_ linkDict: [String: Any]) {
         if let url = linkDict["url"] as? String {
             self.clickURL = url
-            print("✅ NativeAdView: Extracted click URL: \(url)")
+            print(" NativeAdView: Extracted click URL: \(url)")
         }
         
         if let clicktrackers = linkDict["clicktrackers"] as? [String] {
@@ -351,33 +351,33 @@ public final class NativeAdView: UIView {
                 guard let self = self else { return }
                 
                 if let error = error {
-                    print("❌ NativeAdView: Network error: \(error.localizedDescription)")
+                    print("Error: NativeAdView: Network error: \(error.localizedDescription)")
                     self.loadingLabel.text = "Error: \(error.localizedDescription)"
                     return
                 }
                 
                 guard let data = data else {
-                    print("❌ NativeAdView: No data received from server")
+                    print("Error: NativeAdView: No data received from server")
                     self.loadingLabel.text = "Error: No data received"
                     return
                 }
                 
                 guard let content = String(data: data, encoding: .utf8) else {
-                    print("❌ NativeAdView: Invalid response encoding")
+                    print("Error: NativeAdView: Invalid response encoding")
                     self.loadingLabel.text = "Error: Invalid response"
                     return
                 }
                 
-                print("✅ NativeAdView: Received response: \(content)")
+                print(" NativeAdView: Received response: \(content)")
                 
                 do {
                     if let jsonData = content.data(using: .utf8),
                        let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] {
                         
-                        print("✅ NativeAdView: Successfully parsed JSON response")
+                        print(" NativeAdView: Successfully parsed JSON response")
                         
                         if let adm = json["adm"] as? String {
-                            print("✅ NativeAdView: Found adm field in response")
+                            print(" NativeAdView: Found adm field in response")
                             
                             if let positionValue = json["position"] as? Int,
                                let position = bidscubeSdk.AdPosition(rawValue: positionValue) {
@@ -397,7 +397,7 @@ public final class NativeAdView: UIView {
                         self.loadNativeAdContent(content)
                     }
                 } catch {
-                    print("❌ NativeAdView: JSON parsing failed: \(error), treating as direct native ad content")
+                    print("Error: NativeAdView: JSON parsing failed: \(error), treating as direct native ad content")
                     self.loadNativeAdContent(content)
                 }
             }
@@ -412,7 +412,7 @@ public final class NativeAdView: UIView {
         print("🔍 NativeAdView: Decoded URL: \(decodedUrlString)")
         
         guard let url = URL(string: decodedUrlString) else {
-            print("❌ NativeAdView: Invalid image URL after decoding: \(decodedUrlString)")
+            print("Error: NativeAdView: Invalid image URL after decoding: \(decodedUrlString)")
             imageView.backgroundColor = .systemRed
             return
         }
@@ -424,32 +424,32 @@ public final class NativeAdView: UIView {
                 guard let self = self else { return }
                 
                 if let error = error {
-                    print("❌ NativeAdView: Image download error: \(error.localizedDescription)")
+                    print("Error: NativeAdView: Image download error: \(error.localizedDescription)")
                     imageView.backgroundColor = .systemRed
                     return
                 }
                 
                 guard let data = data else {
-                    print("❌ NativeAdView: No image data received")
+                    print("Error: NativeAdView: No image data received")
                     imageView.backgroundColor = .systemRed
                     return
                 }
                 
-                print("✅ NativeAdView: Received image data: \(data.count) bytes")
+                print(" NativeAdView: Received image data: \(data.count) bytes")
                 
                 if data.count == 0 {
-                    print("❌ NativeAdView: Received empty image data")
+                    print("Error: NativeAdView: Received empty image data")
                     imageView.backgroundColor = .systemRed
                     return
                 }
                 
                 guard let image = UIImage(data: data) else {
-                    print("❌ NativeAdView: Failed to create UIImage from data")
+                    print("Error: NativeAdView: Failed to create UIImage from data")
                     imageView.backgroundColor = .systemRed
                     return
                 }
                 
-                print("✅ NativeAdView: Successfully loaded image: \(image.size)")
+                print(" NativeAdView: Successfully loaded image: \(image.size)")
                 imageView.image = image
                 imageView.backgroundColor = .clear
             }

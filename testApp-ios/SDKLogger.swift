@@ -18,7 +18,7 @@ class SDKLogger {
     static func i(_ tag: String, _ message: String) {
         guard isLoggingEnabled else { return }
         logger.info("[\(tag)] \(message)")
-        print("ℹ️ [INFO] [\(tag)] \(message)")
+        print("Info: [INFO] [\(tag)] \(message)")
     }
     
     static func w(_ tag: String, _ message: String) {
@@ -30,7 +30,7 @@ class SDKLogger {
     static func e(_ tag: String, _ message: String) {
         guard isLoggingEnabled else { return }
         logger.error("[\(tag)] \(message)")
-        print("❌ [ERROR] [\(tag)] \(message)")
+        print("Error: [ERROR] [\(tag)] \(message)")
     }
     
     static func v(_ tag: String, _ message: String) {

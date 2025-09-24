@@ -10,7 +10,7 @@ public extension BidscubeSDK {
         callback?.onAdLoading(placementId)
         
         guard let url = buildRequestURL(placementId: placementId, adType: .video) else {
-            print("❌ BidscubeSDK: Failed to build request URL for video ad")
+            print("Error: BidscubeSDK: Failed to build request URL for video ad")
             callback?.onAdFailed(placementId, errorCode: -1, errorMessage: "Failed to build request URL")
             return AnyView(Text("Failed to load ad"))
         }

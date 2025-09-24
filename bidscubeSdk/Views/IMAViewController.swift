@@ -62,7 +62,7 @@ public class IMAViewController: UIViewController {
     }
     
     deinit {
-        print("✅ IMAViewController: Deallocated")
+        print(" IMAViewController: Deallocated")
     }
 }
 
