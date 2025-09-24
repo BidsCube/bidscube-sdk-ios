@@ -46,6 +46,5 @@ let package = Package(
             dependencies: ["bidscubeSdk"],
             path: "Tests/bidscubeSdkTests"
         )
-    ],
-    swiftLanguageModes: [.v6]
+    ]
 )
