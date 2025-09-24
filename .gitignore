@@ -27,3 +27,5 @@ Pods/
 !default.xcworkspace
 
 
+.prettierignore
+.prettierrc
