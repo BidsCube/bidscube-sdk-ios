@@ -3,6 +3,7 @@ import UIKit
 import SwiftUI
 #endif
 
+@MainActor
 public class IMAViewController: UIViewController {
     
     private var imaVideoHandler: IMAVideoAdHandler?

@@ -1,6 +1,6 @@
 import Foundation
 
-public enum AdPosition: Int {
+public enum AdPosition: Int, Sendable {
     case unknown = 0
     case aboveTheFold = 1
     case dependOnScreenSize = 2

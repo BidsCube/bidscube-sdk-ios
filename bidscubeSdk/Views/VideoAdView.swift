@@ -2,6 +2,7 @@ import UIKit
 import AVFoundation
 import WebKit
 
+@MainActor
 public final class VideoAdView: UIView {
     private let webView = WKWebView()
     private let loadingLabel = UILabel()

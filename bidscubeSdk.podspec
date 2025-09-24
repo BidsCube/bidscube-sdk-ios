@@ -21,7 +21,7 @@ Pod::Spec.new do |spec|
   
   spec.platform     = :ios, "13.0"
   spec.ios.deployment_target = '13.0'
-  spec.swift_version = "5.0"
+  spec.swift_versions = ['5.9']
   
   spec.documentation_url = "https://github.com/bidscube/bidscube-sdk-ios"
   
@@ -38,11 +38,12 @@ Pod::Spec.new do |spec|
   
   spec.pod_target_xcconfig = {
     'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64',
-    'SWIFT_VERSION' => '5.0'
+    'SWIFT_STRICT_CONCURRENCY' => 'off'
   }
   
   spec.user_target_xcconfig = {
-    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64',
+    'SWIFT_STRICT_CONCURRENCY' => 'off'
   }
   
 end

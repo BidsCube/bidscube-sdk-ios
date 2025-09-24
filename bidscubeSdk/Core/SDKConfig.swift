@@ -88,6 +88,7 @@ public final class SDKConfig {
         Locale.preferredLanguages.first ?? Locale.current.identifier
     }
 
+    @MainActor
     public static var detectedUserAgent: String {
         let systemVersion = UIDevice.current.systemVersion
         let model = UIDevice.current.model
