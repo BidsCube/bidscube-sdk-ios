@@ -107,7 +107,7 @@ public class Logger {
     /// Log device information for debugging
     public static func deviceInfo() {
         guard isLoggingEnabled && isDebugMode else { return }
-        debug("Device Info: Bundle=\(DeviceInfo.bundleId), App=\(DeviceInfo.appName), Size=\(DeviceInfo.deviceWidth)x\(DeviceInfo.deviceHeight), Language=\(DeviceInfo.language), IFA=\(DeviceInfo.advertisingIdentifier), DNT=\(DeviceInfo.doNotTrack)")
+        debug("Device Info:Bundle=\(DeviceInfo.bundleId), App=\(DeviceInfo.appName), Size=\(DeviceInfo.deviceWidth)x\(DeviceInfo.deviceHeight), Language=\(DeviceInfo.language), IFA=\(DeviceInfo.advertisingIdentifier), DNT=\(DeviceInfo.doNotTrack)")
     }
 }
 

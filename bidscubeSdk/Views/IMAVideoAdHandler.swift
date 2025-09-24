@@ -61,9 +61,9 @@ public final class IMAVideoAdHandler: UIView {
         
         if let vc = viewController {
             adDisplayContainer = IMAAdDisplayContainer(adContainer: self, viewController: vc)
-            print("✅ IMAVideoAdHandler: Recreated ad display container with view controller: \(type(of: vc))")
+            print(" IMAVideoAdHandler: Recreated ad display container with view controller: \(type(of: vc))")
         } else {
-            print("❌ IMAVideoAdHandler: Failed to find view controller for refreshed setup")
+            print("Error: IMAVideoAdHandler: Failed to find view controller for refreshed setup")
         }
     }
     
@@ -95,12 +95,12 @@ public final class IMAVideoAdHandler: UIView {
         }
         
         guard let adsLoader = adsLoader else {
-            print("❌ IMAVideoAdHandler: AdsLoader not initialized")
+            print("Error: IMAVideoAdHandler: AdsLoader not initialized")
             return
         }
         
         guard let adDisplayContainer = adDisplayContainer else {
-            print("❌ IMAVideoAdHandler: AdDisplayContainer not initialized")
+            print("Error: IMAVideoAdHandler: AdDisplayContainer not initialized")
             return
         }
         
@@ -130,7 +130,7 @@ public final class IMAVideoAdHandler: UIView {
             
             adsLoader.requestAds(with: adsRequest)
         } else {
-            print("❌ IMAVideoAdHandler: No VAST URL or XML content provided")
+            print("Error: IMAVideoAdHandler: No VAST URL or XML content provided")
             callback?.onAdFailed(placementId, errorCode: -1, errorMessage: "No VAST content provided")
         }
     }
@@ -195,12 +195,12 @@ public final class IMAVideoAdHandler: UIView {
         
         if let vc = viewController {
             adDisplayContainer = IMAAdDisplayContainer(adContainer: self, viewController: vc)
-            print("✅ IMAVideoAdHandler: Using view controller: \(type(of: vc))")
+            print(" IMAVideoAdHandler: Using view controller: \(type(of: vc))")
             print("   - VC description: \(vc.description)")
             print("   - Parent: \(vc.parent?.description ?? "nil")")
             print("   - Nav: \(vc.navigationController?.description ?? "nil")")
         } else {
-            print("❌ IMAVideoAdHandler: No view controller available for IMAAdDisplayContainer")
+            print("Error: IMAVideoAdHandler: No view controller available for IMAAdDisplayContainer")
         }
         
         let settings = IMASettings()
@@ -283,7 +283,7 @@ public final class IMAVideoAdHandler: UIView {
         var responder: UIResponder? = self
         while responder != nil {
             if let viewController = responder as? UIViewController {
-                print("✅ IMAVideoAdHandler: Found view controller in responder chain: \(type(of: viewController))")
+                print(" IMAVideoAdHandler: Found view controller in responder chain: \(type(of: viewController))")
                 
                 if let hostingController = viewController as? UIHostingController<AnyView> {
                     print("   - SwiftUI hosting controller detected")
@@ -304,29 +304,29 @@ public final class IMAVideoAdHandler: UIView {
             }
             responder = responder?.next
         }
-        print("❌ IMAVideoAdHandler: No view controller found in responder chain")
+        print("Error: IMAVideoAdHandler: No view controller found in responder chain")
         return nil
     }
     
     private func getRootViewController() -> UIViewController? {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else {
-            print("❌ IMAVideoAdHandler: No window found")
+            print("Error: IMAVideoAdHandler: No window found")
             return nil
         }
         
         guard let rootVC = window.rootViewController else {
-            print("❌ IMAVideoAdHandler: No root view controller found")
+            print("Error: IMAVideoAdHandler: No root view controller found")
             return nil
         }
         
         if let hostingController = rootVC as? UIHostingController<AnyView> {
-            print("✅ IMAVideoAdHandler: Found SwiftUI hosting controller: \(type(of: hostingController))")
+            print(" IMAVideoAdHandler: Found SwiftUI hosting controller: \(type(of: hostingController))")
             return hostingController
         }
         
         if let navController = rootVC as? UINavigationController {
-            print("✅ IMAVideoAdHandler: Found navigation controller, using top view controller")
+            print(" IMAVideoAdHandler: Found navigation controller, using top view controller")
             return navController.topViewController ?? navController
         }
         
@@ -335,14 +335,14 @@ public final class IMAVideoAdHandler: UIView {
             topVC = presentedVC
         }
         
-        print("✅ IMAVideoAdHandler: Using top view controller: \(type(of: topVC))")
+        print(" IMAVideoAdHandler: Using top view controller: \(type(of: topVC))")
         return topVC
     }
     
     private func createFallbackViewController() -> UIViewController? {
         let fallbackVC = UIViewController()
         fallbackVC.view.backgroundColor = .clear
-        print("✅ IMAVideoAdHandler: Created fallback view controller")
+        print(" IMAVideoAdHandler: Created fallback view controller")
         return fallbackVC
     }
     
@@ -352,11 +352,11 @@ public final class IMAVideoAdHandler: UIView {
             if let viewController = responder as? UIViewController {
                 if let navController = viewController as? UINavigationController {
                     if let topVC = navController.topViewController {
-                        print("✅ IMAVideoAdHandler: Found content view controller in navigation: \(type(of: topVC))")
+                        print(" IMAVideoAdHandler: Found content view controller in navigation: \(type(of: topVC))")
                         return topVC
                     }
                 } else if !(viewController is UINavigationController) {
-                    print("✅ IMAVideoAdHandler: Found content view controller: \(type(of: viewController))")
+                    print(" IMAVideoAdHandler: Found content view controller: \(type(of: viewController))")
                     return viewController
                 }
             }
@@ -376,7 +376,7 @@ public final class IMAVideoAdHandler: UIView {
         for candidate in candidates {
             if let vc = candidate {
                 if vc.isViewLoaded && vc.view.window != nil {
-                    print("✅ IMAVideoAdHandler: Found stable view controller: \(type(of: vc))")
+                    print(" IMAVideoAdHandler: Found stable view controller: \(type(of: vc))")
                     return vc
                 }
             }
@@ -396,7 +396,7 @@ public final class IMAVideoAdHandler: UIView {
 extension IMAVideoAdHandler: IMAAdsLoaderDelegate {
     
     public func adsLoader(_ loader: IMAAdsLoader, adsLoadedWith adsLoadedData: IMAAdsLoadedData) {
-        print("✅ IMAVideoAdHandler: Ads loaded successfully")
+        print(" IMAVideoAdHandler: Ads loaded successfully")
         
         adsManager = adsLoadedData.adsManager
         
@@ -410,7 +410,7 @@ extension IMAVideoAdHandler: IMAAdsLoaderDelegate {
         let errorMessage = adErrorData.adError.message ?? "Unknown error"
         let errorCode = adErrorData.adError.code.rawValue
         
-        print("❌ IMAVideoAdHandler: Failed to load ads: \(errorMessage)")
+        print("Error: IMAVideoAdHandler: Failed to load ads: \(errorMessage)")
         print("   - Error code: \(errorCode)")
         print("   - Error type: \(adErrorData.adError.type)")
         
@@ -511,12 +511,12 @@ extension IMAVideoAdHandler: IMAAdsManagerDelegate {
             }
             
         default:
-            print("ℹ️ IMAVideoAdHandler: Other ad event: \(event.type)")
+            print("Info: IMAVideoAdHandler: Other ad event: \(event.type)")
         }
     }
     
     public func adsManager(_ adsManager: IMAAdsManager, didReceive error: IMAAdError) {
-        print("❌ IMAVideoAdHandler: Ad error: \(error.message)")
+        print("Error: IMAVideoAdHandler: Ad error: \(error.message)")
         callback?.onAdFailed(placementId, errorCode: error.code.rawValue, errorMessage: error.message!)
     }
     
