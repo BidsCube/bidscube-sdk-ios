@@ -326,6 +326,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
+### Version 0.0.7
+- Automated release via GitHub Actions
+- Bug fixes and improvements
+
 ### Version 0.0.5
 - Automated release via GitHub Actions
 - Bug fixes and improvements

@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "bidscubeSdk"
-  spec.version      = "0.0.6"
+  spec.version      = "0.0.7"
   spec.summary      = "BidsCube iOS SDK for displaying ads"
   spec.description  = <<-DESC
                       BidsCube iOS SDK provides a comprehensive solution for displaying image, video, and native ads in iOS applications.
