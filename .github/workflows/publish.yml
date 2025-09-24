@@ -105,7 +105,7 @@ jobs:
             VERSION=${GITHUB_REF#refs/tags/v}
           else
             # For manual dispatch, use a default version or extract from git
-            VERSION=$(git describe --tags --abbrev=0 2>/dev/null")
+            VERSION=$(git describe --tags --abbrev=0 2>/dev/null)
             # Remove 'v' prefix if present
             VERSION=${VERSION#v}
           fi
