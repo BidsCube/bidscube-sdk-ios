@@ -28,7 +28,7 @@ let package = Package(
                     package: "swift-package-manager-google-interactive-media-ads-ios"
                 )
             ],
-            path: "Sources/bidscubeSdk",
+            path: "bidscubeSdk",
             publicHeadersPath: "include",
             cSettings: [
                 .headerSearchPath("include"),
@@ -46,6 +46,5 @@ let package = Package(
             dependencies: ["bidscubeSdk"],
             path: "Tests/bidscubeSdkTests"
         )
-    ],
-    swiftLanguageModes: [.v6]
+    ]
 )
