@@ -86,14 +86,17 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev pkg-config python3-lldb-13
+
       - name: Setup Swift
         run: |
           curl -O https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz && \
           tar zxf swiftly-$(uname -m).tar.gz && \
           ./swiftly init --quiet-shell-followup && \
-          . "${SWIFTLY_HOME_DIR:-$HOME/.local/share/swiftly}/env.sh" && \
-          hash -r && \
-          swiftly install 6.0
+          bash -c "source ${SWIFTLY_HOME_DIR:-$HOME/.local/share/swiftly}/env.sh && swiftly install 6.0"
 
       - name: Extract version from tag
         id: version
