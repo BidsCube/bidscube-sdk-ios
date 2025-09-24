@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   
   spec.documentation_url = "https://github.com/bidscube/bidscube-sdk-ios"
   
-  spec.source       = { :git => "https://github.com/bidscube/bidscube-sdk-ios.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/bidscube/bidscube-sdk-ios.git", :tag => "v#{spec.version}" }
   
   spec.source_files = "bidscubeSdk/**/*.{swift,h}"
   spec.public_header_files = "bidscubeSdk/bidscubeSdk.h"
