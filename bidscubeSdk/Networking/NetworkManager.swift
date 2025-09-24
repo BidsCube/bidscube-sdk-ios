@@ -1,7 +1,7 @@
 import Foundation
 
 /// Network manager for handling all HTTP requests in the BidsCube SDK
-public class NetworkManager {
+public final class NetworkManager: @unchecked Sendable {
     
     // MARK: - Properties
     
