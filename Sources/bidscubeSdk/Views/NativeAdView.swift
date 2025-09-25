@@ -38,7 +38,6 @@ struct NativeAdLink: Codable {
     let clicktrackers: [String]
 }
 
-@MainActor
 public final class NativeAdView: UIView {
     private let titleLabel = UILabel()
     private let priceLabel = UILabel()

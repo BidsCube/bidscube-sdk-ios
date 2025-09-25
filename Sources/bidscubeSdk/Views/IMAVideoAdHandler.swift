@@ -3,7 +3,6 @@ import SwiftUI
 import AVFoundation
 import GoogleInteractiveMediaAds
 
-@MainActor
 public final class IMAVideoAdHandler: UIView {
     
     private var contentPlayer: AVPlayer?
@@ -394,9 +393,9 @@ public final class IMAVideoAdHandler: UIView {
     }
 }
 
-extension IMAVideoAdHandler: @preconcurrency IMAAdsLoaderDelegate {
+extension IMAVideoAdHandler: IMAAdsLoaderDelegate {
     
-    nonisolated public func adsLoader(_ loader: IMAAdsLoader, adsLoadedWith adsLoadedData: IMAAdsLoadedData) {
+    public func adsLoader(_ loader: IMAAdsLoader, adsLoadedWith adsLoadedData: IMAAdsLoadedData) {
         print(" IMAVideoAdHandler: Ads loaded successfully")
         
         adsManager = adsLoadedData.adsManager
@@ -442,9 +441,9 @@ extension IMAVideoAdHandler: @preconcurrency IMAAdsLoaderDelegate {
     }
 }
 
-extension IMAVideoAdHandler: @preconcurrency IMAAdsManagerDelegate {
+extension IMAVideoAdHandler: IMAAdsManagerDelegate {
     
-    nonisolated public func adsManager(_ adsManager: IMAAdsManager, didReceive event: IMAAdEvent) {
+    public func adsManager(_ adsManager: IMAAdsManager, didReceive event: IMAAdEvent) {
         print("🎯 IMAVideoAdHandler: Ad event: \(event.type)")
         
         switch event.type {
@@ -516,17 +515,17 @@ extension IMAVideoAdHandler: @preconcurrency IMAAdsManagerDelegate {
         }
     }
     
-    nonisolated public func adsManager(_ adsManager: IMAAdsManager, didReceive error: IMAAdError) {
+    public func adsManager(_ adsManager: IMAAdsManager, didReceive error: IMAAdError) {
         print("Error: IMAVideoAdHandler: Ad error: \(error.message)")
         callback?.onAdFailed(placementId, errorCode: error.code.rawValue, errorMessage: error.message!)
     }
     
-    nonisolated public func adsManagerDidRequestContentPause(_ adsManager: IMAAdsManager) {
+    public func adsManagerDidRequestContentPause(_ adsManager: IMAAdsManager) {
         print("⏸️ IMAVideoAdHandler: Content pause requested")
         contentPlayer?.pause()
     }
     
-    nonisolated public func adsManagerDidRequestContentResume(_ adsManager: IMAAdsManager) {
+    public func adsManagerDidRequestContentResume(_ adsManager: IMAAdsManager) {
         print("▶️ IMAVideoAdHandler: Content resume requested")
         contentPlayer?.play()
     }

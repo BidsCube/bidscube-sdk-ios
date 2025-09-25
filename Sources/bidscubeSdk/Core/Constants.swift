@@ -6,7 +6,7 @@ public struct Constants {
     
     
     
-    public static let baseURL = "https://ssp-bcc-ads.com/sdk"
+    public static let baseURL = "https://ssp-bcc-ads.com"
     
     
     public static let defaultTimeoutMs = 30000
@@ -79,7 +79,7 @@ public struct Constants {
         public static let videoAd = "🎥 VideoAd"
         public static let nativeAd = "📱 NativeAd"
         public static let error = "Error:"
-        public static let success = "Success:"
+        public static let success = ""
         public static let info = "Info:"
     }
     

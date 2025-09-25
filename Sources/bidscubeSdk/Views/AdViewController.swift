@@ -54,7 +54,6 @@ private class AdCallbackWrapper: AdCallback {
     }
 }
 
-@MainActor
 public final class AdViewController: UIViewController {
     
     private let placementId: String
@@ -272,8 +271,8 @@ public final class AdViewController: UIViewController {
         positionLabel.isHidden = false
         
         
-        view.bringSubview(toFront: backButton)
-        view.bringSubview(toFront: positionLabel)
+        view.bringSubviewToFront(backButton)
+        view.bringSubviewToFront(positionLabel)
         
         
         showErrorMessage()
@@ -399,7 +398,7 @@ public final class AdViewController: UIViewController {
             closeButton.heightAnchor.constraint(equalToConstant: 40)
         ])
         
-        view.bringSubview(toFront: closeButton)
+        view.bringSubviewToFront(closeButton)
     }
     
     private func setupFullScreenLayout(_ adView: UIView) {
@@ -434,7 +433,7 @@ public final class AdViewController: UIViewController {
             ])
         }
         
-        view.bringSubview(toFront: backButton)
+        view.bringSubviewToFront(backButton)
         
         
         setupFullScreenGestures()
@@ -617,15 +616,15 @@ public final class AdViewController: UIViewController {
     
     private func ensureBackButtonOnTop() {
         if !backButton.isHidden {
-            view.bringSubview(toFront: backButton)
+            view.bringSubviewToFront(backButton)
         }
         
         if let closeButton = closeButton, !closeButton.isHidden {
-            view.bringSubview(toFront: closeButton)
+            view.bringSubviewToFront(closeButton)
         }
         
         if !positionLabel.isHidden {
-            view.bringSubview(toFront: positionLabel)
+            view.bringSubviewToFront(positionLabel)
         }
     }
     
@@ -700,7 +699,7 @@ public final class AdViewController: UIViewController {
             self.backButton.layer.shadowRadius = 4
             self.backButton.layer.shadowOpacity = 0.3
             
-            self.view.bringSubview(toFront: self.backButton)
+            self.view.bringSubviewToFront(self.backButton)
         }
     }
     
