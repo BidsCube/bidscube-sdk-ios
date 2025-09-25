@@ -19,7 +19,6 @@ xcuserdata/
 Packages/
 Package.resolved
 .swiftpm/
-/Sources
 
 # CocoaPods
 Pods/

@@ -24,12 +24,10 @@ public struct DeviceInfo {
     return "https://apps.apple.com"
 }
     
-    @MainActor
     public static var deviceWidth: Int {
         Int(UIScreen.main.bounds.width * UIScreen.main.scale)
     }
     
-    @MainActor
     public static var deviceHeight: Int {
         Int(UIScreen.main.bounds.height * UIScreen.main.scale)
     }
@@ -38,7 +36,6 @@ public struct DeviceInfo {
         Locale.preferredLanguages.first ?? "en"
     }
     
-    @MainActor
     public static var userAgent: String {
         let systemVersion = UIDevice.current.systemVersion
         let model = UIDevice.current.model
@@ -94,7 +91,6 @@ public struct DeviceInfo {
         return "wifi" 
     }
     
-    @MainActor
     public static var debugInfo:[String: Any] {
         return [
             "bundleId": bundleId,

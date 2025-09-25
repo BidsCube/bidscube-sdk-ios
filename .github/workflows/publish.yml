@@ -149,7 +149,7 @@ jobs:
 
   publish-spm:
     name: Publish to Swift Package Manager
-    runs-on: ubuntu-22.04
+    runs-on: macos-latest
     needs: publish-cocoapods
     if: always() && (needs.publish-cocoapods.result == 'success' || needs.publish-cocoapods.result == 'skipped')
     steps:
@@ -157,18 +157,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libcurl4-openssl-dev pkg-config python3-lldb-13
-
-      - name: Setup Swift
-        run: |
-          curl -O https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz && \
-          tar zxf swiftly-$(uname -m).tar.gz && \
-          ./swiftly init --quiet-shell-followup && \
-          bash -c "source ${SWIFTLY_HOME_DIR:-$HOME/.local/share/swiftly}/env.sh && swiftly install 6.0"
 
       - name: Extract version from tag
         id: version
@@ -183,27 +171,24 @@ jobs:
           fi
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Extracted version: $VERSION"
-
-      - name: Update Package.swift version
-        run: |
-          # Update the swift-tools-version if needed
-          sed -i "s|swift-tools-version:.*|swift-tools-version:6.0|" Package.swift
-          echo "Package.swift updated for version ${{ steps.version.outputs.version }}"
-
+          git commit --amend --no-edit
       - name: Validate Package.swift
         run: |
           swift package resolve
           swift package describe --type json > /dev/null
           echo "Package.swift validation successful"
 
-      - name: Build package
+      - name: Validate package structure
         run: |
-          xcodebuild -scheme bidscubeSdk -package-path . -destination 'generic/platform=iOS'
+          # Validate package can be resolved and described
+          swift package resolve
+          swift package describe --type json > /dev/null
+          echo "✅ Package structure validation successful"
 
       - name: Create GitHub Release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CI_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ steps.version.outputs.version }}

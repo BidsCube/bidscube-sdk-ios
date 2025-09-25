@@ -2,7 +2,6 @@ import UIKit
 import WebKit
 import bidscubeSdk
 
-@MainActor
 public final class ImageAdView: UIView {
     private let webView = WKWebView()
     private let loadingLabel = UILabel()
