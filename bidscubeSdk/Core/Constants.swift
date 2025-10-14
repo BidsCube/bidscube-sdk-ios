@@ -2,27 +2,16 @@ import Foundation
 
 
 public struct Constants {
-    
-    
-    
-    
+
     public static let baseURL = "https://ssp-bcc-ads.com"
-    
-    
     public static let defaultTimeoutMs = 30000
-    
-    
-    nonisolated(unsafe) public static let defaultAdPosition = AdPosition.unknown
-    
-    
-    
+    public static let defaultAdPosition = AdPosition.unknown
     
     public struct AdTypes {
         public static let image = "b"
         public static let video = "v"
         public static let native = "n"
     }
-    
     
     public struct ResponseFormats {
         public static let json = "json"
@@ -36,16 +25,8 @@ public struct Constants {
         public static let xml = "xml"
     }
     
-    
-    
-    
     public static let userAgentPrefix = "BidscubeSDK-iOS"
-    
-    
     public static let sdkVersion = "0.2"
-    
-    
-    
     
     public struct ErrorCodes {
         public static let invalidURL = -1
@@ -56,9 +37,6 @@ public struct Constants {
         public static let consentError = -6
     }
     
-    
-    
-    
     public struct ErrorMessages {
         public static let failedToBuildURL = "Failed to build request URL"
         public static let invalidResponse = "Invalid response"
@@ -67,9 +45,6 @@ public struct Constants {
         public static let consentRequired = "User consent required"
         public static let sdkNotInitialized = "SDK not initialized"
     }
-    
-    
-    
     
     public struct LogPrefixes {
         public static let sdk = "📱 BidscubeSDK"
@@ -83,17 +58,11 @@ public struct Constants {
         public static let info = "Info:"
     }
     
-    
-    
-    
     public struct Animation {
         public static let defaultDuration: TimeInterval = 0.3
         public static let fastDuration: TimeInterval = 0.2
         public static let slowDuration: TimeInterval = 0.5
     }
-    
-    
-    
     
     public struct Layout {
         public static let defaultMargin: CGFloat = 16
@@ -101,9 +70,6 @@ public struct Constants {
         public static let cornerRadius: CGFloat = 8
         public static let borderWidth: CGFloat = 1
     }
-    
-    
-    
     
     public struct Privacy {
         public static let gdprKey = "gdpr"
@@ -115,8 +81,12 @@ public struct Constants {
         public static let ifaKey = "ifa"
     }
     
-    
-    
+    public struct SKAdNetwork {
+        public static let enabledKey = "skad_enabled"
+        public static let networkIdKey = "skad_network_id"
+        public static let conversionValueKey = "skad_conversion_value"
+        public static let attributionStatusKey = "skad_attribution_status"
+    }
     
     public struct QueryParams {
         public static let placementId = "placementId"

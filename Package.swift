@@ -36,10 +36,10 @@ let package = Package(
                 .define("TARGET_OS_IPHONE", to: "1"),
                 .define("TARGET_OS_IOS", to: "1")
             ],
-            swiftSettings: [
-                .define("TARGET_OS_IPHONE"),
-                .define("TARGET_OS_IOS")
-            ]
+           swiftSettings: [
+               .define("TARGET_OS_IPHONE"),
+               .define("TARGET_OS_IOS")
+           ]
         ),
         .testTarget(
             name: "bidscubeSdkTests",

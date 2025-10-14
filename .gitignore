@@ -25,7 +25,8 @@ Pods/
 *.xcworkspace
 !default.xcworkspace
 
-
+.idea
 .prettierignore
 .prettierrc
+.code-workspace
 

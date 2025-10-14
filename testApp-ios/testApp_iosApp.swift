@@ -15,6 +15,9 @@ struct testApp_iosApp: App {
                 .enableDebugMode(true)
                 .defaultAdTimeout(10_000)
                 .defaultAdPosition(.unknown)
+                .enableSKAdNetwork(true)
+                .skAdNetworkId("com.bidscube.skadnetwork")
+                .skAdNetworkConversionValue(0)
                 .build()
             BidscubeSDK.initialize(config: config)
         }

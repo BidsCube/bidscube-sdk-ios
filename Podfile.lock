@@ -1,0 +1,16 @@
+PODS:
+  - GoogleAds-IMA-iOS-SDK (3.18.5)
+
+DEPENDENCIES:
+  - GoogleAds-IMA-iOS-SDK (~> 3.18.4)
+
+SPEC REPOS:
+  trunk:
+    - GoogleAds-IMA-iOS-SDK
+
+SPEC CHECKSUMS:
+  GoogleAds-IMA-iOS-SDK: 7dbef0755db43698f2f6a3a7ac51a88571945399
+
+PODFILE CHECKSUM: 25b2134d3bfec551dd9034eecad58dc34faa9bea
+
+COCOAPODS: 1.16.2

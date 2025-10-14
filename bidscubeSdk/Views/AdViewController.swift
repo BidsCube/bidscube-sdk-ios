@@ -7,7 +7,7 @@ private class AdCallbackWrapper: AdCallback {
     private let errorHandler: (String, Int, String) -> Void
     private let successHandler: (String) -> Void
     
-    init(originalCallback: AdCallback?,
+    init(originalCallback: AdCallback?, 
          errorHandler: @escaping (String, Int, String) -> Void,
          successHandler: @escaping (String) -> Void) {
         self.originalCallback = originalCallback
@@ -133,7 +133,7 @@ public final class AdViewController: UIViewController {
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         backButton.translatesAutoresizingMaskIntoConstraints = false
-        backButton.isHidden = true
+        backButton.isHidden = true  
         
         closeButton = UIButton(type: .system)
         closeButton?.setTitle("✕", for: .normal)
@@ -737,15 +737,6 @@ public extension AdViewController {
                                                 adType: adType,
                                                 callback: callback)
         adViewController.modalPresentationStyle = .fullScreen
-
-        
-        // Track ad view with SKAdNetwork
-        BidscubeSDK.trackAdView { success in
-            if success {
-                print("SKAdNetwork: Ad view tracked successfully")
-            }
-        }
-        
         viewController.present(adViewController, animated: true)
     }
     

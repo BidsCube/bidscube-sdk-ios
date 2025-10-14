@@ -3,7 +3,6 @@ import SwiftUI
 import AVFoundation
 import GoogleInteractiveMediaAds
 
-@MainActor
 public final class IMAVideoAdHandler: UIView {
     
     private var contentPlayer: AVPlayer?

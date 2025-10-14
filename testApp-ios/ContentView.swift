@@ -1,5 +1,6 @@
 import SwiftUI
 import bidscubeSdk
+import StoreKit
 
 extension Color {
     init(hex: UInt, alpha: Double = 1) {
@@ -22,9 +23,27 @@ final class TestAdDelegate: AdCallback, ConsentCallback {
     }
     func onAdDisplayed(_ placementId: String) {
         SDKLogger.d("TestAdDelegate", "Ad displayed: \(placementId)")
+        
+        // Track ad view with SKAdNetwork
+        if BidscubeSDK.isSKAdNetworkAvailable() {
+            BidscubeSDK.trackAdView(completion: { success in
+                if success {
+                    SDKLogger.d("TestAdDelegate", "SKAdNetwork: Ad view tracked")
+                }
+            })
+        }
     }
     func onAdClicked(_ placementId: String) {
         SDKLogger.d("TestAdDelegate", "Ad clicked: \(placementId)")
+        
+        // Track ad click with SKAdNetwork
+        if BidscubeSDK.isSKAdNetworkAvailable() {
+            BidscubeSDK.trackAdClick(completion: { success in
+                if success {
+                    SDKLogger.d("TestAdDelegate", "SKAdNetwork: Ad click tracked")
+                }
+            })
+        }
     }
     func onAdClosed(_ placementId: String) {
         SDKLogger.d("TestAdDelegate", "Ad closed: \(placementId)")
@@ -113,8 +132,7 @@ struct ContentView: View {
                         .background(Color(hex: 0x2196F3))
                         .cornerRadius(12)
                         .shadow(radius: 4)
-                }
-                
+                }                
             }
             .padding()
             .onAppear {

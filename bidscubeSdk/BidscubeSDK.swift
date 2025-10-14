@@ -3,8 +3,8 @@ import UIKit
 import StoreKit
 
 public final class BidscubeSDK {
-    nonisolated(unsafe) private static var configuration: SDKConfig?
-    nonisolated(unsafe) private static var manualAdPosition: AdPosition?
+    private static var configuration: SDKConfig?
+    private static var manualAdPosition: AdPosition?
     private static var responseAdPosition: AdPosition = .unknown
     private static var consentRequired: Bool = false
     private static var hasAdsConsentFlag: Bool = false
@@ -19,6 +19,11 @@ public final class BidscubeSDK {
         self.configuration = config
         Logger.configure(from: config)
         Logger.info("BidsCube SDK initialized with configuration")
+        
+        // Initialize SKAdNetwork if enabled
+        if config.enableSKAdNetwork {
+            initializeSKAdNetwork(config: config)
+        }
     }
     
     
@@ -68,12 +73,10 @@ public final class BidscubeSDK {
         manualAdPosition = position
     }
 
-    @MainActor
     public static func getCurrentAdPosition() -> AdPosition? {
         return manualAdPosition
     }
 
-    @MainActor
     public static func getResponseAdPosition() -> AdPosition {
         return responseAdPosition
     }
@@ -82,7 +85,6 @@ public final class BidscubeSDK {
         responseAdPosition = position
     }
 
-    @MainActor
     public static func getEffectiveAdPosition() -> AdPosition {
         return manualAdPosition ?? responseAdPosition
     }
@@ -185,6 +187,9 @@ public final class BidscubeSDK {
                 
                 callback?.onAdLoaded(placementId)
                 callback?.onAdDisplayed(placementId)
+                
+                // Track SKAdNetwork impression
+                trackAdImpression()
                 
             case .failure(let error):
                 callback?.onAdFailed(placementId, errorCode: error.errorCode, errorMessage: error.localizedDescription)
@@ -389,12 +394,12 @@ public final class BidscubeSDK {
     }
     
     
-    @MainActor public static func pushImageAd(_ placementId: String, onto navigationController: UINavigationController, callback: AdCallback? = nil) {
+    public static func pushImageAd(_ placementId: String, onto navigationController: UINavigationController, callback: AdCallback? = nil) {
         AdViewController.pushAd(placementId: placementId, adType: .image, onto: navigationController, callback: callback)
     }
     
     
-    @MainActor public static func presentVideoAd(_ placementId: String, from viewController: UIViewController, callback: AdCallback? = nil) {
+    public static func presentVideoAd(_ placementId: String, from viewController: UIViewController, callback: AdCallback? = nil) {
         AdViewController.presentAd(placementId: placementId, adType: .video, from: viewController, callback: callback)
     }
     
@@ -409,7 +414,7 @@ public final class BidscubeSDK {
     }
     
     
-    @MainActor public static func pushNativeAd(_ placementId: String, onto navigationController: UINavigationController, callback: AdCallback? = nil) {
+    public static func pushNativeAd(_ placementId: String, onto navigationController: UINavigationController, callback: AdCallback? = nil) {
         AdViewController.pushAd(placementId: placementId, adType: .native, onto: navigationController, callback: callback)
     }
     
@@ -451,7 +456,7 @@ public final class BidscubeSDK {
     
     
     
-    @MainActor public static func getBannerAdView(_ placementId: String, position: AdPosition, callback: AdCallback?) -> BannerAdView {
+    public static func getBannerAdView(_ placementId: String, position: AdPosition, callback: AdCallback?) -> BannerAdView {
         Logger.info("getBannerAdView called for placement: \(placementId), position: \(position)")
         
         let bannerView = createOnMainThread { BannerAdView(position: position) }
@@ -480,7 +485,7 @@ public final class BidscubeSDK {
     }
     
     
-    @MainActor public static func showHeaderBanner(_ placementId: String, in viewController: UIViewController, callback: AdCallback? = nil) {
+    public static func showHeaderBanner(_ placementId: String, in viewController: UIViewController, callback: AdCallback? = nil) {
         Logger.info("showHeaderBanner called for placement: \(placementId)")
         
         let bannerView = getBannerAdView(placementId, position: .header, callback: callback)
@@ -507,7 +512,7 @@ public final class BidscubeSDK {
     }
     
     
-    @MainActor public static func showCustomBanner(_ placementId: String, position: AdPosition, width: CGFloat, height: CGFloat, in viewController: UIViewController, callback: AdCallback? = nil) {
+    public static func showCustomBanner(_ placementId: String, position: AdPosition, width: CGFloat, height: CGFloat, in viewController: UIViewController, callback: AdCallback? = nil) {
         Logger.info("showCustomBanner called for placement: \(placementId), position: \(position), size: \(width)x\(height)")
         
         let bannerView = getBannerAdView(placementId, position: position, callback: callback)
@@ -595,32 +600,198 @@ public final class BidscubeSDK {
         return activeBanners.count
     }
     
-    // MARK: - SKAdNetwork Support
+    // MARK: - SKAdNetwork Methods
+    
+    private static func initializeSKAdNetwork(config: SDKConfig) {
+        if #available(iOS 14.0, *) {
+            SKAdNetworkManager.registerForAdNetworkAttribution()
+            
+            if let networkId = config.skAdNetworkId {
+                Logger.info("SKAdNetwork initialized with network ID: \(networkId)")
+            }
+            
+            if config.skAdNetworkConversionValue > 0 {
+                SKAdNetworkManager.updateConversionValue(config.skAdNetworkConversionValue)
+            }
+        } else {
+            Logger.info("SKAdNetwork not available on this iOS version")
+        }
+    }
+    
+    public static func trackAdImpression() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackAdImpression()
+        }
+    }
+    
+    public static func trackAdClick() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackAdClick()
+        }
+    }
+    
+    public static func trackAppOpen() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackAppOpen()
+        }
+    }
+    
+    public static func trackUserRegistration() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackUserRegistration()
+        }
+    }
+    
+    public static func trackFirstPurchase() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackFirstPurchase()
+        }
+    }
+    
+    public static func trackSubscription() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackSubscription()
+        }
+    }
+    
+    public static func trackHighValuePurchase() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackHighValuePurchase()
+        }
+    }
+    
+    public static func trackRetention() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackRetention()
+        }
+    }
+    
+    public static func trackEngagement() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackEngagement()
+        }
+    }
+    
+    public static func trackPremiumFeature() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackPremiumFeature()
+        }
+    }
+    
+    public static func trackSocialShare() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackSocialShare()
+        }
+    }
+    
+    public static func trackReferral() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackReferral()
+        }
+    }
+    
+    public static func trackLoyaltyProgram() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackLoyaltyProgram()
+        }
+    }
+    
+    public static func trackPremiumSubscription() {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            ConversionTracker.trackPremiumSubscription()
+        }
+    }
+    
+    public static func updateConversionValue(_ value: Int) {
+        guard let config = configuration, config.enableSKAdNetwork else { return }
+        
+        if #available(iOS 14.0, *) {
+            SKAdNetworkManager.updateConversionValue(value)
+        }
+    }
+    
+    public static func getSKAdNetworkStatus() -> String {
+        if #available(iOS 14.0, *) {
+            return SKAdNetworkManager.getAttributionStatus()
+        } else {
+            return "not_available"
+        }
+    }
+    
+    // MARK: - SKAdNetwork Public API
     
     /// Register SKAdNetwork for ad attribution
     /// - Parameters:
     ///   - adNetworkId: The SKAdNetwork identifier
     ///   - completion: Completion handler with success status
     public static func registerSKAdNetwork(_ adNetworkId: String, completion: @escaping (Bool) -> Void) {
-        SKAdNetworkManager.registerAdNetwork(adNetworkId, completion: completion)
+        if #available(iOS 14.0, *) {
+            SKAdNetworkManager.registerForAdNetworkAttribution()
+            completion(true)
+        } else {
+            completion(false)
+        }
     }
     
     /// Track ad view event with SKAdNetwork
     /// - Parameter completion: Completion handler with success status
     public static func trackAdView(completion: @escaping (Bool) -> Void) {
-        SKAdNetworkManager.trackAdEvent(.adView, completion: completion)
+        if #available(iOS 14.0, *) {
+            SKAdNetworkManager.trackAdImpression()
+            completion(true)
+        } else {
+            completion(false)
+        }
     }
     
     /// Track ad click event with SKAdNetwork
     /// - Parameter completion: Completion handler with success status
     public static func trackAdClick(completion: @escaping (Bool) -> Void) {
-        SKAdNetworkManager.trackAdEvent(.adClick, completion: completion)
+        if #available(iOS 14.0, *) {
+            SKAdNetworkManager.trackAdClick()
+            completion(true)
+        } else {
+            completion(false)
+        }
     }
     
     /// Track ad interaction event with SKAdNetwork
     /// - Parameter completion: Completion handler with success status
     public static func trackAdInteraction(completion: @escaping (Bool) -> Void) {
-        SKAdNetworkManager.trackAdEvent(.adInteraction, completion: completion)
+        if #available(iOS 14.0, *) {
+            SKAdNetworkManager.trackAdClick()
+            completion(true)
+        } else {
+            completion(false)
+        }
     }
     
     /// Update SKAdNetwork conversion value
@@ -628,7 +799,12 @@ public final class BidscubeSDK {
     ///   - conversionValue: The conversion value (0-63)
     ///   - completion: Completion handler with success status
     public static func updateSKAdNetworkConversionValue(_ conversionValue: Int, completion: @escaping (Bool) -> Void) {
-        SKAdNetworkManager.updateConversionValue(conversionValue, completion: completion)
+        if #available(iOS 14.0, *) {
+            SKAdNetworkManager.updateConversionValue(conversionValue)
+            completion(true)
+        } else {
+            completion(false)
+        }
     }
     
     /// Check if SKAdNetwork is available

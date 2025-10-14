@@ -5,8 +5,8 @@ public class Logger {
     
     // MARK: - Properties
     
-    nonisolated(unsafe) private static var isLoggingEnabled: Bool = true
-    nonisolated(unsafe) private static var isDebugMode: Bool = false
+    private static var isLoggingEnabled: Bool = true
+    private static var isDebugMode: Bool = false
     
     // MARK: - Configuration
     
