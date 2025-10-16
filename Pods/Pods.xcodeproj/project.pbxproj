@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 71;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -16,6 +16,7 @@
 			dependencies = (
 			);
 			name = "GoogleAds-IMA-iOS-SDK";
+			productName = "GoogleAds-IMA-iOS-SDK";
 		};
 /* End PBXAggregateTarget section */
 
@@ -48,21 +49,21 @@
 /* Begin PBXFileReference section */
 		12784FAB84211C761A2B45C443544E84 /* Pods-testApp-ios-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-testApp-ios-acknowledgements.markdown"; sourceTree = "<group>"; };
 		16BAAFFA38E6BF24815E9483FBDBA6F7 /* Pods-testApp-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-testApp-ios.release.xcconfig"; sourceTree = "<group>"; };
-		1EDFF02040521E5222B446C17BFE0847 /* Pods-bidscubeSdk */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-bidscubeSdk"; path = Pods_bidscubeSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EDFF02040521E5222B446C17BFE0847 /* Pods_bidscubeSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bidscubeSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26DE01372E80C0A3EFD0C6C1EC6CD462 /* Pods-bidscubeSdk-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-bidscubeSdk-Info.plist"; sourceTree = "<group>"; };
 		34489CD3264ABAAD793A33DA989A7D34 /* Pods-bidscubeSdk.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-bidscubeSdk.modulemap"; sourceTree = "<group>"; };
 		383E359F6F70B3D84A5A83D045E4A7B9 /* Pods-bidscubeSdk-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-bidscubeSdk-umbrella.h"; sourceTree = "<group>"; };
 		384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		3A6BFB4F3EE671709E6E175F392525ED /* GoogleAds-IMA-iOS-SDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "GoogleAds-IMA-iOS-SDK.debug.xcconfig"; sourceTree = "<group>"; };
-		3D5C8BE33F0EFD29C03C67463A3F4E25 /* GoogleInteractiveMediaAds.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; path = GoogleInteractiveMediaAds.xcframework; sourceTree = "<group>"; };
+		3D5C8BE33F0EFD29C03C67463A3F4E25 /* GoogleInteractiveMediaAds.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = GoogleInteractiveMediaAds.xcframework; sourceTree = "<group>"; };
 		4130B1092D9347801B7B2FC8AB2876F7 /* Pods-testApp-ios-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-testApp-ios-frameworks.sh"; sourceTree = "<group>"; };
 		507784022D3720DF9764DB39FBB15DA1 /* Pods-bidscubeSdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-bidscubeSdk.debug.xcconfig"; sourceTree = "<group>"; };
 		5CF61EE896193A68B182CC123A6C7411 /* Pods-testApp-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-testApp-ios-dummy.m"; sourceTree = "<group>"; };
 		7AB5675A5A12FA5E4927F5B80132C029 /* Pods-bidscubeSdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-bidscubeSdk.release.xcconfig"; sourceTree = "<group>"; };
 		96F54D54DF65E3CC1932A372200E42B0 /* Pods-bidscubeSdk-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-bidscubeSdk-acknowledgements.markdown"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A198C73D3946A8EC82FEA92A9044A5DB /* Pods-bidscubeSdk-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-bidscubeSdk-dummy.m"; sourceTree = "<group>"; };
-		B06CD3B2435C09C52BE9EA76F223F869 /* Pods-testApp-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-testApp-ios"; path = Pods_testApp_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B06CD3B2435C09C52BE9EA76F223F869 /* Pods_testApp_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testApp_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32100F91106071FAF7F63A24EC98415 /* GoogleAds-IMA-iOS-SDK-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "GoogleAds-IMA-iOS-SDK-xcframeworks.sh"; sourceTree = "<group>"; };
 		D1BBCB4BB85C66C977D3DFFD214605B9 /* Pods-testApp-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-testApp-ios-umbrella.h"; sourceTree = "<group>"; };
 		DB805EB3A7AC79EE0513ACB22C6889B9 /* Pods-testApp-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-testApp-ios-Info.plist"; sourceTree = "<group>"; };
@@ -99,7 +100,6 @@
 				DB601D6E67CDAFB1B3E3BC886E5A2D1F /* Frameworks */,
 				54A77B7FA5FEDB6A32F01B021928F917 /* Support Files */,
 			);
-			name = "GoogleAds-IMA-iOS-SDK";
 			path = "GoogleAds-IMA-iOS-SDK";
 			sourceTree = "<group>";
 		};
@@ -123,8 +123,8 @@
 		46026D8E431ACD15FD6896D8AC713226 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1EDFF02040521E5222B446C17BFE0847 /* Pods-bidscubeSdk */,
-				B06CD3B2435C09C52BE9EA76F223F869 /* Pods-testApp-ios */,
+				1EDFF02040521E5222B446C17BFE0847 /* Pods_bidscubeSdk.framework */,
+				B06CD3B2435C09C52BE9EA76F223F869 /* Pods_testApp_ios.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -246,7 +246,7 @@
 			);
 			name = "Pods-bidscubeSdk";
 			productName = Pods_bidscubeSdk;
-			productReference = 1EDFF02040521E5222B446C17BFE0847 /* Pods-bidscubeSdk */;
+			productReference = 1EDFF02040521E5222B446C17BFE0847 /* Pods_bidscubeSdk.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		C12B0A37DB5D13133FC9EE036AE9E8F9 /* Pods-testApp-ios */ = {
@@ -265,7 +265,7 @@
 			);
 			name = "Pods-testApp-ios";
 			productName = Pods_testApp_ios;
-			productReference = B06CD3B2435C09C52BE9EA76F223F869 /* Pods-testApp-ios */;
+			productReference = B06CD3B2435C09C52BE9EA76F223F869 /* Pods_testApp_ios.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -286,8 +286,6 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			minimizedProjectReferenceProxies = 0;
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 46026D8E431ACD15FD6896D8AC713226 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -470,6 +468,7 @@
 		};
 		8DE5143C03248BB6CD542DE3963D6F3A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 507784022D3720DF9764DB39FBB15DA1 /* Pods-bidscubeSdk.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -575,6 +574,7 @@
 		};
 		9E406C6AAF85E580207CD97B0044DEAB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AB5675A5A12FA5E4927F5B80132C029 /* Pods-bidscubeSdk.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;

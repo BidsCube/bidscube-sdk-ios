@@ -72,23 +72,62 @@ public struct DeviceInfo {
     }
     
     public static var gdprConsent: String {
+        // Try to get GDPR consent from UserDefaults first
+        if let gdprConsent = UserDefaults.standard.string(forKey: "IABTCF_TCString") {
+            return gdprConsent
+        }
+        
+        // Fallback: check if user has given consent to data processing
+        if let hasConsent = UserDefaults.standard.object(forKey: "IABTCF_PurposeConsents") as? String {
+            // Check if consent is given for purpose 1 (storage and access of information)
+            if hasConsent.count > 0 && hasConsent.first == "1" {
+                return "1"
+            }
+        }
+        
+        // Default to no consent if not found
         return "0"
     }
     
     public static var usPrivacy: String {
-        return "1---"
+        // Try to get US Privacy string from UserDefaults
+        if let usPrivacyString = UserDefaults.standard.string(forKey: "IABUSPrivacy_String") {
+            return usPrivacyString
+        }
+        
+        // Fallback: check individual consent flags
+        let optOutSale = UserDefaults.standard.bool(forKey: "IABUSPrivacy_OptOutSale") ? "Y" : "N"
+        let optOutSharing = UserDefaults.standard.bool(forKey: "IABUSPrivacy_OptOutSharing") ? "Y" : "N"
+        let limitAdTracking = UserDefaults.standard.bool(forKey: "IABUSPrivacy_LimitAdTracking") ? "Y" : "N"
+        
+        // Format: 1--- (1=not applicable, ---=not set)
+        return "1\(optOutSale)\(optOutSharing)\(limitAdTracking)"
     }
     
     public static var ccpa: String {
-        return "0"
+        // Try to get CCPA consent from UserDefaults
+        if let ccpaConsent = UserDefaults.standard.string(forKey: "IABCCPA_Consent") {
+            return ccpaConsent
+        }
+        
+        // Fallback: check if user has opted out of sale
+        let optOutSale = UserDefaults.standard.bool(forKey: "IABCCPA_OptOutSale")
+        return optOutSale ? "1" : "0"
     }
     
     public static var coppa: String {
+        // Try to get COPPA status from UserDefaults
+        if let coppaStatus = UserDefaults.standard.string(forKey: "IABCOPPA_Status") {
+            return coppaStatus
+        }
+        
+        // Fallback: check if app is directed to children
+        if let isChildDirected = UserDefaults.standard.object(forKey: "IABCOPPA_ChildDirected") as? Bool {
+            return isChildDirected ? "1" : "0"
+        }
+        
+        // Default to not child-directed
         return "0"
-    }
-    
-    public static var networkType: String {
-        return "wifi" 
     }
     
     public static var debugInfo:[String: Any] {

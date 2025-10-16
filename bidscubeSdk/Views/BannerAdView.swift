@@ -45,7 +45,7 @@ public final class BannerAdView: UIView {
         
         backgroundColor = .lightGray
         layer.cornerRadius = cornerRadius
-        clipsToBounds = true
+        clipsToBounds = cornerRadius > 0
         
         
         layer.shadowColor = UIColor.black.cgColor
@@ -113,9 +113,14 @@ public final class BannerAdView: UIView {
         loadingLabel.isHidden = false
         loadingLabel.text = "Loading Banner..."
         
-        print("🔍 BannerAdView: Making HTTP request to: \(url.absoluteString)")
+        print("BannerAdView: Making HTTP request to: \(url.absoluteString)")
         
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue(Constants.userAgentPrefix + "/" + Constants.sdkVersion, forHTTPHeaderField: "User-Agent")
+        
+        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 
@@ -134,14 +139,26 @@ public final class BannerAdView: UIView {
                     if let jsonData = htmlContent.data(using: .utf8),
                        let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
                        let adm = json["adm"] as? String {
-                         print("🔍 Banner Adm: \(adm)")
+                         print("Banner Adm: \(adm)")
                         
                         if let positionValue = json["position"] as? Int,
                            let position = bidscubeSdk.AdPosition(rawValue: positionValue) {
-                            print("🔍 BannerAdView: Received position from server: \(positionValue) - \(self.displayName(for: position))")
+                            print("BannerAdView: Received position from server: \(positionValue) - \(self.displayName(for: position))")
                             DispatchQueue.main.async {
                                 BidscubeSDK.setResponseAdPosition(position)
                             }
+                        }
+                        
+                        if let skadnetworkData = json["skadnetwork"] as? [String: Any] {
+                            print("BannerAdView: Found SKAdNetwork data in response")
+                            if let skadnetworkResponse = SKAdNetworkManager.parseSKAdNetworkResponse(from: skadnetworkData) {
+                                print("BannerAdView: Successfully parsed SKAdNetwork response")
+                                SKAdNetworkManager.processSKAdNetworkResponse(skadnetworkResponse)
+                            } else {
+                                print("BannerAdView: Failed to parse SKAdNetwork response")
+                            }
+                        } else {
+                            print("BannerAdView: No SKAdNetwork data in response")
                         }
                         
                         self.loadAdContent(adm)
@@ -224,7 +241,7 @@ public final class BannerAdView: UIView {
             self.alpha = 1.0
         }
         
-        print("🔍 BannerAdView: Attached to screen at \(bannerPosition)")
+        print("BannerAdView: Attached to screen at \(bannerPosition)")
     }
     
     public func detachFromScreen() {
@@ -241,7 +258,7 @@ public final class BannerAdView: UIView {
             BidscubeSDK.untrackBanner(self)
         }
         
-        print("🔍 BannerAdView: Detached from screen")
+        print("BannerAdView: Detached from screen")
     }
     
     private func setupBannerConstraints(in parentView: UIView) {
@@ -336,7 +353,7 @@ public final class BannerAdView: UIView {
                         let extractedURL = String(htmlContent[swiftRange])
                         if let decodedURL = extractedURL.removingPercentEncoding {
                             self.clickURL = decodedURL
-                            print("🔍 BannerAdView: Extracted click URL from HTML: \(decodedURL)")
+                            print("BannerAdView: Extracted click URL from HTML: \(decodedURL)")
                             return
                         }
                     }
@@ -344,21 +361,17 @@ public final class BannerAdView: UIView {
             }
         }
         
-        print("⚠️ BannerAdView: Could not extract click URL from HTML content")
+        print("BannerAdView: Could not extract click URL from HTML content")
     }
     
     @objc private func handleTap() {
-        print("🔍 BannerAdView: Tap gesture detected")
-        
-        
+        print("BannerAdView: Tap gesture detected")
         callback?.onAdClicked(placementId)
-        
-        
         if let clickURL = clickURL, let url = URL(string: clickURL) {
-            print("🔍 BannerAdView: Opening extracted click URL: \(clickURL)")
+            print("BannerAdView: Opening extracted click URL: \(clickURL)")
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else {
-            print("⚠️ BannerAdView: No click URL available to open")
+            print("BannerAdView: No click URL available to open")
         }
     }
 }
@@ -376,36 +389,31 @@ extension BannerAdView: WKNavigationDelegate {
             return
         }
 
-        print("🔍 BannerAdView: Navigation request to: \(url.absoluteString)")
-        print("🔍 BannerAdView: Navigation type: \(navigationAction.navigationType.rawValue)")
+        print("BannerAdView: Navigation request to: \(url.absoluteString)")
+        print("BannerAdView: Navigation type: \(navigationAction.navigationType.rawValue)")
 
-        
         guard navigationAction.navigationType == .linkActivated else {
-            print("🔍 BannerAdView: Non-user navigation, allowing")
+            print("BannerAdView: Non-user navigation, allowing")
             decisionHandler(.allow)
             return
         }
 
-        
         if url.absoluteString.contains("clck") || url.absoluteString.contains("click") {
-            print("🔍 BannerAdView: Detected click tracking, triggering callback")
+            print("BannerAdView: Detected click tracking, triggering callback")
             callback?.onAdClicked(placementId)
 
-            
             decisionHandler(.allow)
             return
         }
 
-        
         if url.scheme?.hasPrefix("http") == true {
-            print("🔍 BannerAdView: Opening external URL: \(url.absoluteString)")
+            print("BannerAdView: Opening external URL: \(url.absoluteString)")
             callback?.onAdClicked(placementId)
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
             decisionHandler(.cancel)
             return
         }
 
-        
         decisionHandler(.allow)
     }
 }

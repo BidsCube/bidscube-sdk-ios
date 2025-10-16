@@ -50,6 +50,52 @@ public class NetworkManager {
         performRequest(request, completion: completion)
     }
     
+    /// Performs a POST request to the specified URL with JSON object
+    /// - Parameters:
+    ///   - url: The URL to request
+    ///   - jsonObject: The JSON object to send
+    ///   - completion: Completion handler with result
+    public func post(url: URL, jsonObject: [String: Any], completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: [])
+            
+            // Print request body for debugging
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                Logger.info("📤 POST Request Body:")
+                Logger.info("URL: \(url.absoluteString)")
+                Logger.info("Body: \(jsonString)")
+                Logger.info("---")
+            }
+            
+            post(url: url, data: jsonData, completion: completion)
+        } catch {
+            completion(.failure(.unknown(error)))
+        }
+    }
+    
+    /// Performs a POST request to the specified URL with JSON array
+    /// - Parameters:
+    ///   - url: The URL to request
+    ///   - jsonArray: The JSON array to send
+    ///   - completion: Completion handler with result
+    public func post(url: URL, jsonArray: [String], completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: jsonArray, options: [])
+            
+            // Print request body for debugging
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                Logger.info("📤 POST Request Body:")
+                Logger.info("URL: \(url.absoluteString)")
+                Logger.info("Body: \(jsonString)")
+                Logger.info("---")
+            }
+            
+            post(url: url, data: jsonData, completion: completion)
+        } catch {
+            completion(.failure(.unknown(error)))
+        }
+    }
+    
     // MARK: - Private Methods
     
     private func performRequest(_ request: URLRequest, completion: @escaping (Result<Data, NetworkError>) -> Void) {

@@ -90,9 +90,9 @@ jobs:
             sed -i "s|public static let sdkVersion = \".*\"|public static let sdkVersion = \"${{ steps.version.outputs.version }}\"|" bidscubeSdk/Core/Constants.swift
             echo "Updated bidscubeSdk/Core/Constants.swift"
           fi
-          if [ -f "Sources/bidscubeSdk/Core/Constants.swift" ]; then
-            sed -i "s|public static let sdkVersion = \".*\"|public static let sdkVersion = \"${{ steps.version.outputs.version }}\"|" Sources/bidscubeSdk/Core/Constants.swift
-            echo "Updated Sources/bidscubeSdk/Core/Constants.swift"
+          if [ -f "bidscubeSdk/Core/Constants.swift" ]; then
+            sed -i "s|public static let sdkVersion = \".*\"|public static let sdkVersion = \"${{ steps.version.outputs.version }}\"|" bidscubeSdk/Core/Constants.swift
+            echo "Updated bidscubeSdk/Core/Constants.swift"
           fi
 
       - name: Validate podspec

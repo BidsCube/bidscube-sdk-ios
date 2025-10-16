@@ -3,7 +3,7 @@ import Foundation
 
 public struct Constants {
 
-    public static let baseURL = "https://ssp-bcc-ads.com"
+    public static let baseURL = "https://ssp-bcc-ads.com/sdk"
     public static let defaultTimeoutMs = 30000
     public static let defaultAdPosition = AdPosition.unknown
     
@@ -81,12 +81,6 @@ public struct Constants {
         public static let ifaKey = "ifa"
     }
     
-    public struct SKAdNetwork {
-        public static let enabledKey = "skad_enabled"
-        public static let networkIdKey = "skad_network_id"
-        public static let conversionValueKey = "skad_conversion_value"
-        public static let attributionStatusKey = "skad_attribution_status"
-    }
     
     public struct QueryParams {
         public static let placementId = "placementId"

@@ -18,7 +18,8 @@ public final class SDKConfig {
                  baseURL: String,
                  enableSKAdNetwork: Bool,
                  skAdNetworkId: String?,
-                 skAdNetworkConversionValue: Int) {
+                 skAdNetworkConversionValue: Int,
+) {
         self.enableLogging = enableLogging
         self.enableDebugMode = enableDebugMode
         self.defaultAdTimeoutMs = defaultAdTimeoutMs
@@ -88,6 +89,7 @@ public final class SDKConfig {
             self.skAdNetworkConversionValue = max(0, min(value, 63))
             return self
         }
+        
 
         public func build() -> SDKConfig {
             SDKConfig(
@@ -98,7 +100,7 @@ public final class SDKConfig {
                 baseURL: baseURL,
                 enableSKAdNetwork: enableSKAdNetwork,
                 skAdNetworkId: skAdNetworkId,
-                skAdNetworkConversionValue: skAdNetworkConversionValue
+                skAdNetworkConversionValue: skAdNetworkConversionValue,
             )
         }
     }

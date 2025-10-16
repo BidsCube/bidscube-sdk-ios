@@ -9,34 +9,12 @@
 /* Begin PBXBuildFile section */
 		041A52092E70143D00DC462A /* bidscubeSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A38F6E2E69C68500FC2662 /* bidscubeSdk.framework */; };
 		041A520A2E70143D00DC462A /* bidscubeSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04A38F6E2E69C68500FC2662 /* bidscubeSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		04A38F792E69C68500FC2662 /* bidscubeSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A38F6E2E69C68500FC2662 /* bidscubeSdk.framework */; };
 		85448C0EF6391F2DDA41227A /* Pods_bidscubeSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AA1D06D7DDE80EB7B01C30 /* Pods_bidscubeSdk.framework */; };
 		F203F154D65F48AD9EECBADB /* Pods_testApp_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC1FF7AE42E6B912D9D4CBF /* Pods_testApp_ios.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		041A51EE2E7013FC00DC462A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 04A38F652E69C68500FC2662 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 041A51DD2E7013FA00DC462A;
-			remoteInfo = "testApp-ios";
-		};
-		041A51F82E7013FC00DC462A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 04A38F652E69C68500FC2662 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 041A51DD2E7013FA00DC462A;
-			remoteInfo = "testApp-ios";
-		};
-		041A520B2E70143D00DC462A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 04A38F652E69C68500FC2662 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 04A38F6D2E69C68500FC2662;
-			remoteInfo = bidscubeSdk;
-		};
-		04A38F7A2E69C68500FC2662 /* PBXContainerItemProxy */ = {
+		046DB2272E9FF2190064D5E3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 04A38F652E69C68500FC2662 /* Project object */;
 			proxyType = 1;
@@ -61,10 +39,7 @@
 
 /* Begin PBXFileReference section */
 		041A51DE2E7013FA00DC462A /* testApp-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "testApp-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		041A51ED2E7013FC00DC462A /* testApp-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "testApp-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		041A51F72E7013FC00DC462A /* testApp-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "testApp-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A38F6E2E69C68500FC2662 /* bidscubeSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = bidscubeSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		04A38F782E69C68500FC2662 /* bidscubeSdkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bidscubeSdkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15C415F0AA61BF2D21006DE4 /* Pods-testApp-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp-ios.debug.xcconfig"; path = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		407CD84F681494B744C8A29E /* Pods-bidscubeSdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bidscubeSdk.release.xcconfig"; path = "Target Support Files/Pods-bidscubeSdk/Pods-bidscubeSdk.release.xcconfig"; sourceTree = "<group>"; };
 		464F057DEC84650EABE83A3E /* Pods-testApp-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp-ios.release.xcconfig"; path = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios.release.xcconfig"; sourceTree = "<group>"; };
@@ -73,9 +48,22 @@
 		CCC1FF7AE42E6B912D9D4CBF /* Pods_testApp_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testApp_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0416B3982EA056F30038492A /* Exceptions for "testApp-ios" folder in "bidscubeSdk" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 04A38F6D2E69C68500FC2662 /* bidscubeSdk */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		041A51DF2E7013FA00DC462A /* testApp-ios */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0416B3982EA056F30038492A /* Exceptions for "testApp-ios" folder in "bidscubeSdk" target */,
+			);
 			path = "testApp-ios";
 			sourceTree = "<group>";
 		};
@@ -111,33 +99,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		041A51EA2E7013FC00DC462A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		041A51F42E7013FC00DC462A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		04A38F6B2E69C68500FC2662 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				85448C0EF6391F2DDA41227A /* Pods_bidscubeSdk.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		04A38F752E69C68500FC2662 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				04A38F792E69C68500FC2662 /* bidscubeSdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,10 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				04A38F6E2E69C68500FC2662 /* bidscubeSdk.framework */,
-				04A38F782E69C68500FC2662 /* bidscubeSdkTests.xctest */,
 				041A51DE2E7013FA00DC462A /* testApp-ios.app */,
-				041A51ED2E7013FC00DC462A /* testApp-iosTests.xctest */,
-				041A51F72E7013FC00DC462A /* testApp-iosUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -217,54 +180,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				041A520C2E70143D00DC462A /* PBXTargetDependency */,
+				046DB2282E9FF2190064D5E3 /* PBXTargetDependency */,
 			);
 			name = "testApp-ios";
 			productName = "testApp-ios";
 			productReference = 041A51DE2E7013FA00DC462A /* testApp-ios.app */;
 			productType = "com.apple.product-type.application";
-		};
-		041A51EC2E7013FC00DC462A /* testApp-iosTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 041A52062E7013FC00DC462A /* Build configuration list for PBXNativeTarget "testApp-iosTests" */;
-			buildPhases = (
-				041A51E92E7013FC00DC462A /* Sources */,
-				041A51EA2E7013FC00DC462A /* Frameworks */,
-				041A51EB2E7013FC00DC462A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				041A51EF2E7013FC00DC462A /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				041A51F02E7013FC00DC462A /* testApp-iosTests */,
-			);
-			name = "testApp-iosTests";
-			productName = "testApp-iosTests";
-			productReference = 041A51ED2E7013FC00DC462A /* testApp-iosTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		041A51F62E7013FC00DC462A /* testApp-iosUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 041A52072E7013FC00DC462A /* Build configuration list for PBXNativeTarget "testApp-iosUITests" */;
-			buildPhases = (
-				041A51F32E7013FC00DC462A /* Sources */,
-				041A51F42E7013FC00DC462A /* Frameworks */,
-				041A51F52E7013FC00DC462A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				041A51F92E7013FC00DC462A /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				041A51FA2E7013FC00DC462A /* testApp-iosUITests */,
-			);
-			name = "testApp-iosUITests";
-			productName = "testApp-iosUITests";
-			productReference = 041A51F72E7013FC00DC462A /* testApp-iosUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		04A38F6D2E69C68500FC2662 /* bidscubeSdk */ = {
 			isa = PBXNativeTarget;
@@ -289,27 +210,6 @@
 			productReference = 04A38F6E2E69C68500FC2662 /* bidscubeSdk.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		04A38F772E69C68500FC2662 /* bidscubeSdkTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 04A38F862E69C68500FC2662 /* Build configuration list for PBXNativeTarget "bidscubeSdkTests" */;
-			buildPhases = (
-				04A38F742E69C68500FC2662 /* Sources */,
-				04A38F752E69C68500FC2662 /* Frameworks */,
-				04A38F762E69C68500FC2662 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				04A38F7B2E69C68500FC2662 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				04A38F7C2E69C68500FC2662 /* bidscubeSdkTests */,
-			);
-			name = bidscubeSdkTests;
-			productName = bidscubeSdkTests;
-			productReference = 04A38F782E69C68500FC2662 /* bidscubeSdkTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -323,18 +223,7 @@
 					041A51DD2E7013FA00DC462A = {
 						CreatedOnToolsVersion = 16.2;
 					};
-					041A51EC2E7013FC00DC462A = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 041A51DD2E7013FA00DC462A;
-					};
-					041A51F62E7013FC00DC462A = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 041A51DD2E7013FA00DC462A;
-					};
 					04A38F6D2E69C68500FC2662 = {
-						CreatedOnToolsVersion = 16.2;
-					};
-					04A38F772E69C68500FC2662 = {
 						CreatedOnToolsVersion = 16.2;
 					};
 				};
@@ -357,10 +246,7 @@
 			projectRoot = "";
 			targets = (
 				04A38F6D2E69C68500FC2662 /* bidscubeSdk */,
-				04A38F772E69C68500FC2662 /* bidscubeSdkTests */,
 				041A51DD2E7013FA00DC462A /* testApp-ios */,
-				041A51EC2E7013FC00DC462A /* testApp-iosTests */,
-				041A51F62E7013FC00DC462A /* testApp-iosUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -373,28 +259,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		041A51EB2E7013FC00DC462A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		041A51F52E7013FC00DC462A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		04A38F6C2E69C68500FC2662 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		04A38F762E69C68500FC2662 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -475,28 +340,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		041A51E92E7013FC00DC462A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		041A51F32E7013FC00DC462A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		04A38F6A2E69C68500FC2662 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		04A38F742E69C68500FC2662 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -506,25 +350,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		041A51EF2E7013FC00DC462A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 041A51DD2E7013FA00DC462A /* testApp-ios */;
-			targetProxy = 041A51EE2E7013FC00DC462A /* PBXContainerItemProxy */;
-		};
-		041A51F92E7013FC00DC462A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 041A51DD2E7013FA00DC462A /* testApp-ios */;
-			targetProxy = 041A51F82E7013FC00DC462A /* PBXContainerItemProxy */;
-		};
-		041A520C2E70143D00DC462A /* PBXTargetDependency */ = {
+		046DB2282E9FF2190064D5E3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 04A38F6D2E69C68500FC2662 /* bidscubeSdk */;
-			targetProxy = 041A520B2E70143D00DC462A /* PBXContainerItemProxy */;
-		};
-		04A38F7B2E69C68500FC2662 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 04A38F6D2E69C68500FC2662 /* bidscubeSdk */;
-			targetProxy = 04A38F7A2E69C68500FC2662 /* PBXContainerItemProxy */;
+			targetProxy = 046DB2272E9FF2190064D5E3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -542,6 +371,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "testApp-ios/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -554,7 +384,7 @@
 				);
 				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bidscube.ios.testApp-ios";
-				PRODUCT_NAME = bidscubeSdk;
+				PRODUCT_NAME = "testApp-ios";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -576,6 +406,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "testApp-ios/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -593,84 +424,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		041A52012E7013FC00DC462A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VN7YM4R7N7;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MARKETING_VERSION = 0.2;
-				PRODUCT_NAME = "testApp-iosTests";
-				SDKROOT = iphoneos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testApp-ios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/testApp-ios";
-			};
-			name = Debug;
-		};
-		041A52022E7013FC00DC462A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VN7YM4R7N7;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MARKETING_VERSION = 0.2;
-				PRODUCT_NAME = "testApp-iosTests";
-				SDKROOT = iphoneos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testApp-ios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/testApp-ios";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		041A52032E7013FC00DC462A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VN7YM4R7N7;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MARKETING_VERSION = 0.2;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bidscube.ios.testApp-iosUITests";
-				PRODUCT_NAME = "testApp-iosUITests";
-				SDKROOT = iphoneos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "testApp-ios";
-			};
-			name = Debug;
-		};
-		041A52042E7013FC00DC462A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VN7YM4R7N7;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MARKETING_VERSION = 0.2;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bidscube.ios.testApp-iosUITests";
-				PRODUCT_NAME = "testApp-iosUITests";
-				SDKROOT = iphoneos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "testApp-ios";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -902,50 +655,6 @@
 			};
 			name = Release;
 		};
-		04A38F872E69C68500FC2662 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VN7YM4R7N7;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MACOSX_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 0.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bidscube.ios.bidscubeSdkTests;
-				PRODUCT_NAME = bidscubeSdkTests;
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				XROS_DEPLOYMENT_TARGET = 2.2;
-			};
-			name = Debug;
-		};
-		04A38F882E69C68500FC2662 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VN7YM4R7N7;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MACOSX_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 0.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bidscube.ios.bidscubeSdkTests;
-				PRODUCT_NAME = bidscubeSdkTests;
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				XROS_DEPLOYMENT_TARGET = 2.2;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -954,24 +663,6 @@
 			buildConfigurations = (
 				041A51FF2E7013FC00DC462A /* Debug */,
 				041A52002E7013FC00DC462A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		041A52062E7013FC00DC462A /* Build configuration list for PBXNativeTarget "testApp-iosTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				041A52012E7013FC00DC462A /* Debug */,
-				041A52022E7013FC00DC462A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		041A52072E7013FC00DC462A /* Build configuration list for PBXNativeTarget "testApp-iosUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				041A52032E7013FC00DC462A /* Debug */,
-				041A52042E7013FC00DC462A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -990,15 +681,6 @@
 			buildConfigurations = (
 				04A38F822E69C68500FC2662 /* Debug */,
 				04A38F832E69C68500FC2662 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		04A38F862E69C68500FC2662 /* Build configuration list for PBXNativeTarget "bidscubeSdkTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				04A38F872E69C68500FC2662 /* Debug */,
-				04A38F882E69C68500FC2662 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

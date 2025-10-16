@@ -34,6 +34,9 @@ public final class BidscubeSDK {
             .defaultAdTimeout(Constants.defaultTimeoutMs)
             .defaultAdPosition(Constants.defaultAdPosition)
             .baseURL(Constants.baseURL)
+            .enableSKAdNetwork(true)
+            .skAdNetworkId("skadnetwork.com.example")
+            .skAdNetworkConversionValue(1)
             .build()
         
         initialize(config: config)
@@ -53,6 +56,10 @@ public final class BidscubeSDK {
 
     public static func isInitialized() -> Bool {
         return configuration != nil
+    }
+    
+    public static func getConfiguration() -> SDKConfig? {
+        return configuration
     }
 
     public static func cleanup() {
@@ -155,14 +162,17 @@ public final class BidscubeSDK {
         )
     }
     public static func showImageAd(_ placementId: String, _ callback: AdCallback?) {
+        print("showImageAd called with placementId: \(placementId)")
         callback?.onAdLoading(placementId)
         
+        // Build POST URL and request body
+        let includeSKAdNetworks = configuration?.enableSKAdNetwork ?? false
         
-        guard let url = buildRequestURL(placementId: placementId, adType: .image) else {
+        guard let url = URLBuilder.buildAdRequestURL(placementId: placementId, adType: .image, position: getEffectiveAdPosition(), timeoutMs: configuration?.defaultAdTimeoutMs ?? Constants.defaultTimeoutMs, debug: configuration?.enableDebugMode ?? false, includeSKAdNetworks: includeSKAdNetworks) else {
+            print("Failed to build URL for placementId: \(placementId)")
             callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
             return
         }
-        
         
         NetworkManager.shared.get(url: url) { result in
             switch result {
@@ -172,16 +182,31 @@ public final class BidscubeSDK {
                     return
                 }
                 
-                
                 do {
                     if let jsonData = htmlContent.data(using: .utf8),
-                       let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
-                       let positionValue = json["position"] as? Int,
-                       let position = AdPosition(rawValue: positionValue) {
-                        self.responseAdPosition = position
+                       let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] {
+                        
+                        // Process position
+                        if let positionValue = json["position"] as? Int,
+                           let position = AdPosition(rawValue: positionValue) {
+                            self.responseAdPosition = position
+                        }
+                        
+                        // Process SKAdNetwork response if present
+                        if let skadnetworkData = json["skadnetwork"] as? [String: Any] {
+                            print("BidscubeSDK: Found SKAdNetwork data in response")
+                            if let skadnetworkResponse = SKAdNetworkManager.parseSKAdNetworkResponse(from: skadnetworkData) {
+                                print("BidscubeSDK: Successfully parsed SKAdNetwork response")
+                                SKAdNetworkManager.processSKAdNetworkResponse(skadnetworkResponse)
+                            } else {
+                                print("BidscubeSDK: Failed to parse SKAdNetwork response")
+                            }
+                        } else {
+                            print("BidscubeSDK: No SKAdNetwork data in response")
+                        }
                     }
                 } catch {
-                    
+                    print("BidscubeSDK: Error parsing JSON response: \(error)")
                     self.responseAdPosition = .unknown
                 }
                 
@@ -198,6 +223,7 @@ public final class BidscubeSDK {
     }
 
     public static func getImageAdView(_ placementId: String, _ callback: AdCallback?) -> UIView {
+        print("🚀 DEBUG: getImageAdView called for placement: \(placementId)")
         Logger.info("getImageAdView called for placement: \(placementId)")
         
         
@@ -241,12 +267,13 @@ public final class BidscubeSDK {
     public static func showVideoAd(_ placementId: String, _ callback: AdCallback?) {
         callback?.onAdLoading(placementId)
         
+        // Build GET URL with SKAdNetwork parameters
+        let includeSKAdNetworks = configuration?.enableSKAdNetwork ?? false
         
-        guard let url = buildRequestURL(placementId: placementId, adType: .video) else {
+        guard let url = URLBuilder.buildAdRequestURL(placementId: placementId, adType: .video, position: getEffectiveAdPosition(), timeoutMs: configuration?.defaultAdTimeoutMs ?? Constants.defaultTimeoutMs, debug: configuration?.enableDebugMode ?? false, includeSKAdNetworks: includeSKAdNetworks) else {
             callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
             return
         }
-        
         
         NetworkManager.shared.get(url: url) { result in
             switch result {
@@ -321,12 +348,13 @@ public final class BidscubeSDK {
     public static func showNativeAd(_ placementId: String, _ callback: AdCallback?) {
         callback?.onAdLoading(placementId)
         
+        // Build GET URL with SKAdNetwork parameters
+        let includeSKAdNetworks = configuration?.enableSKAdNetwork ?? false
         
-        guard let url = buildRequestURL(placementId: placementId, adType: .native) else {
+        guard let url = URLBuilder.buildAdRequestURL(placementId: placementId, adType: .native, position: getEffectiveAdPosition(), timeoutMs: configuration?.defaultAdTimeoutMs ?? Constants.defaultTimeoutMs, debug: configuration?.enableDebugMode ?? false, includeSKAdNetworks: includeSKAdNetworks) else {
             callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
             return
         }
-        
         
         NetworkManager.shared.get(url: url) { result in
             switch result {
@@ -339,13 +367,29 @@ public final class BidscubeSDK {
                 
                 do {
                     if let jsonData = content.data(using: .utf8),
-                       let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
-                       let positionValue = json["position"] as? Int,
-                       let position = AdPosition(rawValue: positionValue) {
-                        self.responseAdPosition = position
+                       let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] {
+                        
+                        // Process position
+                        if let positionValue = json["position"] as? Int,
+                           let position = AdPosition(rawValue: positionValue) {
+                            self.responseAdPosition = position
+                        }
+                        
+                        // Process SKAdNetwork response if present
+                        if let skadnetworkData = json["skadnetwork"] as? [String: Any] {
+                            print("🔍 BidscubeSDK: Found SKAdNetwork data in video response")
+                            if let skadnetworkResponse = SKAdNetworkManager.parseSKAdNetworkResponse(from: skadnetworkData) {
+                                print("BidscubeSDK: Successfully parsed SKAdNetwork response")
+                                SKAdNetworkManager.processSKAdNetworkResponse(skadnetworkResponse)
+                            } else {
+                                print("BidscubeSDK: Failed to parse SKAdNetwork response")
+                            }
+                        } else {
+                            print("ℹ️ BidscubeSDK: No SKAdNetwork data in video response")
+                        }
                     }
                 } catch {
-                    
+                    print("❌ BidscubeSDK: Error parsing video JSON response: \(error)")
                     self.responseAdPosition = .unknown
                 }
                 
@@ -811,6 +855,29 @@ public final class BidscubeSDK {
     /// - Returns: True if SKAdNetwork is available
     public static func isSKAdNetworkAvailable() -> Bool {
         return SKAdNetworkManager.isAvailable()
+    }
+    
+    /// Get all SKAdNetwork IDs from the app's Info.plist
+    /// - Returns: Array of SKAdNetwork identifiers
+    public static func getSKAdNetworkIDs() -> [String] {
+        return SKAdNetworkManager.getSKAdNetworkIDs()
+    }
+    
+    /// Display SKAdNetwork IDs in console
+    public static func displaySKAdNetworkIDsInConsole() {
+        SKAdNetworkManager.displaySKAdNetworkIDsInConsole()
+    }
+    
+    /// Get SKAdNetwork IDs as formatted string for display
+    /// - Returns: Formatted string with all SKAdNetwork IDs
+    public static func getSKAdNetworkIDsAsString() -> String {
+        return SKAdNetworkManager.getSKAdNetworkIDsAsString()
+    }
+    
+    /// Debug method to inspect Info.plist structure
+    /// - Returns: Detailed information about Info.plist contents
+    public static func debugInfoPlistStructure() -> String {
+        return SKAdNetworkManager.debugInfoPlistStructure()
     }
 }
 

@@ -8,7 +8,8 @@ public struct URLBuilder {
         position: AdPosition,
         timeoutMs: Int,
         debug: Bool,
-        ctaText: String? = nil
+        ctaText: String? = nil,
+        includeSKAdNetworks: Bool = true
     ) -> URL? {
         return buildAdRequestURL(
             base: Constants.baseURL,
@@ -17,7 +18,8 @@ public struct URLBuilder {
             position: position,
             timeoutMs: timeoutMs,
             debug: debug,
-            ctaText: ctaText
+            ctaText: ctaText,
+            includeSKAdNetworks: includeSKAdNetworks
         )
     }
 
@@ -28,7 +30,8 @@ public struct URLBuilder {
         position: AdPosition,
         timeoutMs: Int,
         debug: Bool,
-        ctaText: String? = nil
+        ctaText: String? = nil,
+        includeSKAdNetworks: Bool = true
     ) -> URL? {
         guard var components = URLComponents(string: base) else {
             logError("Failed to create URL components from base: \(base)")
@@ -37,12 +40,22 @@ public struct URLBuilder {
 
         var queryItems = buildCommonQueryItems(placementId: placementId, adType: adType)
         queryItems.append(contentsOf: buildPrivacyQueryItems())
-        queryItems.append(contentsOf: buildSKAdNetworkQueryItems())
 
         if let ctaText = ctaText {
             queryItems.append(URLQueryItem(name: Constants.QueryParams.ctaText, value: ctaText))
         }
-
+        
+        // Add SKAdNetwork IDs as GET parameters
+        if includeSKAdNetworks {
+            let skAdNetworkIds = getSKAdNetworkIDsFromInfoPlist()
+            for skAdNetworkId in skAdNetworkIds {
+                queryItems.append(URLQueryItem(name: "skadnet", value: skAdNetworkId))
+            }
+            if !skAdNetworkIds.isEmpty {
+                logSuccess("Added \(skAdNetworkIds.count) SKAdNetwork IDs as GET parameters")
+            }
+        }
+        
         components.queryItems = queryItems
 
         guard let finalURL = components.url else {
@@ -113,20 +126,6 @@ public struct URLBuilder {
         return items
     }
     
-    private static func buildSKAdNetworkQueryItems() -> [URLQueryItem] {
-        var items: [URLQueryItem] = []
-        
-        // Check if SKAdNetwork is available and enabled
-        if #available(iOS 14.0, *) {
-            items.append(URLQueryItem(name: Constants.SKAdNetwork.enabledKey, value: "1"))
-            items.append(URLQueryItem(name: Constants.SKAdNetwork.attributionStatusKey, value: "available"))
-        } else {
-            items.append(URLQueryItem(name: Constants.SKAdNetwork.enabledKey, value: "0"))
-            items.append(URLQueryItem(name: Constants.SKAdNetwork.attributionStatusKey, value: "not_available"))
-        }
-        
-        return items
-    }
 
     private static func logSuccess(_ message: String) {
         Logger.urlBuilder(message)
@@ -134,5 +133,100 @@ public struct URLBuilder {
 
     private static func logError(_ message: String) {
         Logger.error(message, prefix: Constants.LogPrefixes.urlBuilder)
+    }
+    
+    // MARK: - POST Request Body Builder
+    
+    /// Builds the request body for POST ad requests - contains only SKAdNetwork IDs
+    /// - Parameters:
+    ///   - placementId: The placement ID
+    ///   - adType: The ad type
+    ///   - position: The ad position
+    ///   - timeoutMs: Request timeout in milliseconds
+    ///   - debug: Debug mode flag
+    ///   - ctaText: Optional CTA text
+    ///   - includeSKAdNetworks: Whether to include SKAdNetwork data from Info.plist
+    /// - Returns: Array of SKAdNetwork IDs or empty array
+    public static func buildAdRequestBody(
+        placementId: String,
+        adType: AdType,
+        position: AdPosition,
+        timeoutMs: Int,
+        debug: Bool,
+        ctaText: String? = nil,
+        includeSKAdNetworks: Bool = true
+    ) -> [String] {
+        Logger.info("🔧 URLBuilder.buildAdRequestBody called with includeSKAdNetworks: \(includeSKAdNetworks)")
+        
+        // Return only SKAdNetwork IDs from Info.plist
+        if includeSKAdNetworks {
+            let skAdNetworkIds = getSKAdNetworkIDsFromInfoPlist()
+            if !skAdNetworkIds.isEmpty {
+                logSuccess("Included \(skAdNetworkIds.count) SKAdNetwork IDs in request body: \(skAdNetworkIds)")
+                return skAdNetworkIds
+            } else {
+                logSuccess("No SKAdNetwork IDs found in Info.plist")
+                return []
+            }
+        } else {
+            logSuccess("SKAdNetwork IDs excluded from request body (includeSKAdNetworks = false)")
+            return []
+        }
+    }
+    
+    /// Extracts SKAdNetwork IDs from Info.plist
+    /// - Returns: Array of SKAdNetwork identifiers
+    private static func getSKAdNetworkIDsFromInfoPlist() -> [String] {
+        Logger.info("🔍 getSKAdNetworkIDsFromInfoPlist called")
+        var identifiers: [String] = []
+        
+        // Try to get SKAdNetworkItems from Bundle.main.infoDictionary first
+        if let infoDict = Bundle.main.infoDictionary {
+            Logger.info("📱 Bundle.main.infoDictionary available")
+            if let skAdNetworkItems = infoDict["SKAdNetworkItems"] as? [[String: Any]] {
+                Logger.info("✅ Found SKAdNetworkItems in infoDictionary: \(skAdNetworkItems.count) items")
+                identifiers = skAdNetworkItems.compactMap { item in
+                    guard let identifier = item["SKAdNetworkIdentifier"] as? String else {
+                        return nil
+                    }
+                    return identifier
+                }
+            } else {
+                Logger.info("❌ No SKAdNetworkItems found in infoDictionary")
+            }
+        } else {
+            Logger.info("❌ Bundle.main.infoDictionary is nil")
+        }
+        
+        // Fallback: try to read from Info.plist file directly
+        if identifiers.isEmpty {
+            Logger.info("🔄 Trying to read Info.plist file directly")
+            guard let path = Bundle.main.path(forResource: "Info", ofType: "plist") else {
+                Logger.info("❌ Could not find Info.plist file path")
+                return []
+            }
+            
+            Logger.info("📁 Info.plist path: \(path)")
+            guard let plist = NSDictionary(contentsOfFile: path) else {
+                Logger.info("❌ Could not read Info.plist file")
+                return []
+            }
+            
+            guard let skAdNetworkItems = plist["SKAdNetworkItems"] as? [[String: Any]] else {
+                Logger.info("❌ No SKAdNetworkItems found in Info.plist file")
+                return []
+            }
+            
+            Logger.info("✅ Found SKAdNetworkItems in Info.plist file: \(skAdNetworkItems.count) items")
+            identifiers = skAdNetworkItems.compactMap { item in
+                guard let identifier = item["SKAdNetworkIdentifier"] as? String else {
+                    return nil
+                }
+                return identifier
+            }
+        }
+        
+        Logger.info("🎯 Final result: \(identifiers.count) SKAdNetwork IDs: \(identifiers)")
+        return identifiers
     }
 }

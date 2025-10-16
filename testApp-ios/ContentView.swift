@@ -132,6 +132,17 @@ struct ContentView: View {
                         .background(Color(hex: 0x2196F3))
                         .cornerRadius(12)
                         .shadow(radius: 4)
+                }
+                
+                NavigationLink(destination: SKAdNetworkTestView()) {
+                    Text("SKAdNetwork Test")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color(hex: 0x9C27B0))
+                        .cornerRadius(12)
+                        .shadow(radius: 4)
                 }                
             }
             .padding()

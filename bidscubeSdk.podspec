@@ -27,8 +27,8 @@ Pod::Spec.new do |spec|
   
   spec.source       = { :git => "https://github.com/bidscube/bidscube-sdk-ios.git", :tag => "v#{spec.version}" }
   
-  spec.source_files = "Sources/bidscubeSdk/**/*.{swift,h}"
-  spec.public_header_files = "Sources/bidscubeSdk/bidscubeSdk.h"
+  spec.source_files = "bidscubeSdk/**/*.{swift,h}"
+  spec.public_header_files = "bidscubeSdk/bidscubeSdk.h"
   
   spec.dependency 'GoogleAds-IMA-iOS-SDK', '~> 3.19'
   

@@ -42,10 +42,10 @@ if [ -f "bidscubeSdk/Core/Constants.swift" ]; then
 fi
 
 # Update Sources version if it exists
-if [ -f "Sources/bidscubeSdk/Core/Constants.swift" ]; then
-    sed -i.bak "s/public static let sdkVersion = \".*\"/public static let sdkVersion = \"$VERSION\"/" Sources/bidscubeSdk/Core/Constants.swift
-    rm -f Sources/bidscubeSdk/Core/Constants.swift.bak
-    echo "✅ Updated Sources/Constants.swift"
+if [ -f "bidscubeSdk/Core/Constants.swift" ]; then
+    sed -i.bak "s/public static let sdkVersion = \".*\"/public static let sdkVersion = \"$VERSION\"/" bidscubeSdk/Core/Constants.swift
+    rm -f bidscubeSdk/Core/Constants.swift.bak
+    echo "✅ Updated Constants.swift"
 fi
 
 # Update changelog in README.md
