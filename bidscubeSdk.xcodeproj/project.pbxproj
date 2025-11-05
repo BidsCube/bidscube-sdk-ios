@@ -239,6 +239,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				0472A3532E744D02000D1D0B /* XCRemoteSwiftPackageReference "googleads-ima-ios" */,
+				046D16B22EA27ED0008871FE /* XCRemoteSwiftPackageReference "bidscube-sdk-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 04A38F6F2E69C68500FC2662 /* Products */;
@@ -299,9 +300,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-testApp-ios/Pods-testApp-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-testApp-ios/Pods-testApp-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -688,6 +693,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		046D16B22EA27ED0008871FE /* XCRemoteSwiftPackageReference "bidscube-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BidsCube/bidscube-sdk-ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		0472A3532E744D02000D1D0B /* XCRemoteSwiftPackageReference "googleads-ima-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/googleads-ima-ios";

@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "bidscubeSdk"
-  spec.version      = "0.2"
+  spec.version      = "0.2.1"
   spec.summary      = "BidsCube iOS SDK for displaying ads"
   spec.description  = <<-DESC
                       BidsCube iOS SDK provides a comprehensive solution for displaying image, video, and native ads in iOS applications.
@@ -19,8 +19,8 @@ Pod::Spec.new do |spec|
   spec.license      = { :type => "MIT", :file => "LICENSE" }
   spec.author       = { "Vlad" => "generalisimys20132@gmail.com" }
   
-  spec.platform     = :ios, "13.0"
-  spec.ios.deployment_target = '13.0'
+  spec.platform     = :ios, "14.0"
+  spec.ios.deployment_target = '14.0'
   spec.swift_versions = ['5.9']
   
   spec.documentation_url = "https://github.com/bidscube/bidscube-sdk-ios"

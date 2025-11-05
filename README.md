@@ -326,6 +326,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
+### Version 0.2.1
+- Automated release via GitHub Actions
+- Hot fix for BidscubeSDK Flutter version compatibility
+- Bug fixes and improvements
+
 ### Version 0.1
 - Automated release via GitHub Actions
 - Bug fixes and improvements
