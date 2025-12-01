@@ -35,6 +35,8 @@ struct SDKTestView: View {
                             .cornerRadius(12)
                     }
                     
+                    if isSDKInitialized {
+                        
                     // Placement ID Input
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Placement ID Input:")
@@ -51,14 +53,11 @@ struct SDKTestView: View {
                         .foregroundColor(.secondary)
                     
                     // Active Banner Count
-                    if isSDKInitialized {
                         Text("Active Banners: \(BidscubeSDK.getActiveBannerCount())")
                             .font(.subheadline)
                             .foregroundColor(.blue)
                             .padding(.vertical)
-                    }
-                    
-                    if isSDKInitialized {
+                   
                         // Ad Type Buttons
                         VStack(spacing: 12) {
                             Text("Ad Types")
@@ -160,7 +159,6 @@ struct SDKTestView: View {
                                     .padding(.horizontal)
                             }
                         }
-                    }
                     
                     // Position Selection (at the bottom) - FOR TESTING ONLY
                     VStack(alignment: .leading, spacing: 8) {
@@ -199,6 +197,7 @@ struct SDKTestView: View {
                                 .italic()
                         }
                     }
+                }
                 }
                 .padding()
             }
