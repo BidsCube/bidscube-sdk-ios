@@ -39,21 +39,21 @@ class MyAdDelegate: AdCallback {
 }
 
 let callback = MyAdDelegate()
-BidscubeSDK.showImageAd("19481", callback)
+BidscubeSDK.showImageAd("20212", callback)
 ```
 
 ### Get an Ad View
 
 ```swift
-let view = BidscubeSDK.getImageAdView("19481", callback)
+let view = BidscubeSDK.getImageAdView("20212", callback)
 ```
 
 ### Video and Native
 
 ```swift
-BidscubeSDK.showVideoAd("19483", callback)
-BidscubeSDK.showSkippableVideoAd("19483", "Install Now", callback)
-let nativeView = BidscubeSDK.getNativeAdView("19487", callback)
+BidscubeSDK.showVideoAd("20213", callback)
+BidscubeSDK.showSkippableVideoAd("20213", "Install Now", callback)
+let nativeView = BidscubeSDK.getNativeAdView("20214", callback)
 ```
 
 ## Ad Positioning

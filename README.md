@@ -12,75 +12,53 @@ A comprehensive iOS SDK for displaying image, video, and native ads in iOS appli
 - **Production-ready** with comprehensive logging
 
 ## Requirements
-
-- iOS 13.0+
+- iOS 14.0+ (CocoaPods) / iOS 13.0+ (SPM target)
 - Xcode 15.0+
 - Swift 6.0+
-- CocoaPods 1.10.0+
-- Swift Package Manager (recommended)
- 
+- CocoaPods 1.10.0+ or Swift Package Manager
+
 ## Installation
-
-### Swift Package Manager (Recommended)
-
-1. In Xcode, go to **File** → **Add Package Dependencies**
-2. Enter the repository URL: `https://github.com/bidscube/bidscube-sdk-ios.git`
-3. Select the version you want to use
-4. Click **Add Package**
-
-Alternatively, add it to your `Package.swift`:
-
+### Swift Package Manager (recommended)
+1. File → **Add Package Dependencies** → `https://github.com/bidscube/bidscube-sdk-ios.git`
+2. Pick version `1.2.1` (or `from: "1.2.1"` in `Package.swift`)
 ```swift
 dependencies: [
-    .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "0.0.1")
+    .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "1.2.1")
 ]
 ```
 
 ### CocoaPods
-
-Add the following to your `Podfile`:
-
 ```ruby
-platform :ios, '13.0'
+platform :ios, '14.0'
 use_frameworks!
 
 target 'YourApp' do
-  pod 'bidscubeSdk'
+  pod 'bidscubeSdk', '~> 1.2.1'
 end
 ```
-
-Then run:
-
-```bash
-pod install
-```
+Run `pod install`.
 
 ### Manual Installation
+1. Download the repo.
+2. Add `bidscubeSdk` to your project.
+3. Link `UIKit`, `WebKit`, `AVFoundation`, `MediaPlayer`, and `GoogleAds-IMA-iOS-SDK`.
 
-1. Download the latest release from GitHub
-2. Add the `bidscubeSdk` folder to your Xcode project
-3. Add the following frameworks to your project:
-   - UIKit
-   - WebKit
-   - AVFoundation
-   - MediaPlayer
-   - GoogleAds-IMA-iOS-SDK
-
-## Quick Start
-
+## Quick start
 ### 1. Initialize the SDK
-
 ```swift
 import bidscubeSdk
 
-// Configure the SDK
 let config = SDKConfig.Builder()
-    .enableLogging(true)
-    .enableDebugMode(true)
-    .defaultAdTimeout(30000) // 30 seconds
+   .enableLogging(true)
+    .enableDebugMode(false)
+    .defaultAdTimeout(Constants.defaultTimeoutMs)
+    .defaultAdPosition(Constants.defaultAdPosition)
+    .baseURL(Constants.baseURL)
+    .enableSKAdNetwork(true)
+    .skAdNetworkId("skadnetwork.com.example")
+    .skAdNetworkConversionValue(1)
     .build()
 
-// Initialize the SDK
 BidscubeSDK.initialize(config: config)
 ```
 
@@ -187,9 +165,9 @@ The SDK supports different placement IDs for various ad types and positions:
 
 | Placement ID | Ad Type | Description |
 |--------------|---------|-------------|
-| `19483` | Video | Test video ad with VAST response |
-| `test_image` | Image | Test image ad |
-| `test_native` | Native | Test native ad |
+| `20213` | Video | Test video ad with VAST response |
+| `20212` | Image | Test image ad |
+| `20214` | Native | Test native ad |
 
 ### Production Placement IDs
 
@@ -273,6 +251,26 @@ let config = SDKConfig.Builder()
     .build()
 ```
 
+## Ads, positions, and rendering override
+
+- **Ad types**: image, video, native.
+- **Test placements**: `20212` (image/banner), `20213` (video), `20214` (native).
+- **Positions** (`AdPosition` raw values): `unknown` (0), `aboveTheFold` (1), `dependOnScreenSize` (2), `belowTheFold` (3), `header` (4), `footer` (5), `sidebar` (6), `fullScreen` (7).
+- You can set a manual position before requesting with `BidscubeSDK.setAdPosition(_:)`; SDK falls back to server `position`, then `unknown`.
+- If the ad response contains both `adm` (ad markup) and `position`, the SDK triggers `onAdRenderOverride(adm:position:)` and skips built-in rendering so you can render the markup yourself.
+
+Example override hook:
+```swift
+class CustomDelegate: AdCallback {
+    func onAdRenderOverride(adm: String, position: AdPosition) {
+        // adm: ad markup (HTML/VAST/snippet); position: where server suggests
+        render(adm, at: position)
+    }
+}
+```
+
+See the in-repo demo `bidscubeSdk/Views/CustomAdRenderView.swift` for a working override flow.
+
 ## Troubleshooting
 
 ### Common Issues
@@ -325,6 +323,10 @@ let config = SDKConfig.Builder()
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
+
+### Version 1.2.1
+- Automated release via GitHub Actions
+- Bug fixes and improvements
 
 ### Version 1.1.0
 - Automated release via GitHub Actions

@@ -186,6 +186,14 @@ public final class BidscubeSDK {
                     if let jsonData = htmlContent.data(using: .utf8),
                        let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] {
                         
+                        // User override: if both adm and position are present, let user render
+                        if let adm = json["adm"] as? String,
+                           let positionValue = json["position"] as? Int,
+                           let position = AdPosition(rawValue: positionValue) {
+                            callback?.onAdRenderOverride(adm: adm, position: position)
+                            return // Don't proceed with default rendering
+                        }
+                        
                         // Process position
                         if let positionValue = json["position"] as? Int,
                            let position = AdPosition(rawValue: positionValue) {
@@ -286,13 +294,14 @@ public final class BidscubeSDK {
                 
                 do {
                     if let jsonData = content.data(using: .utf8),
-                       let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
-                       let positionValue = json["position"] as? Int,
-                       let position = AdPosition(rawValue: positionValue) {
-                        self.responseAdPosition = position
-                    }
+                               let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
+                               let adm = json["adm"] as? String,
+                               let positionValue = json["position"] as? Int,
+                               let position = AdPosition(rawValue: positionValue) {
+                                callback?.onAdRenderOverride(adm: adm, position: position)
+                                return
+                            }
                 } catch {
-                    
                     self.responseAdPosition = .fullScreen
                 }
                 
@@ -369,6 +378,12 @@ public final class BidscubeSDK {
                     if let jsonData = content.data(using: .utf8),
                        let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] {
                         
+                        if let adm = json["adm"] as? String,
+                           let positionValue = json["position"] as? Int,
+                           let position = AdPosition(rawValue: positionValue) {
+                            callback?.onAdRenderOverride(adm: adm, position: position)
+                            return // Don't proceed with default rendering
+                        }
                         // Process position
                         if let positionValue = json["position"] as? Int,
                            let position = AdPosition(rawValue: positionValue) {

@@ -9,9 +9,9 @@ struct WindowedAdTestView: View {
     
     private let delegate = TestAdDelegate()
     
-    private let imageAdPlacementId = "19481"
-    private let videoAdPlacementId = "19483"
-    private let nativeAdPlacementId = "19487"
+    private let imageAdPlacementId = "20212"
+    private let videoAdPlacementId = "20213"
+    private let nativeAdPlacementId = "20214"
     
     var body: some View {
         ZStack {

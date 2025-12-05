@@ -6,13 +6,13 @@ final class ViewController: UIViewController, AdCallback, ConsentCallback {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
-        let imageView = BidscubeSDK.getImageAdView("19481", self)
+        let imageView = BidscubeSDK.getImageAdView("20212", self)
         imageView.translatesAutoresizingMaskIntoConstraints = false
 
-        let videoView = BidscubeSDK.getVideoAdView("19483", self)
+        let videoView = BidscubeSDK.getVideoAdView("20213", self)
         videoView.translatesAutoresizingMaskIntoConstraints = false
 
-        let nativeView = BidscubeSDK.getNativeAdView("19487", self)
+        let nativeView = BidscubeSDK.getNativeAdView("20214", self)
         nativeView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(imageView)

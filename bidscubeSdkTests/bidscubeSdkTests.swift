@@ -40,15 +40,15 @@ struct bidscubeSdkTests {
         try await Task.sleep(nanoseconds: 200_000_000)
         #expect(delegate.consentInfoUpdated)
 
-        BidscubeSDK.showImageAd("19481", delegate)
+        BidscubeSDK.showImageAd("20212", delegate)
         try await Task.sleep(nanoseconds: 200_000_000)
         #expect(delegate.adLoaded)
 
-        let v1 = BidscubeSDK.getImageAdView("19481", delegate)
+        let v1 = BidscubeSDK.getImageAdView("20212", delegate)
         #expect((v1 as UIView?) != nil)
-        let v2 = BidscubeSDK.getVideoAdView("19483", delegate)
+        let v2 = BidscubeSDK.getVideoAdView("20213", delegate)
         #expect((v2 as UIView?) != nil)
-        let v3 = BidscubeSDK.getNativeAdView("19487", delegate)
+        let v3 = BidscubeSDK.getNativeAdView("20214", delegate)
         #expect((v3 as UIView?) != nil)
 
         BidscubeSDK.cleanup()

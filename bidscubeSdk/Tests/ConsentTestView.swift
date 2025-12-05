@@ -3,7 +3,7 @@ import bidscubeSdk
 
 struct ConsentTestView: View {
     @State private var sdkStatus = "SDK Status: Not Initialized"
-    @State private var placementId = "19481"
+    @State private var placementId = "20212"
     @State private var isSDKInitialized = false
     @State private var showPlacementIdAlert = false
     @State private var consentStatus = ""
@@ -36,7 +36,7 @@ struct ConsentTestView: View {
                         Text("Placement ID Input:")
                             .font(.headline)
                         
-                        TextField("Enter placement ID (e.g., 19481)", text: $placementId)
+                        TextField("Enter placement ID (e.g., 20212)", text: $placementId)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.numberPad)
                     }
@@ -333,7 +333,7 @@ struct ConsentTestView: View {
         }
         
         showToast("Showing image ad...")
-        let adView = BidscubeSDK.getImageAdView("19481", delegate)
+        let adView = BidscubeSDK.getImageAdView("20212", delegate)
         DispatchQueue.main.async {
             self.currentAdView = AnyView(UIViewRepresentableWrapper(view: adView))
         }

@@ -3,7 +3,7 @@ import bidscubeSdk
 
 struct SDKTestView: View {
     @State private var sdkStatus = "SDK Status: Not Initialized"
-    @State private var placementId = "19481"
+    @State private var placementId: String? = nil
     @State private var currentAdPosition = "Current Ad Position: Not Set"
     @State private var isSDKInitialized = false
     @State private var showPlacementIdAlert = false
@@ -11,7 +11,7 @@ struct SDKTestView: View {
     @State private var selectedPosition: AdPosition = .unknown
     @State private var useManualPosition = false
     @State private var lastDisplayedAdType: AdType?
-    @State private var bannerCornerRadius: Double = 6.0
+    @State private var bannerCornerRadius: Double = 0.0
     
     private let delegate = TestAdDelegate()
     
@@ -42,7 +42,10 @@ struct SDKTestView: View {
                         Text("Placement ID Input:")
                             .font(.headline)
                         
-                        TextField("Enter placement ID (e.g., 19481)", text: $placementId)
+                        TextField("Enter placement ID:", text: Binding<String>(
+                            get: { placementId ?? "" },
+                            set: { placementId = $0.isEmpty ? nil : $0 }
+                        ))
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.numberPad)
                     }
@@ -93,6 +96,7 @@ struct SDKTestView: View {
                                     .background(Color.orange)
                                     .cornerRadius(12)
                             }
+
                         }
                         
                         // Logging Control
@@ -268,22 +272,27 @@ struct SDKTestView: View {
             SDKLogger.w("SDKTestView", "SDK not initialized when trying to show ad")
             return
         }
-        
-        guard !placementId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            showPlacementIdAlert = true
-            SDKLogger.w("SDKTestView", "Placement ID is empty")
-            return
+        // Determine correct placementId per button if TextField is empty
+        let trimmedPlacementId = (placementId?.trimmingCharacters(in: .whitespacesAndNewlines)).flatMap { $0.isEmpty ? nil : $0 }
+        let effectivePlacementId: String
+        switch adType {
+        case .image:
+            effectivePlacementId = trimmedPlacementId ?? "20212"
+        case .video:
+            effectivePlacementId = trimmedPlacementId ?? "20213"
+        case .native:
+            effectivePlacementId = trimmedPlacementId ?? "20214"
         }
-        
-        let trimmedPlacementId = placementId.trimmingCharacters(in: .whitespacesAndNewlines)
+        // Remove old empty placement check
+        // PlacementID Alert not needed since defaults provided
         
         // Handle manual position override
         if useManualPosition {
             BidscubeSDK.setAdPosition(selectedPosition)
-            SDKLogger.d("SDKTestView", "Showing \(adType) ad with placement ID: \(trimmedPlacementId) and manual position: \(selectedPosition.rawValue) - \(displayName(for: selectedPosition))")
+            SDKLogger.d("SDKTestView", "Showing \(adType) ad with placement ID: \(effectivePlacementId) and manual position: \(selectedPosition.rawValue) - \(displayName(for: selectedPosition))")
         } else {
             BidscubeSDK.setAdPosition(.unknown)
-            SDKLogger.d("SDKTestView", "Showing \(adType) ad with placement ID: \(trimmedPlacementId) - using server response position")
+            SDKLogger.d("SDKTestView", "Showing \(adType) ad with placement ID: \(effectivePlacementId) - using server response position")
         }
         
         do {
@@ -293,23 +302,23 @@ struct SDKTestView: View {
             if shouldPresentFullScreen {
                 // Present full screen ad
                 SDKLogger.d("SDKTestView", "Presenting \(adType) ad full screen (manual override)")
-                presentFullScreenAd(adType, placementId: trimmedPlacementId)
+                presentFullScreenAd(adType, placementId: effectivePlacementId)
             } else if selectedPosition == .header || selectedPosition == .footer || selectedPosition == .sidebar {
                 // Show banner ad for header, footer, or sidebar positions
                 SDKLogger.d("SDKTestView", "Showing \(adType) banner ad at position: \(selectedPosition.rawValue) - \(displayName(for: selectedPosition))")
-                showBannerAd(adType, placementId: trimmedPlacementId, position: selectedPosition)
+                showBannerAd(adType, placementId: effectivePlacementId, position: selectedPosition)
             } else {
                 // Display inline ad
                 let adView: UIView
                 switch adType {
                 case .image:
-                    adView = BidscubeSDK.getImageAdView(trimmedPlacementId, delegate)
+                    adView = BidscubeSDK.getImageAdView(effectivePlacementId, delegate)
                     
                 case .video:
-                    adView = BidscubeSDK.getVideoAdView(trimmedPlacementId, delegate)
+                    adView = BidscubeSDK.getVideoAdView(effectivePlacementId, delegate)
                     
                 case .native:
-                    adView = BidscubeSDK.getNativeAdView(trimmedPlacementId, delegate)
+                    adView = BidscubeSDK.getNativeAdView(effectivePlacementId, delegate)
                 }
                 
                 // Display the ad view in SwiftUI
@@ -320,7 +329,7 @@ struct SDKTestView: View {
             }
             
             // Update current ad position and check for server-side full screen
-            updatePositionAfterResponse(trimmedPlacementId)
+            updatePositionAfterResponse(effectivePlacementId)
             
         } catch {
             let errorMessage = "Failed to show ad: \(error.localizedDescription)"

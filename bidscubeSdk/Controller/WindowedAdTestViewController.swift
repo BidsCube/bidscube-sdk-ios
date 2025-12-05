@@ -76,9 +76,9 @@ final class WindowedAdTestViewController: UIViewController, AdCallback, ConsentC
         return b
     }
 
-    @objc private func createImageAd() { attach(BidscubeSDK.getImageAdView("19481", self)) }
-    @objc private func createVideoAd() { attach(BidscubeSDK.getVideoAdView("19483", self)) }
-    @objc private func createNativeAd() { attach(BidscubeSDK.getNativeAdView("19487", self)) }
+    @objc private func createImageAd() { attach(BidscubeSDK.getImageAdView("20212", self)) }
+    @objc private func createVideoAd() { attach(BidscubeSDK.getVideoAdView("20213", self)) }
+    @objc private func createNativeAd() { attach(BidscubeSDK.getNativeAdView("20214", self)) }
 
     private func attach(_ viewToAdd: UIView) {
         currentAdView?.removeFromSuperview()

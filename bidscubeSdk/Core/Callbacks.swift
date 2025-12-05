@@ -13,6 +13,11 @@ public protocol AdCallback: AnyObject {
     func onVideoAdSkipped(_ placementId: String)
     func onVideoAdSkippable(_ placementId: String)
     func onInstallButtonClicked(_ placementId: String, buttonText: String)
+    /// Called when the SDK wants to let the app handle custom ad rendering.
+    /// - Parameters:
+    ///   - adm: Ad markup (the ad creative data as string).
+    ///   - position: AdPosition for where it should render.
+    func onAdRenderOverride(adm: String, position: AdPosition)
 }
 
 public extension AdCallback {
@@ -21,6 +26,7 @@ public extension AdCallback {
     func onVideoAdSkipped(_ placementId: String) {}
     func onVideoAdSkippable(_ placementId: String) {}
     func onInstallButtonClicked(_ placementId: String, buttonText: String) {}
+    func onAdRenderOverride(adm: String, position: AdPosition) {}
 }
 
 public protocol ConsentCallback: AnyObject {
