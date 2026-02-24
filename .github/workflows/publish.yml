@@ -30,10 +30,27 @@ jobs:
 
       - name: Setup Swift
         run: |
-          curl -O https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz && \
-          tar zxf swiftly-$(uname -m).tar.gz && \
-          ./swiftly init --quiet-shell-followup && \
-          bash -c "source ${SWIFTLY_HOME_DIR:-$HOME/.local/share/swiftly}/env.sh && swiftly install 6.0"
+          set -euo pipefail
+          curl -fL --retry 5 --retry-all-errors --retry-delay 3 \
+            -O "https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz"
+          tar zxf "swiftly-$(uname -m).tar.gz"
+          ./swiftly init --skip-install --no-modify-profile --quiet-shell-followup
+          source "${SWIFTLY_HOME_DIR:-$HOME/.local/share/swiftly}/env.sh"
+          installed=false
+          for attempt in 1 2 3 4 5; do
+            if swiftly install 6.0; then
+              installed=true
+              break
+            fi
+            echo "Swift install attempt ${attempt} failed, retrying..."
+            sleep $((attempt * 5))
+          done
+          if [ "$installed" = false ]; then
+            echo "Failed to install Swift 6.0 after retries"
+            exit 1
+          fi
+          swiftly use 6.0
+          swift --version
 
       - name: Extract version from tag
         id: version
