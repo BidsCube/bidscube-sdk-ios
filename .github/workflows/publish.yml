@@ -6,6 +6,9 @@ on:
       - 'v*'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   publish-cocoapods:
     name: Publish to CocoaPods
@@ -205,9 +208,10 @@ jobs:
       - name: Create GitHub Release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.CI_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: v${{ steps.version.outputs.version }}
+          commitish: ${{ github.sha }}
           release_name: Release ${{ steps.version.outputs.version }}
           body: |
             ## Bidscube iOS SDK v${{ steps.version.outputs.version }}
