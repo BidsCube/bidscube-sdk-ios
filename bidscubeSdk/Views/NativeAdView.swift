@@ -377,7 +377,6 @@ public final class NativeAdView: UIView {
         }
     }
     
-    
     public func loadNativeAdFromURL(_ url: URL) {
         resetImpressionTrackingState()
         loadingLabel.isHidden = false
