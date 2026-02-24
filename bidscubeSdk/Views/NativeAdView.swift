@@ -62,6 +62,9 @@ public final class NativeAdView: UIView {
     private weak var callback: AdCallback?
     private var currentLayoutMode: NativeAdLayoutMode = .full
     private var activeConstraints: [NSLayoutConstraint] = []
+    private var impressionTrackerURLs: [URL] = []
+    private var isNativeContentLoaded = false
+    private var hasFiredImpressionTrackers = false
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -244,11 +247,15 @@ public final class NativeAdView: UIView {
             
             if let imptrackers = nativeJson["imptrackers"] as? [String] {
                 print("NativeAdView: Found \(imptrackers.count) impression trackers")
+                updateImpressionTrackers(imptrackers)
             }
             
             if let eventtrackers = nativeJson["eventtrackers"] as? [[String: Any]] {
                 print("NativeAdView: Found \(eventtrackers.count) event trackers")
             }
+
+            isNativeContentLoaded = true
+            fireImpressionTrackersIfNeeded()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.loadingLabel.isHidden = true
@@ -325,9 +332,54 @@ public final class NativeAdView: UIView {
             print("NativeAdView: Found \(clicktrackers.count) click trackers")
         }
     }
+
+    private func resetImpressionTrackingState() {
+        impressionTrackerURLs.removeAll()
+        isNativeContentLoaded = false
+        hasFiredImpressionTrackers = false
+    }
+
+    private func updateImpressionTrackers(_ trackers: [String]) {
+        impressionTrackerURLs = trackers.compactMap { tracker in
+            let decodedTracker = decodeEscapedString(tracker)
+            return URL(string: decodedTracker)
+        }
+    }
+
+    private func fireImpressionTrackersIfNeeded() {
+        guard !hasFiredImpressionTrackers else { return }
+        guard isNativeContentLoaded else { return }
+        guard window != nil else { return }
+
+        hasFiredImpressionTrackers = true
+
+        guard !impressionTrackerURLs.isEmpty else {
+            print("NativeAdView: No impression trackers to fire")
+            return
+        }
+
+        print("NativeAdView: Firing \(impressionTrackerURLs.count) impression trackers")
+        for trackerURL in impressionTrackerURLs {
+            var request = URLRequest(url: trackerURL)
+            request.httpMethod = "GET"
+            request.cachePolicy = .reloadIgnoringLocalCacheData
+            request.timeoutInterval = 10
+
+            URLSession.shared.dataTask(with: request) { _, response, error in
+                if let error = error {
+                    print("NativeAdView: Impression tracker failed: \(trackerURL.absoluteString), error: \(error.localizedDescription)")
+                    return
+                }
+
+                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
+                print("NativeAdView: Impression tracker fired: \(trackerURL.absoluteString), status: \(statusCode)")
+            }.resume()
+        }
+    }
     
     
     public func loadNativeAdFromURL(_ url: URL) {
+        resetImpressionTrackingState()
         loadingLabel.isHidden = false
         loadingLabel.text = "Loading Native Ad..."
         
@@ -503,6 +555,11 @@ public final class NativeAdView: UIView {
         
         // Auto-adjust layout based on current size
         setLayoutModeForSize(bounds.size)
+    }
+
+    public override func didMoveToWindow() {
+        super.didMoveToWindow()
+        fireImpressionTrackersIfNeeded()
     }
     
     /// Sets the layout mode for the native ad view

@@ -20,10 +20,10 @@ A comprehensive iOS SDK for displaying image, video, and native ads in iOS appli
 ## Installation
 ### Swift Package Manager (recommended)
 1. File → **Add Package Dependencies** → `https://github.com/bidscube/bidscube-sdk-ios.git`
-2. Pick version `1.2.1` (or `from: "1.2.1"` in `Package.swift`)
+2. Pick version `1.2.2` (or `from: "1.2.2"` in `Package.swift`)
 ```swift
 dependencies: [
-    .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "1.2.1")
+    .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "1.2.2")
 ]
 ```
 
@@ -33,7 +33,7 @@ platform :ios, '14.0'
 use_frameworks!
 
 target 'YourApp' do
-  pod 'bidscubeSdk', '~> 1.2.1'
+  pod 'bidscubeSdk', '~> 1.2.2'
 end
 ```
 Run `pod install`.
@@ -323,6 +323,10 @@ let config = SDKConfig.Builder()
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
+
+### Version 1.2.2
+- Fire Native `imptrackers` on ad display with one-time guard per load
+- Add impression tracker success/failure logging for validation
 
 ### Version 1.2.1
 - Automated release via GitHub Actions
