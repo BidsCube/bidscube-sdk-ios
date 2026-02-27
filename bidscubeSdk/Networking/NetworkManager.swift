@@ -29,7 +29,7 @@ public class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue(Constants.userAgentPrefix + "/" + Constants.sdkVersion, forHTTPHeaderField: "User-Agent")
+        request.setValue(DeviceInfo.userAgent, forHTTPHeaderField: "User-Agent")
         
         performRequest(request, completion: completion)
     }
@@ -44,7 +44,7 @@ public class NetworkManager {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue(Constants.userAgentPrefix + "/" + Constants.sdkVersion, forHTTPHeaderField: "User-Agent")
+        request.setValue(DeviceInfo.userAgent, forHTTPHeaderField: "User-Agent")
         request.httpBody = data
         
         performRequest(request, completion: completion)

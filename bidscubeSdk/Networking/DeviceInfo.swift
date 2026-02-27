@@ -37,12 +37,19 @@ public struct DeviceInfo {
     }
     
     public static var userAgent: String {
-        let systemVersion = UIDevice.current.systemVersion
-        let model = UIDevice.current.model
-        let appName = self.appName
-        let appVersion = self.appVersion
-        
-        return "\(appName)/\(appVersion) (iOS \(systemVersion); \(model))"
+        let osVersionToken = UIDevice.current.systemVersion.replacingOccurrences(of: ".", with: "_")
+        let safariVersionToken = systemMajorMinorVersion
+        let cpuToken = UIDevice.current.userInterfaceIdiom == .pad ? "iPad; CPU OS" : "iPhone; CPU iPhone OS"
+
+        return "Mozilla/5.0 (\(cpuToken) \(osVersionToken) like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/\(safariVersionToken) Mobile/15E148 Safari/604.1"
+    }
+
+    private static var systemMajorMinorVersion: String {
+        let versionParts = UIDevice.current.systemVersion.split(separator: ".")
+        if versionParts.count >= 2 {
+            return "\(versionParts[0]).\(versionParts[1])"
+        }
+        return UIDevice.current.systemVersion
     }
     
     public static var isTrackingEnabled: Bool {

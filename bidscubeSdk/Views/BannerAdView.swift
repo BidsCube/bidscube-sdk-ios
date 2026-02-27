@@ -118,7 +118,7 @@ public final class BannerAdView: UIView {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue(Constants.userAgentPrefix + "/" + Constants.sdkVersion, forHTTPHeaderField: "User-Agent")
+        request.setValue(DeviceInfo.userAgent, forHTTPHeaderField: "User-Agent")
         
         URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             DispatchQueue.main.async {
