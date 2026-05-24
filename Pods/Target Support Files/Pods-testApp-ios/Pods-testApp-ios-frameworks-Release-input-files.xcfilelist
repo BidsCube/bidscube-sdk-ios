@@ -1,4 +1,0 @@
-${PODS_ROOT}/Target Support Files/Pods-testApp-ios/Pods-testApp-ios-frameworks.sh
-${BUILT_PRODUCTS_DIR}/BidscubeSDKAppLovin/BidscubeSDKAppLovin.framework
-${PODS_XCFRAMEWORKS_BUILD_DIR}/AppLovinSDK/AppLovinSDK.framework/AppLovinSDK
-${PODS_XCFRAMEWORKS_BUILD_DIR}/GoogleAds-IMA-iOS-SDK/GoogleInteractiveMediaAds.framework/GoogleInteractiveMediaAds
