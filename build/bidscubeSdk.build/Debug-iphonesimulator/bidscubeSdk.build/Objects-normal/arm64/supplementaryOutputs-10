@@ -1,0 +1,23 @@
+{
+  "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/bidscubeSdk/Networking/NetworkManager.swift" : {
+    "const-values" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/NetworkManager.swiftconstvalues",
+    "dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/NetworkManager.d",
+    "diagnostics" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/NetworkManager.dia",
+    "object" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/NetworkManager.o",
+    "swift-dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/NetworkManager.swiftdeps"
+  },
+  "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/bidscubeSdk/Networking/URLBuilder.swift" : {
+    "const-values" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/URLBuilder.swiftconstvalues",
+    "dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/URLBuilder.d",
+    "diagnostics" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/URLBuilder.dia",
+    "object" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/URLBuilder.o",
+    "swift-dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/URLBuilder.swiftdeps"
+  },
+  "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/bidscubeSdk/Tests/SKAdNetworkTestView.swift" : {
+    "const-values" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/SKAdNetworkTestView-4886a67848b4ee6e3355620beaa71dca.swiftconstvalues",
+    "dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/SKAdNetworkTestView-4886a67848b4ee6e3355620beaa71dca.d",
+    "diagnostics" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/SKAdNetworkTestView-4886a67848b4ee6e3355620beaa71dca.dia",
+    "object" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/SKAdNetworkTestView-4886a67848b4ee6e3355620beaa71dca.o",
+    "swift-dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/SKAdNetworkTestView-4886a67848b4ee6e3355620beaa71dca.swiftdeps"
+  }
+}

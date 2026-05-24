@@ -16,9 +16,7 @@ struct UIViewRepresentableWrapper: UIViewRepresentable {
     
     static func dismantleUIView(_ uiView: UIView, coordinator: ()) {
         print("🔍 UIViewRepresentableWrapper: Dismantling UIView wrapper")
-        // Clean up any resources if needed
-        if let videoAdView = uiView as? VideoAdView {
-            videoAdView.cleanup()
-        }
+        _ = coordinator
+        // Keep wrapper generic for AppLovin views.
     }
 }

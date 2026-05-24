@@ -19,7 +19,12 @@ typedef NS_ENUM(NSUInteger, IMAFriendlyObstructionPurpose) {
 /** The purpose for registering the obstruction as friendly. */
 @property(nonatomic, readonly) IMAFriendlyObstructionPurpose purpose;
 
-/** Optional, detailed reasoning for registering this obstruction as friendly. */
+/**
+ * Optional, detailed reasoning for registering this obstruction as friendly.
+ * If the <code>detailedReason</code> is not null, it must follow the IAB
+ * standard by being 50 characters or less and only containing characters
+ * <code>A-z</code>, <code>0-9</code>, or spaces.
+ */
 @property(nonatomic, readonly, nullable) NSString *detailedReason;
 
 /**

@@ -1,0 +1,23 @@
+{
+  "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/bidscubeSdk/Views/IMAVideoAdHandler.swift" : {
+    "const-values" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/IMAVideoAdHandler.swiftconstvalues",
+    "dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/IMAVideoAdHandler.d",
+    "diagnostics" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/IMAVideoAdHandler.dia",
+    "object" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/IMAVideoAdHandler.o",
+    "swift-dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/IMAVideoAdHandler.swiftdeps"
+  },
+  "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/bidscubeSdk/Views/IMAViewController.swift" : {
+    "const-values" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/IMAViewController.swiftconstvalues",
+    "dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/IMAViewController.d",
+    "diagnostics" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/IMAViewController.dia",
+    "object" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/IMAViewController.o",
+    "swift-dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/IMAViewController.swiftdeps"
+  },
+  "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/bidscubeSdk/Views/NativeAdView.swift" : {
+    "const-values" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/NativeAdView.swiftconstvalues",
+    "dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/NativeAdView.d",
+    "diagnostics" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/NativeAdView.dia",
+    "object" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/NativeAdView.o",
+    "swift-dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/NativeAdView.swiftdeps"
+  }
+}

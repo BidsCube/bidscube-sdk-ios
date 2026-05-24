@@ -1,0 +1,23 @@
+{
+  "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/bidscubeSdk/BidscubeSDK.swift" : {
+    "const-values" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/BidscubeSDK-3371e9f72c96e150356fabfcb30fe1e3.swiftconstvalues",
+    "dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/BidscubeSDK-3371e9f72c96e150356fabfcb30fe1e3.d",
+    "diagnostics" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/BidscubeSDK-3371e9f72c96e150356fabfcb30fe1e3.dia",
+    "object" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/BidscubeSDK-3371e9f72c96e150356fabfcb30fe1e3.o",
+    "swift-dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/BidscubeSDK-3371e9f72c96e150356fabfcb30fe1e3.swiftdeps"
+  },
+  "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/bidscubeSdk/Views/SDKTestView.swift" : {
+    "const-values" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/SDKTestView-96b383b198c0a65a229fead74e1aaba2.swiftconstvalues",
+    "dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/SDKTestView-96b383b198c0a65a229fead74e1aaba2.d",
+    "diagnostics" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/SDKTestView-96b383b198c0a65a229fead74e1aaba2.dia",
+    "object" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/SDKTestView-96b383b198c0a65a229fead74e1aaba2.o",
+    "swift-dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/SDKTestView-96b383b198c0a65a229fead74e1aaba2.swiftdeps"
+  },
+  "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/bidscubeSdk/Views/VideoAdView.swift" : {
+    "const-values" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/VideoAdView-e9d25822f44a6b6848aa9578d28de310.swiftconstvalues",
+    "dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/VideoAdView-e9d25822f44a6b6848aa9578d28de310.d",
+    "diagnostics" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/VideoAdView-e9d25822f44a6b6848aa9578d28de310.dia",
+    "object" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/VideoAdView-e9d25822f44a6b6848aa9578d28de310.o",
+    "swift-dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/x86_64/VideoAdView-e9d25822f44a6b6848aa9578d28de310.swiftdeps"
+  }
+}

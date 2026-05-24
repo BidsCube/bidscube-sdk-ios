@@ -34,6 +34,44 @@ NS_ASSUME_NONNULL_BEGIN
  * container to display the stream.
  *
  * @param assetKey           the stream assetKey
+ * @param networkCode        the network code for the stream (optional but recommended).
+ * @param adDisplayContainer the IMAAdDisplayContainer for rendering the ad UI
+ * @param videoDisplay       the IMAVideoDisplay for playing the stream
+ * @param userContext The user context for tracking requests (optional)
+ *
+ * @return the IMALiveStreamRequest instance
+ */
+- (instancetype)initWithAssetKey:(NSString *)assetKey
+                     networkCode:(nullable NSString *)networkCode
+              adDisplayContainer:(IMAAdDisplayContainer *)adDisplayContainer
+                    videoDisplay:(id<IMAVideoDisplay>)videoDisplay
+                     userContext:(nullable id)userContext;
+
+/**
+ * Initializes a live stream request instance with the given assetKey. Uses the given ad display
+ * container to display the stream. Uses the picture in picture proxy to track PIP events.
+ *
+ * @param assetKey              the stream assetKey
+ * @param networkCode           the network code for the stream (optional but recommended).
+ * @param adDisplayContainer    the IMAAdDisplayContainer for rendering the ad UI
+ * @param videoDisplay          the IMAVideoDisplay for playing the stream
+ * @param pictureInPictureProxy the IMAPictureInPictureProxy for tracking PIP events
+ * @param userContext The user context for tracking requests (optional)
+ *
+ * @return the IMALiveStreamRequest instance
+ */
+- (instancetype)initWithAssetKey:(NSString *)assetKey
+                     networkCode:(nullable NSString *)networkCode
+              adDisplayContainer:(IMAAdDisplayContainer *)adDisplayContainer
+                    videoDisplay:(id<IMAVideoDisplay>)videoDisplay
+           pictureInPictureProxy:(nullable IMAPictureInPictureProxy *)pictureInPictureProxy
+                     userContext:(nullable id)userContext;
+
+/**
+ * Initializes a live stream request instance with the given assetKey. Uses the given ad display
+ * container to display the stream.
+ *
+ * @param assetKey           the stream assetKey
  * @param adDisplayContainer the IMAAdDisplayContainer for rendering the ad UI
  * @param videoDisplay       the IMAVideoDisplay for playing the stream
  * @param userContext The user context for tracking requests (optional)
@@ -43,7 +81,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithAssetKey:(NSString *)assetKey
               adDisplayContainer:(IMAAdDisplayContainer *)adDisplayContainer
                     videoDisplay:(id<IMAVideoDisplay>)videoDisplay
-                     userContext:(nullable id)userContext;
+                     userContext:(nullable id)userContext
+    DEPRECATED_MSG_ATTRIBUTE(
+        "Use initWithAssetKey:networkCode:adDisplayContainer:videoDisplay:userContext: instead.");
 
 /**
  * Initializes a live stream request instance with the given assetKey. Uses the given ad display
@@ -61,7 +101,10 @@ NS_ASSUME_NONNULL_BEGIN
               adDisplayContainer:(IMAAdDisplayContainer *)adDisplayContainer
                     videoDisplay:(id<IMAVideoDisplay>)videoDisplay
            pictureInPictureProxy:(nullable IMAPictureInPictureProxy *)pictureInPictureProxy
-                     userContext:(nullable id)userContext;
+                     userContext:(nullable id)userContext
+    DEPRECATED_MSG_ATTRIBUTE("Use "
+                             "initWithAssetKey:networkCode:adDisplayContainer:videoDisplay:"
+                             "pictureInPictureProxy:userContext: instead.");
 
 /**
  * :nodoc:

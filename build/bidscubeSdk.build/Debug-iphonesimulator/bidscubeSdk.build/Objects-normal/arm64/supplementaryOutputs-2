@@ -1,0 +1,30 @@
+{
+  "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/bidscubeSdk/Controller/ViewController.swift" : {
+    "const-values" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/ViewController-d43d0b095ed92958792d6da8301906f9.swiftconstvalues",
+    "dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/ViewController-d43d0b095ed92958792d6da8301906f9.d",
+    "diagnostics" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/ViewController-d43d0b095ed92958792d6da8301906f9.dia",
+    "object" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/ViewController-d43d0b095ed92958792d6da8301906f9.o",
+    "swift-dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/ViewController-d43d0b095ed92958792d6da8301906f9.swiftdeps"
+  },
+  "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/bidscubeSdk/Controller/WindowedAdTestViewController.swift" : {
+    "const-values" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/WindowedAdTestViewController.swiftconstvalues",
+    "dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/WindowedAdTestViewController.d",
+    "diagnostics" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/WindowedAdTestViewController.dia",
+    "object" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/WindowedAdTestViewController.o",
+    "swift-dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/WindowedAdTestViewController.swiftdeps"
+  },
+  "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/bidscubeSdk/Core/AdPosition.swift" : {
+    "const-values" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/AdPosition.swiftconstvalues",
+    "dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/AdPosition.d",
+    "diagnostics" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/AdPosition.dia",
+    "object" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/AdPosition.o",
+    "swift-dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/AdPosition.swiftdeps"
+  },
+  "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/bidscubeSdk/Tests/ConsentTestView.swift" : {
+    "const-values" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/ConsentTestView-a1dfb2973eeb200ab73416975965257a.swiftconstvalues",
+    "dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/ConsentTestView-a1dfb2973eeb200ab73416975965257a.d",
+    "diagnostics" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/ConsentTestView-a1dfb2973eeb200ab73416975965257a.dia",
+    "object" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/ConsentTestView-a1dfb2973eeb200ab73416975965257a.o",
+    "swift-dependencies" : "/Users/catchman/prj/bidcube/ios/bidscube-sdk-ios/build/bidscubeSdk.build/Debug-iphonesimulator/bidscubeSdk.build/Objects-normal/arm64/ConsentTestView-a1dfb2973eeb200ab73416975965257a.swiftdeps"
+  }
+}

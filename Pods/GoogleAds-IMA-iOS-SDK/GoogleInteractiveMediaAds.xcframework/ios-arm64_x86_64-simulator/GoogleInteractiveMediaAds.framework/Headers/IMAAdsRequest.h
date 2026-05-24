@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, IMAVideoOrientation);
+
 @class IMAAdDisplayContainer;
 @class IMAAVPlayerContentPlayhead;
 @class IMAAVPlayerVideoDisplay;
@@ -84,6 +86,12 @@ NS_ASSUME_NONNULL_BEGIN
  * optional.
  */
 @property(nonatomic, copy, nullable) NSString *contentTitle;
+
+/**
+ * Specifies the preferred orientation for linear ads. This parameter is optional and defaults to IMAVideoOrientationUnset.
+ * :nodoc:
+ */
+@property(nonatomic, assign) IMAVideoOrientation preferredLinearOrientation;
 
 /**
  * Specifies the Secure Signal with custom data for this ads request. Secure Signal with custom

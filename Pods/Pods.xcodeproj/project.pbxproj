@@ -3,41 +3,108 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 71;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		5BC46914A3617E8E5EA6E625B5DD1684 /* AppLovinSDK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 1137672E97496FACD0DD9E48E86C50EF /* Build configuration list for PBXAggregateTarget "AppLovinSDK" */;
+			buildPhases = (
+				0767D10B049CB169F35806FA0DC22F33 /* [CP] Copy XCFrameworks */,
+			);
+			dependencies = (
+			);
+			name = AppLovinSDK;
+		};
 		7362DAB47E2EFA5452F30DD7E9830B56 /* GoogleAds-IMA-iOS-SDK */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 3ABA5F09EC43807FFA362AE56AD22924 /* Build configuration list for PBXAggregateTarget "GoogleAds-IMA-iOS-SDK" */;
+			buildConfigurationList = 69614541FE60FDDFA89A77798B04D194 /* Build configuration list for PBXAggregateTarget "GoogleAds-IMA-iOS-SDK" */;
 			buildPhases = (
-				34C560B906D648F5E1173388CD967FBB /* [CP] Copy XCFrameworks */,
+				C3A200D985E42F9E98559BC1EA99A14E /* [CP] Copy XCFrameworks */,
 			);
 			dependencies = (
 			);
 			name = "GoogleAds-IMA-iOS-SDK";
-			productName = "GoogleAds-IMA-iOS-SDK";
 		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		1D2374A6B4036431E3354F4CAF0CA906 /* Pods-testApp-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF61EE896193A68B182CC123A6C7411 /* Pods-testApp-ios-dummy.m */; };
-		4D258B2D96EC8AC828CB14EB35FFB206 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
-		734BED4C2A6CEC09DA8BF67E194AF42D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
-		A086EB73ACAC848B5908570F2A673515 /* Pods-bidscubeSdk-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 383E359F6F70B3D84A5A83D045E4A7B9 /* Pods-bidscubeSdk-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AFC3018EFBD575B45474763B7991CC0D /* Pods-bidscubeSdk-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A198C73D3946A8EC82FEA92A9044A5DB /* Pods-bidscubeSdk-dummy.m */; };
-		E59B8B2A558A49C3D34D9CA03ADA2208 /* Pods-testApp-ios-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D1BBCB4BB85C66C977D3DFFD214605B9 /* Pods-testApp-ios-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01A1A79B7ACBF94A388E097C8C3CBC7C /* AdPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26877816710E489978398F352769374A /* AdPosition.swift */; };
+		098F5FAB6B073C9C34F84751F9BB9E31 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B30AD7535DCE143597BE037FBB33E /* Logger.swift */; };
+		0B27EC135675B4C1025E05BA6BFA299E /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD55FC869253CB494097ADB497DDD57 /* DeviceInfo.swift */; };
+		134326BBEFB8454BD433D6B486E378DB /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219D3E26F8F0624217BEE4986E9E4F52 /* URLBuilder.swift */; };
+		13DCA6773A5B997EB4B5545632A3CF5B /* ConversionTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE611B098C35CD2972A4AECEC3350BD1 /* ConversionTracker.swift */; };
+		157ADBEB654C2F0B82F38415D9855BBE /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8339217C743AE29CECDFF6C72B9B0976 /* AdViewController.swift */; };
+		17122612FF110CEB0F8EF04410427306 /* bidscubeSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 017DB737565DB2179D5BEAB033994858 /* bidscubeSdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E11EBB03182A25964FC0E3CA558E5DA /* IMAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC836ABC5BE5B378702505B2FC13BF8 /* IMAViewController.swift */; };
+		27BFBEC00D7FD0E63E92FC8326321E15 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626A1221C20F4D93518F953313ADB38 /* ViewController.swift */; };
+		311F6B6172C7EBC281D22791F4707714 /* BidscubeSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE07A376D5628116FB321F1DE4984C6A /* BidscubeSDK.swift */; };
+		3A90E6529C9D67DD8DEAF3590240421B /* SDKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF566D9E16678175EB41809495C00D72 /* SDKConfig.swift */; };
+		475879332FC851BB1C6FFDA1B361A616 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C1F72C61279E95A6FB22A11C529E705 /* UIKit.framework */; };
+		4FE4B9D5A9A38A29080AB65ECEDCA74B /* Pods-testApp-ios-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8790B7A643E38466C0A9D5D6DD07276A /* Pods-testApp-ios-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5418F6C8621BFC645CE8C2B9AA916217 /* SDKLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114113804B513F74E4C93838A68D664B /* SDKLogger.swift */; };
+		6A41BEB6AB86C4B85815D8CDD2BAFB1E /* VideoAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6320963DE74D1248B5134B3D91EFD56 /* VideoAdView.swift */; };
+		6BEFAE0678FB55FA0CD35A927F120E8F /* bidscubeSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 9879854DC8A7F92E748BC793278B8E31 /* bidscubeSdk.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6D13842B1055B41011DA88A0554BCA01 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40172B7C0820037DCAD652278E72B6A9 /* MediaPlayer.framework */; };
+		726E2D1B8CF6B92954BD1320E5FB4B3E /* NativeAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECF88F26B1CC40BECA669E4A8163A42 /* NativeAdView.swift */; };
+		8D9A6BEC16E48C7CDE680B110B928A92 /* ImageAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C94D9E1CE220C20211EBD8430A5251 /* ImageAdView.swift */; };
+		8EF6685AAF89474AAD0F45194FD52266 /* BidscubeSDKAppLovin-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4D3D17E5852B6940EA338A72D9C4B8 /* BidscubeSDKAppLovin-dummy.m */; };
+		8FCEC89382FEB39FD6D34006C1874F85 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0D2198AE67E40D967033281E814703 /* Constants.swift */; };
+		9A31EE31B8E49B07EEDC7C106141112E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43505E6ACE296F44CAAA9F771201FB22 /* WebKit.framework */; };
+		9D8A3B63C5B7CE4BABA996E6DED5CC7A /* WindowedAdTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3BD4E2DCAFC20C6F5A29B07FD6A32B /* WindowedAdTestViewController.swift */; };
+		A2EB6E18A2112275236A93539CEA00C0 /* Pods-testApp-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D3395386815493CDE259B5A970889C /* Pods-testApp-ios-dummy.m */; };
+		AAEEC9823B9F5AB4ADD96A3D41D4164A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF4F1E9CB2900D3D7FFAB3F6AEC47067 /* Foundation.framework */; };
+		B05E9C46CAA2B21BEF004D97D0004CCD /* SKAdNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97AAF6A0AE6E623DF391539B1649FB3 /* SKAdNetworkManager.swift */; };
+		B10C12335A5AF422EDDCF67EE3D6AE5F /* CustomAdRenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057DBE9D3487EB6A7CDD6025B62E02B1 /* CustomAdRenderView.swift */; };
+		B84448E309AB5F27AF825432B4F23A25 /* BannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117E4FE8477A3BBAA23438CA07905CF2 /* BannerAdView.swift */; };
+		BA38629E8346FC0A199AC1154E1CA744 /* Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44174ED46A89914E72CE968760EADD35 /* Callbacks.swift */; };
+		C20A6A5596F22741C1C2A729027917EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF4F1E9CB2900D3D7FFAB3F6AEC47067 /* Foundation.framework */; };
+		C47A4C64F2F1AD644E0E77CB350B177C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ACB6B27AF5CDF4A591602FA3C1524C /* ContentView.swift */; };
+		C95E2CD744864B94FE136021658D5C6A /* BidscubeSDKAppLovin-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B8DFE84A8B207EAA6DF4F3CC615D2BC0 /* BidscubeSDKAppLovin-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CC01459F21DC2D61C42459C725283439 /* SKAdNetworkModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA713ACB369C2745447192BDD17BD36C /* SKAdNetworkModels.swift */; };
+		CD13FCA597AEB6A87461BAC10912C44B /* SKAdNetworkTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3F2D49E426EFFF409B952BD34A35E /* SKAdNetworkTestView.swift */; };
+		CD1A9F0B9BD8BACEFFB8C844151A9C5A /* SDKTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6285285176914B8A4F7CB0D10506C6 /* SDKTestView.swift */; };
+		CDE41276C6A0B2325FC68E5C065A3CCE /* ALBidscubeMediationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E77D58AC16C1AC19A6DB08F6FE702B /* ALBidscubeMediationAdapter.swift */; };
+		D4555459C1666003C764C6FA588D1581 /* WindowedAdTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1AF161953D49DC42E7386BB8578FAE /* WindowedAdTestView.swift */; };
+		D728228EF841884B1FA418254B5C022D /* IMAVideoAdHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2ADCDDD8B370F9BA514564A25C94ECE /* IMAVideoAdHandler.swift */; };
+		DBBD96FE4BA9F08EE9A7585C3D761F5B /* AdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D55557F8D4208C54D4ED29CEEAD8CBC /* AdType.swift */; };
+		E75394C8506B56E39441A1F36DC96D0A /* ConsentTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35D4457EA7659D53572F8F40692AE45 /* ConsentTestView.swift */; };
+		F0931D3A331E6C3FDE6F8F7A23153BE1 /* BidscubeSDK+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032C3C8B80AD075B935A6503EF119CC9 /* BidscubeSDK+SwiftUI.swift */; };
+		F5C1FA46030FF20B90E94423A37FDF6B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB35F0BD48F9C98F57B7524ECE0E271 /* NetworkManager.swift */; };
+		FADD4C7AE941F80F558B5524615934E9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D38FEB4CBA7E1D08C1740B7A765828C /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		20001E26796AA3CCFD30EB8F3E778483 /* PBXContainerItemProxy */ = {
+		0554475C466D6285E8FE0ECC343F91FD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 7362DAB47E2EFA5452F30DD7E9830B56;
 			remoteInfo = "GoogleAds-IMA-iOS-SDK";
 		};
-		B5B7224B94ABB4B69CE82597F903A924 /* PBXContainerItemProxy */ = {
+		24ED395D22D7CD226652DC8D0A991D18 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BC46914A3617E8E5EA6E625B5DD1684;
+			remoteInfo = AppLovinSDK;
+		};
+		518EE47F257E84AA1EEE8CA3E8C104E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B59807D1116E1C456EA0B5B0F98013DC;
+			remoteInfo = BidscubeSDKAppLovin;
+		};
+		687D0C52EF3F862C25D924A1F44EF463 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BC46914A3617E8E5EA6E625B5DD1684;
+			remoteInfo = AppLovinSDK;
+		};
+		81915E809BC83943D1EDF7E87EE51CC4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -47,112 +114,255 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		12784FAB84211C761A2B45C443544E84 /* Pods-testApp-ios-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-testApp-ios-acknowledgements.markdown"; sourceTree = "<group>"; };
-		16BAAFFA38E6BF24815E9483FBDBA6F7 /* Pods-testApp-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-testApp-ios.release.xcconfig"; sourceTree = "<group>"; };
-		1EDFF02040521E5222B446C17BFE0847 /* Pods_bidscubeSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bidscubeSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		26DE01372E80C0A3EFD0C6C1EC6CD462 /* Pods-bidscubeSdk-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-bidscubeSdk-Info.plist"; sourceTree = "<group>"; };
-		34489CD3264ABAAD793A33DA989A7D34 /* Pods-bidscubeSdk.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-bidscubeSdk.modulemap"; sourceTree = "<group>"; };
-		383E359F6F70B3D84A5A83D045E4A7B9 /* Pods-bidscubeSdk-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-bidscubeSdk-umbrella.h"; sourceTree = "<group>"; };
-		384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3A6BFB4F3EE671709E6E175F392525ED /* GoogleAds-IMA-iOS-SDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "GoogleAds-IMA-iOS-SDK.debug.xcconfig"; sourceTree = "<group>"; };
-		3D5C8BE33F0EFD29C03C67463A3F4E25 /* GoogleInteractiveMediaAds.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = GoogleInteractiveMediaAds.xcframework; sourceTree = "<group>"; };
-		4130B1092D9347801B7B2FC8AB2876F7 /* Pods-testApp-ios-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-testApp-ios-frameworks.sh"; sourceTree = "<group>"; };
-		507784022D3720DF9764DB39FBB15DA1 /* Pods-bidscubeSdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-bidscubeSdk.debug.xcconfig"; sourceTree = "<group>"; };
-		5CF61EE896193A68B182CC123A6C7411 /* Pods-testApp-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-testApp-ios-dummy.m"; sourceTree = "<group>"; };
-		7AB5675A5A12FA5E4927F5B80132C029 /* Pods-bidscubeSdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-bidscubeSdk.release.xcconfig"; sourceTree = "<group>"; };
-		96F54D54DF65E3CC1932A372200E42B0 /* Pods-bidscubeSdk-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-bidscubeSdk-acknowledgements.markdown"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A198C73D3946A8EC82FEA92A9044A5DB /* Pods-bidscubeSdk-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-bidscubeSdk-dummy.m"; sourceTree = "<group>"; };
-		B06CD3B2435C09C52BE9EA76F223F869 /* Pods_testApp_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testApp_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C32100F91106071FAF7F63A24EC98415 /* GoogleAds-IMA-iOS-SDK-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "GoogleAds-IMA-iOS-SDK-xcframeworks.sh"; sourceTree = "<group>"; };
-		D1BBCB4BB85C66C977D3DFFD214605B9 /* Pods-testApp-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-testApp-ios-umbrella.h"; sourceTree = "<group>"; };
-		DB805EB3A7AC79EE0513ACB22C6889B9 /* Pods-testApp-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-testApp-ios-Info.plist"; sourceTree = "<group>"; };
-		E19EA140ADB9829D2CEF996D21523D20 /* Pods-testApp-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-testApp-ios.debug.xcconfig"; sourceTree = "<group>"; };
-		E353A7BF0DCEF64ABE3A34956FF7C7BF /* Pods-testApp-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-testApp-ios.modulemap"; sourceTree = "<group>"; };
-		EEC1C9C44385AD3DCD2A5409BC3A5597 /* Pods-testApp-ios-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-testApp-ios-acknowledgements.plist"; sourceTree = "<group>"; };
-		F2E22BAAFBA5A779062D117430C20E9E /* GoogleAds-IMA-iOS-SDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "GoogleAds-IMA-iOS-SDK.release.xcconfig"; sourceTree = "<group>"; };
-		F4F3C9FBD56399FE812B4747F89EFBCD /* Pods-bidscubeSdk-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-bidscubeSdk-acknowledgements.plist"; sourceTree = "<group>"; };
+		017DB737565DB2179D5BEAB033994858 /* bidscubeSdk.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bidscubeSdk.h; path = bidscubeSdk/bidscubeSdk.h; sourceTree = "<group>"; };
+		032C3C8B80AD075B935A6503EF119CC9 /* BidscubeSDK+SwiftUI.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BidscubeSDK+SwiftUI.swift"; path = "bidscubeSdk/BidscubeSDK+SwiftUI.swift"; sourceTree = "<group>"; };
+		057DBE9D3487EB6A7CDD6025B62E02B1 /* CustomAdRenderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CustomAdRenderView.swift; path = bidscubeSdk/Views/CustomAdRenderView.swift; sourceTree = "<group>"; };
+		114113804B513F74E4C93838A68D664B /* SDKLogger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SDKLogger.swift; path = bidscubeSdk/Logger/SDKLogger.swift; sourceTree = "<group>"; };
+		117E4FE8477A3BBAA23438CA07905CF2 /* BannerAdView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BannerAdView.swift; path = bidscubeSdk/Views/BannerAdView.swift; sourceTree = "<group>"; };
+		125B48EE407CCEDC36C9B263F90DEF58 /* BidscubeSDKAppLovin-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BidscubeSDKAppLovin-prefix.pch"; sourceTree = "<group>"; };
+		189DC1A90F3ECCD6021CBCC4DB86D4ED /* GoogleAds-IMA-iOS-SDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "GoogleAds-IMA-iOS-SDK.debug.xcconfig"; sourceTree = "<group>"; };
+		21580BC397117F05B69A643B7CE821B1 /* GoogleAds-IMA-iOS-SDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "GoogleAds-IMA-iOS-SDK.release.xcconfig"; sourceTree = "<group>"; };
+		219D3E26F8F0624217BEE4986E9E4F52 /* URLBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URLBuilder.swift; path = bidscubeSdk/Networking/URLBuilder.swift; sourceTree = "<group>"; };
+		223F35044DD750F01AB81370EDF10D8D /* AppLovinSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AppLovinSDK.debug.xcconfig; sourceTree = "<group>"; };
+		245BED2B7335B70B2F50CDBCCADB109F /* AppLovinSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AppLovinSDK.release.xcconfig; sourceTree = "<group>"; };
+		26877816710E489978398F352769374A /* AdPosition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdPosition.swift; path = bidscubeSdk/Core/AdPosition.swift; sourceTree = "<group>"; };
+		36DD44494726E1E27F695469B764E57C /* GoogleAds-IMA-iOS-SDK-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "GoogleAds-IMA-iOS-SDK-xcframeworks.sh"; sourceTree = "<group>"; };
+		40172B7C0820037DCAD652278E72B6A9 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
+		43505E6ACE296F44CAAA9F771201FB22 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
+		44174ED46A89914E72CE968760EADD35 /* Callbacks.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Callbacks.swift; path = bidscubeSdk/Core/Callbacks.swift; sourceTree = "<group>"; };
+		4C077ECA38C6D2FDBF41466F2B55DB48 /* Pods-testApp-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-testApp-ios.modulemap"; sourceTree = "<group>"; };
+		4E5B1189754BD2A91B763F2902985C6F /* Pods-testApp-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-testApp-ios.release.xcconfig"; sourceTree = "<group>"; };
+		4ECF88F26B1CC40BECA669E4A8163A42 /* NativeAdView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NativeAdView.swift; path = bidscubeSdk/Views/NativeAdView.swift; sourceTree = "<group>"; };
+		4F4682846EFF5821C6601340B2903819 /* BidscubeSDKAppLovin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BidscubeSDKAppLovin.release.xcconfig; sourceTree = "<group>"; };
+		5626A1221C20F4D93518F953313ADB38 /* ViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = bidscubeSdk/Controller/ViewController.swift; sourceTree = "<group>"; };
+		68D3395386815493CDE259B5A970889C /* Pods-testApp-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-testApp-ios-dummy.m"; sourceTree = "<group>"; };
+		6C1AF161953D49DC42E7386BB8578FAE /* WindowedAdTestView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WindowedAdTestView.swift; path = bidscubeSdk/Tests/WindowedAdTestView.swift; sourceTree = "<group>"; };
+		6D55557F8D4208C54D4ED29CEEAD8CBC /* AdType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdType.swift; path = bidscubeSdk/Core/AdType.swift; sourceTree = "<group>"; };
+		803606CC6ACE88648CFFFDB9687E8893 /* GoogleInteractiveMediaAds.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; path = GoogleInteractiveMediaAds.xcframework; sourceTree = "<group>"; };
+		8339217C743AE29CECDFF6C72B9B0976 /* AdViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdViewController.swift; path = bidscubeSdk/Views/AdViewController.swift; sourceTree = "<group>"; };
+		8790B7A643E38466C0A9D5D6DD07276A /* Pods-testApp-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-testApp-ios-umbrella.h"; sourceTree = "<group>"; };
+		8B8AE55919BE512BD57307DF94FF70BC /* AppLovinSDK-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "AppLovinSDK-xcframeworks.sh"; sourceTree = "<group>"; };
+		8C1F72C61279E95A6FB22A11C529E705 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		8EB35F0BD48F9C98F57B7524ECE0E271 /* NetworkManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = bidscubeSdk/Networking/NetworkManager.swift; sourceTree = "<group>"; };
+		9879854DC8A7F92E748BC793278B8E31 /* bidscubeSdk.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bidscubeSdk.h; path = bidscubeSdk/include/bidscubeSdk.h; sourceTree = "<group>"; };
+		9D38FEB4CBA7E1D08C1740B7A765828C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A910B3499D667B8B6DCD1B2084FEC6ED /* BidscubeSDKAppLovin-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BidscubeSDKAppLovin-Info.plist"; sourceTree = "<group>"; };
+		AE07A376D5628116FB321F1DE4984C6A /* BidscubeSDK.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BidscubeSDK.swift; path = bidscubeSdk/BidscubeSDK.swift; sourceTree = "<group>"; };
+		AF566D9E16678175EB41809495C00D72 /* SDKConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SDKConfig.swift; path = bidscubeSdk/Core/SDKConfig.swift; sourceTree = "<group>"; };
+		AF7B30AD7535DCE143597BE037FBB33E /* Logger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = bidscubeSdk/Core/Logger.swift; sourceTree = "<group>"; };
+		B06CD3B2435C09C52BE9EA76F223F869 /* Pods-testApp-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-testApp-ios"; path = Pods_testApp_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2ADCDDD8B370F9BA514564A25C94ECE /* IMAVideoAdHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IMAVideoAdHandler.swift; path = bidscubeSdk/Views/IMAVideoAdHandler.swift; sourceTree = "<group>"; };
+		B8DFE84A8B207EAA6DF4F3CC615D2BC0 /* BidscubeSDKAppLovin-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BidscubeSDKAppLovin-umbrella.h"; sourceTree = "<group>"; };
+		BA713ACB369C2745447192BDD17BD36C /* SKAdNetworkModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SKAdNetworkModels.swift; path = bidscubeSdk/Core/SKAdNetworkModels.swift; sourceTree = "<group>"; };
+		BB3BD4E2DCAFC20C6F5A29B07FD6A32B /* WindowedAdTestViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WindowedAdTestViewController.swift; path = bidscubeSdk/Controller/WindowedAdTestViewController.swift; sourceTree = "<group>"; };
+		BD595AB9EA45B98765DC50BAD7DECD5D /* BidscubeSDKAppLovin */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BidscubeSDKAppLovin; path = BidscubeSDKAppLovin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C23268CD4E664A847F4F3743188E12EC /* Pods-testApp-ios-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-testApp-ios-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C3E77D58AC16C1AC19A6DB08F6FE702B /* ALBidscubeMediationAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ALBidscubeMediationAdapter.swift; path = bidscubeSdk/AppLovin/ALBidscubeMediationAdapter.swift; sourceTree = "<group>"; };
+		CCC836ABC5BE5B378702505B2FC13BF8 /* IMAViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IMAViewController.swift; path = bidscubeSdk/Views/IMAViewController.swift; sourceTree = "<group>"; };
+		CD0D2198AE67E40D967033281E814703 /* Constants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = bidscubeSdk/Core/Constants.swift; sourceTree = "<group>"; };
+		CFEA5E9244767749C2E5B1A337ECD7F1 /* Pods-testApp-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-testApp-ios-Info.plist"; sourceTree = "<group>"; };
+		D2F8B28CF05C3E7F5E6C01E0DACF6722 /* BidscubeSDKAppLovin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BidscubeSDKAppLovin.debug.xcconfig; sourceTree = "<group>"; };
+		D4F9A66B7A9EEFA4ACDC6BFD4C9A1B56 /* AppLovinSDK.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; name = AppLovinSDK.xcframework; path = "applovin-ios-sdk-13.6.2/AppLovinSDK.xcframework"; sourceTree = "<group>"; };
+		D97AAF6A0AE6E623DF391539B1649FB3 /* SKAdNetworkManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SKAdNetworkManager.swift; path = bidscubeSdk/Core/SKAdNetworkManager.swift; sourceTree = "<group>"; };
+		DC6285285176914B8A4F7CB0D10506C6 /* SDKTestView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SDKTestView.swift; path = bidscubeSdk/Views/SDKTestView.swift; sourceTree = "<group>"; };
+		DC7B7865EE50D00B7A1795C093036E60 /* Pods-testApp-ios-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-testApp-ios-frameworks.sh"; sourceTree = "<group>"; };
+		DD33998D5517CA625604187496F0A1B7 /* Pods-testApp-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-testApp-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		DFD55FC869253CB494097ADB497DDD57 /* DeviceInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeviceInfo.swift; path = bidscubeSdk/Networking/DeviceInfo.swift; sourceTree = "<group>"; };
+		E35D4457EA7659D53572F8F40692AE45 /* ConsentTestView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsentTestView.swift; path = bidscubeSdk/Tests/ConsentTestView.swift; sourceTree = "<group>"; };
+		E6320963DE74D1248B5134B3D91EFD56 /* VideoAdView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VideoAdView.swift; path = bidscubeSdk/Views/VideoAdView.swift; sourceTree = "<group>"; };
+		EE611B098C35CD2972A4AECEC3350BD1 /* ConversionTracker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConversionTracker.swift; path = bidscubeSdk/Core/ConversionTracker.swift; sourceTree = "<group>"; };
+		EECED2F6AB843688BDEEB3A2E959FB55 /* BidscubeSDKAppLovin.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BidscubeSDKAppLovin.modulemap; sourceTree = "<group>"; };
+		EF4F1E9CB2900D3D7FFAB3F6AEC47067 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		F1ACB6B27AF5CDF4A591602FA3C1524C /* ContentView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = bidscubeSdk/Views/ContentView.swift; sourceTree = "<group>"; };
+		F3C94D9E1CE220C20211EBD8430A5251 /* ImageAdView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageAdView.swift; path = bidscubeSdk/Views/ImageAdView.swift; sourceTree = "<group>"; };
+		F415ACCFA1B7FA2B99EF98CD84831764 /* Pods-testApp-ios-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-testApp-ios-acknowledgements.plist"; sourceTree = "<group>"; };
+		FD4D3D17E5852B6940EA338A72D9C4B8 /* BidscubeSDKAppLovin-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BidscubeSDKAppLovin-dummy.m"; sourceTree = "<group>"; };
+		FDF3F2D49E426EFFF409B952BD34A35E /* SKAdNetworkTestView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SKAdNetworkTestView.swift; path = bidscubeSdk/Tests/SKAdNetworkTestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5E4C67B6F49A38F2A5AC2B8194734BCB /* Frameworks */ = {
+		57103840318E6068E735F6778B809F05 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				734BED4C2A6CEC09DA8BF67E194AF42D /* Foundation.framework in Frameworks */,
+				FADD4C7AE941F80F558B5524615934E9 /* AVFoundation.framework in Frameworks */,
+				AAEEC9823B9F5AB4ADD96A3D41D4164A /* Foundation.framework in Frameworks */,
+				6D13842B1055B41011DA88A0554BCA01 /* MediaPlayer.framework in Frameworks */,
+				475879332FC851BB1C6FFDA1B361A616 /* UIKit.framework in Frameworks */,
+				9A31EE31B8E49B07EEDC7C106141112E /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BC153FDDC10D91142BFDD9AC287FD612 /* Frameworks */ = {
+		9970DBF034C40577D8BFFC8833B1BF2E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D258B2D96EC8AC828CB14EB35FFB206 /* Foundation.framework in Frameworks */,
+				C20A6A5596F22741C1C2A729027917EC /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0F83D74E571364295D89861AE82E384C /* GoogleAds-IMA-iOS-SDK */ = {
+		106991E22D56D22CE2AC1888CCFC6ABD /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				DB601D6E67CDAFB1B3E3BC886E5A2D1F /* Frameworks */,
-				54A77B7FA5FEDB6A32F01B021928F917 /* Support Files */,
+				8B8AE55919BE512BD57307DF94FF70BC /* AppLovinSDK-xcframeworks.sh */,
+				223F35044DD750F01AB81370EDF10D8D /* AppLovinSDK.debug.xcconfig */,
+				245BED2B7335B70B2F50CDBCCADB109F /* AppLovinSDK.release.xcconfig */,
 			);
-			path = "GoogleAds-IMA-iOS-SDK";
+			name = "Support Files";
+			path = "../Target Support Files/AppLovinSDK";
 			sourceTree = "<group>";
 		};
-		40104B0DA136E379B7656FF50B8EAF1B /* Pods-testApp-ios */ = {
+		253A23ABEDB1EB4477C084F147FFAF18 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E353A7BF0DCEF64ABE3A34956FF7C7BF /* Pods-testApp-ios.modulemap */,
-				12784FAB84211C761A2B45C443544E84 /* Pods-testApp-ios-acknowledgements.markdown */,
-				EEC1C9C44385AD3DCD2A5409BC3A5597 /* Pods-testApp-ios-acknowledgements.plist */,
-				5CF61EE896193A68B182CC123A6C7411 /* Pods-testApp-ios-dummy.m */,
-				4130B1092D9347801B7B2FC8AB2876F7 /* Pods-testApp-ios-frameworks.sh */,
-				DB805EB3A7AC79EE0513ACB22C6889B9 /* Pods-testApp-ios-Info.plist */,
-				D1BBCB4BB85C66C977D3DFFD214605B9 /* Pods-testApp-ios-umbrella.h */,
-				E19EA140ADB9829D2CEF996D21523D20 /* Pods-testApp-ios.debug.xcconfig */,
-				16BAAFFA38E6BF24815E9483FBDBA6F7 /* Pods-testApp-ios.release.xcconfig */,
+				803606CC6ACE88648CFFFDB9687E8893 /* GoogleInteractiveMediaAds.xcframework */,
 			);
-			name = "Pods-testApp-ios";
-			path = "Target Support Files/Pods-testApp-ios";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		46026D8E431ACD15FD6896D8AC713226 /* Products */ = {
+		261C2BD819B8BBB4A1276757B141DE98 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				1EDFF02040521E5222B446C17BFE0847 /* Pods_bidscubeSdk.framework */,
-				B06CD3B2435C09C52BE9EA76F223F869 /* Pods_testApp_ios.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		54A77B7FA5FEDB6A32F01B021928F917 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				C32100F91106071FAF7F63A24EC98415 /* GoogleAds-IMA-iOS-SDK-xcframeworks.sh */,
-				3A6BFB4F3EE671709E6E175F392525ED /* GoogleAds-IMA-iOS-SDK.debug.xcconfig */,
-				F2E22BAAFBA5A779062D117430C20E9E /* GoogleAds-IMA-iOS-SDK.release.xcconfig */,
+				36DD44494726E1E27F695469B764E57C /* GoogleAds-IMA-iOS-SDK-xcframeworks.sh */,
+				189DC1A90F3ECCD6021CBCC4DB86D4ED /* GoogleAds-IMA-iOS-SDK.debug.xcconfig */,
+				21580BC397117F05B69A643B7CE821B1 /* GoogleAds-IMA-iOS-SDK.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/GoogleAds-IMA-iOS-SDK";
 			sourceTree = "<group>";
 		};
-		8208DC247CF19593B1B82A682CDC1424 /* Targets Support Files */ = {
+		2A5B94B71CA1473CBD265B4AED228A4E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EAE3F5E0A56969661ED135BC4D3930CB /* Pods-bidscubeSdk */,
-				40104B0DA136E379B7656FF50B8EAF1B /* Pods-testApp-ios */,
+				BD595AB9EA45B98765DC50BAD7DECD5D /* BidscubeSDKAppLovin */,
+				B06CD3B2435C09C52BE9EA76F223F869 /* Pods-testApp-ios */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2F868EC1225495657B3A4EEE1F8B9FCC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4F9A66B7A9EEFA4ACDC6BFD4C9A1B56 /* AppLovinSDK.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		32B65B397444581319EBAEB2DEC4516A /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E9A8351DA309459C3542B7453E2B2E25 /* Pods-testApp-ios */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		842A7CA93D1FDCD5541AB40B91B07508 /* Pods */ = {
+		33929FA00BFFB8582BC2A67F8FCDA233 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				0F83D74E571364295D89861AE82E384C /* GoogleAds-IMA-iOS-SDK */,
+				EECED2F6AB843688BDEEB3A2E959FB55 /* BidscubeSDKAppLovin.modulemap */,
+				FD4D3D17E5852B6940EA338A72D9C4B8 /* BidscubeSDKAppLovin-dummy.m */,
+				A910B3499D667B8B6DCD1B2084FEC6ED /* BidscubeSDKAppLovin-Info.plist */,
+				125B48EE407CCEDC36C9B263F90DEF58 /* BidscubeSDKAppLovin-prefix.pch */,
+				B8DFE84A8B207EAA6DF4F3CC615D2BC0 /* BidscubeSDKAppLovin-umbrella.h */,
+				D2F8B28CF05C3E7F5E6C01E0DACF6722 /* BidscubeSDKAppLovin.debug.xcconfig */,
+				4F4682846EFF5821C6601340B2903819 /* BidscubeSDKAppLovin.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/BidscubeSDKAppLovin";
+			sourceTree = "<group>";
+		};
+		3D37BD8F289F2BBC09CE7A9D605781D5 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				9D38FEB4CBA7E1D08C1740B7A765828C /* AVFoundation.framework */,
+				EF4F1E9CB2900D3D7FFAB3F6AEC47067 /* Foundation.framework */,
+				40172B7C0820037DCAD652278E72B6A9 /* MediaPlayer.framework */,
+				8C1F72C61279E95A6FB22A11C529E705 /* UIKit.framework */,
+				43505E6ACE296F44CAAA9F771201FB22 /* WebKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		57DE373D29A72AA3B0907FA10F86332A /* BidscubeSDKAppLovin */ = {
+			isa = PBXGroup;
+			children = (
+				26877816710E489978398F352769374A /* AdPosition.swift */,
+				6D55557F8D4208C54D4ED29CEEAD8CBC /* AdType.swift */,
+				8339217C743AE29CECDFF6C72B9B0976 /* AdViewController.swift */,
+				C3E77D58AC16C1AC19A6DB08F6FE702B /* ALBidscubeMediationAdapter.swift */,
+				117E4FE8477A3BBAA23438CA07905CF2 /* BannerAdView.swift */,
+				017DB737565DB2179D5BEAB033994858 /* bidscubeSdk.h */,
+				9879854DC8A7F92E748BC793278B8E31 /* bidscubeSdk.h */,
+				AE07A376D5628116FB321F1DE4984C6A /* BidscubeSDK.swift */,
+				032C3C8B80AD075B935A6503EF119CC9 /* BidscubeSDK+SwiftUI.swift */,
+				44174ED46A89914E72CE968760EADD35 /* Callbacks.swift */,
+				E35D4457EA7659D53572F8F40692AE45 /* ConsentTestView.swift */,
+				CD0D2198AE67E40D967033281E814703 /* Constants.swift */,
+				F1ACB6B27AF5CDF4A591602FA3C1524C /* ContentView.swift */,
+				EE611B098C35CD2972A4AECEC3350BD1 /* ConversionTracker.swift */,
+				057DBE9D3487EB6A7CDD6025B62E02B1 /* CustomAdRenderView.swift */,
+				DFD55FC869253CB494097ADB497DDD57 /* DeviceInfo.swift */,
+				F3C94D9E1CE220C20211EBD8430A5251 /* ImageAdView.swift */,
+				B2ADCDDD8B370F9BA514564A25C94ECE /* IMAVideoAdHandler.swift */,
+				CCC836ABC5BE5B378702505B2FC13BF8 /* IMAViewController.swift */,
+				AF7B30AD7535DCE143597BE037FBB33E /* Logger.swift */,
+				4ECF88F26B1CC40BECA669E4A8163A42 /* NativeAdView.swift */,
+				8EB35F0BD48F9C98F57B7524ECE0E271 /* NetworkManager.swift */,
+				AF566D9E16678175EB41809495C00D72 /* SDKConfig.swift */,
+				114113804B513F74E4C93838A68D664B /* SDKLogger.swift */,
+				DC6285285176914B8A4F7CB0D10506C6 /* SDKTestView.swift */,
+				D97AAF6A0AE6E623DF391539B1649FB3 /* SKAdNetworkManager.swift */,
+				BA713ACB369C2745447192BDD17BD36C /* SKAdNetworkModels.swift */,
+				FDF3F2D49E426EFFF409B952BD34A35E /* SKAdNetworkTestView.swift */,
+				219D3E26F8F0624217BEE4986E9E4F52 /* URLBuilder.swift */,
+				E6320963DE74D1248B5134B3D91EFD56 /* VideoAdView.swift */,
+				5626A1221C20F4D93518F953313ADB38 /* ViewController.swift */,
+				6C1AF161953D49DC42E7386BB8578FAE /* WindowedAdTestView.swift */,
+				BB3BD4E2DCAFC20C6F5A29B07FD6A32B /* WindowedAdTestViewController.swift */,
+				33929FA00BFFB8582BC2A67F8FCDA233 /* Support Files */,
+			);
+			name = BidscubeSDKAppLovin;
+			path = BidscubeSDKAppLovin;
+			sourceTree = "<group>";
+		};
+		91E4D6B747C282EDC968DD02509EF4E4 /* AppLovinSDK */ = {
+			isa = PBXGroup;
+			children = (
+				2F868EC1225495657B3A4EEE1F8B9FCC /* Frameworks */,
+				106991E22D56D22CE2AC1888CCFC6ABD /* Support Files */,
+			);
+			name = AppLovinSDK;
+			path = AppLovinSDK;
+			sourceTree = "<group>";
+		};
+		9889D1F8307265A8A07B8E26D6CA7064 /* GoogleAds-IMA-iOS-SDK */ = {
+			isa = PBXGroup;
+			children = (
+				253A23ABEDB1EB4477C084F147FFAF18 /* Frameworks */,
+				261C2BD819B8BBB4A1276757B141DE98 /* Support Files */,
+			);
+			name = "GoogleAds-IMA-iOS-SDK";
+			path = "GoogleAds-IMA-iOS-SDK";
+			sourceTree = "<group>";
+		};
+		B94D7768568A9992200DB461E8CF687F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3D37BD8F289F2BBC09CE7A9D605781D5 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF82D09DD3903D5FBA79B816691A880C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				91E4D6B747C282EDC968DD02509EF4E4 /* AppLovinSDK */,
+				57DE373D29A72AA3B0907FA10F86332A /* BidscubeSDKAppLovin */,
+				9889D1F8307265A8A07B8E26D6CA7064 /* GoogleAds-IMA-iOS-SDK */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -161,111 +371,93 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				842A7CA93D1FDCD5541AB40B91B07508 /* Pods */,
-				46026D8E431ACD15FD6896D8AC713226 /* Products */,
-				8208DC247CF19593B1B82A682CDC1424 /* Targets Support Files */,
+				B94D7768568A9992200DB461E8CF687F /* Frameworks */,
+				BF82D09DD3903D5FBA79B816691A880C /* Pods */,
+				2A5B94B71CA1473CBD265B4AED228A4E /* Products */,
+				32B65B397444581319EBAEB2DEC4516A /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+		E9A8351DA309459C3542B7453E2B2E25 /* Pods-testApp-ios */ = {
 			isa = PBXGroup;
 			children = (
-				E4801F62A6B08CD9B5410329F1A18FDE /* iOS */,
+				4C077ECA38C6D2FDBF41466F2B55DB48 /* Pods-testApp-ios.modulemap */,
+				C23268CD4E664A847F4F3743188E12EC /* Pods-testApp-ios-acknowledgements.markdown */,
+				F415ACCFA1B7FA2B99EF98CD84831764 /* Pods-testApp-ios-acknowledgements.plist */,
+				68D3395386815493CDE259B5A970889C /* Pods-testApp-ios-dummy.m */,
+				DC7B7865EE50D00B7A1795C093036E60 /* Pods-testApp-ios-frameworks.sh */,
+				CFEA5E9244767749C2E5B1A337ECD7F1 /* Pods-testApp-ios-Info.plist */,
+				8790B7A643E38466C0A9D5D6DD07276A /* Pods-testApp-ios-umbrella.h */,
+				DD33998D5517CA625604187496F0A1B7 /* Pods-testApp-ios.debug.xcconfig */,
+				4E5B1189754BD2A91B763F2902985C6F /* Pods-testApp-ios.release.xcconfig */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DB601D6E67CDAFB1B3E3BC886E5A2D1F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3D5C8BE33F0EFD29C03C67463A3F4E25 /* GoogleInteractiveMediaAds.xcframework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E4801F62A6B08CD9B5410329F1A18FDE /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		EAE3F5E0A56969661ED135BC4D3930CB /* Pods-bidscubeSdk */ = {
-			isa = PBXGroup;
-			children = (
-				34489CD3264ABAAD793A33DA989A7D34 /* Pods-bidscubeSdk.modulemap */,
-				96F54D54DF65E3CC1932A372200E42B0 /* Pods-bidscubeSdk-acknowledgements.markdown */,
-				F4F3C9FBD56399FE812B4747F89EFBCD /* Pods-bidscubeSdk-acknowledgements.plist */,
-				A198C73D3946A8EC82FEA92A9044A5DB /* Pods-bidscubeSdk-dummy.m */,
-				26DE01372E80C0A3EFD0C6C1EC6CD462 /* Pods-bidscubeSdk-Info.plist */,
-				383E359F6F70B3D84A5A83D045E4A7B9 /* Pods-bidscubeSdk-umbrella.h */,
-				507784022D3720DF9764DB39FBB15DA1 /* Pods-bidscubeSdk.debug.xcconfig */,
-				7AB5675A5A12FA5E4927F5B80132C029 /* Pods-bidscubeSdk.release.xcconfig */,
-			);
-			name = "Pods-bidscubeSdk";
-			path = "Target Support Files/Pods-bidscubeSdk";
+			name = "Pods-testApp-ios";
+			path = "Target Support Files/Pods-testApp-ios";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		7B16D46E3E64E1CA741C3EA89F5D3241 /* Headers */ = {
+		4E9237F86CD8E97A8C0321F63A900CB3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A086EB73ACAC848B5908570F2A673515 /* Pods-bidscubeSdk-umbrella.h in Headers */,
+				4FE4B9D5A9A38A29080AB65ECEDCA74B /* Pods-testApp-ios-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9CB5DA48A4B53D4C692B41FE82D6F8B1 /* Headers */ = {
+		C78A0A60B7D5523E9FD1A4D8BEC89EE8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E59B8B2A558A49C3D34D9CA03ADA2208 /* Pods-testApp-ios-umbrella.h in Headers */,
+				17122612FF110CEB0F8EF04410427306 /* bidscubeSdk.h in Headers */,
+				6BEFAE0678FB55FA0CD35A927F120E8F /* bidscubeSdk.h in Headers */,
+				C95E2CD744864B94FE136021658D5C6A /* BidscubeSDKAppLovin-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		92FE085301316E9BFA45978583F7151E /* Pods-bidscubeSdk */ = {
+		B59807D1116E1C456EA0B5B0F98013DC /* BidscubeSDKAppLovin */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 62328EC2C9AB993970D18E6848889763 /* Build configuration list for PBXNativeTarget "Pods-bidscubeSdk" */;
+			buildConfigurationList = D598D5A816EF14DDA2605E3A31F7934A /* Build configuration list for PBXNativeTarget "BidscubeSDKAppLovin" */;
 			buildPhases = (
-				7B16D46E3E64E1CA741C3EA89F5D3241 /* Headers */,
-				209AA63AE8F38E1BEAF675196101275B /* Sources */,
-				BC153FDDC10D91142BFDD9AC287FD612 /* Frameworks */,
-				C69445CD1AEFF118C527FDFAC4F099A5 /* Resources */,
+				C78A0A60B7D5523E9FD1A4D8BEC89EE8 /* Headers */,
+				E6F86DF3EE491305E68F60ACD061F79D /* Sources */,
+				57103840318E6068E735F6778B809F05 /* Frameworks */,
+				8899D319FF87306C925978BA3FCF249A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4BEBB8CEA855DD469CD0A485DEEF25AB /* PBXTargetDependency */,
+				CDAC909894B90AD673EB84808A07CC5D /* PBXTargetDependency */,
+				058EC034496DD943CB07A2E72EC1114F /* PBXTargetDependency */,
 			);
-			name = "Pods-bidscubeSdk";
-			productName = Pods_bidscubeSdk;
-			productReference = 1EDFF02040521E5222B446C17BFE0847 /* Pods_bidscubeSdk.framework */;
+			name = BidscubeSDKAppLovin;
+			productName = BidscubeSDKAppLovin;
+			productReference = BD595AB9EA45B98765DC50BAD7DECD5D /* BidscubeSDKAppLovin */;
 			productType = "com.apple.product-type.framework";
 		};
 		C12B0A37DB5D13133FC9EE036AE9E8F9 /* Pods-testApp-ios */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 359E58A66C5DC3FAC4E2FB8A4DCB70A9 /* Build configuration list for PBXNativeTarget "Pods-testApp-ios" */;
+			buildConfigurationList = 0D641BEEC72E247FDC0CE3A2DEFF1862 /* Build configuration list for PBXNativeTarget "Pods-testApp-ios" */;
 			buildPhases = (
-				9CB5DA48A4B53D4C692B41FE82D6F8B1 /* Headers */,
-				6A7AFF3A34E1BDA9C8E305F4782A39D5 /* Sources */,
-				5E4C67B6F49A38F2A5AC2B8194734BCB /* Frameworks */,
-				5CCAAA55768AA630797E85CAD7A76AB5 /* Resources */,
+				4E9237F86CD8E97A8C0321F63A900CB3 /* Headers */,
+				78510407BE70BA79B6C7B782F9277D47 /* Sources */,
+				9970DBF034C40577D8BFFC8833B1BF2E /* Frameworks */,
+				BEC15EB5469E4AC1A354D24002AC811F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1B47A6A34E8C48FDB849CF49C741EE52 /* PBXTargetDependency */,
+				15A026F9DF2E8B16477FBAC9A444FF92 /* PBXTargetDependency */,
+				E9ACFEECCA1050CEC894A329D493BCE9 /* PBXTargetDependency */,
+				A23B5550C48534EA80FE0999487BCEA2 /* PBXTargetDependency */,
 			);
 			name = "Pods-testApp-ios";
 			productName = Pods_testApp_ios;
-			productReference = B06CD3B2435C09C52BE9EA76F223F869 /* Pods_testApp_ios.framework */;
+			productReference = B06CD3B2435C09C52BE9EA76F223F869 /* Pods-testApp-ios */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -274,9 +466,8 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 2600;
+				LastUpgradeCheck = 1600;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 16.0";
@@ -287,26 +478,29 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 46026D8E431ACD15FD6896D8AC713226 /* Products */;
+			minimizedProjectReferenceProxies = 0;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 2A5B94B71CA1473CBD265B4AED228A4E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				5BC46914A3617E8E5EA6E625B5DD1684 /* AppLovinSDK */,
+				B59807D1116E1C456EA0B5B0F98013DC /* BidscubeSDKAppLovin */,
 				7362DAB47E2EFA5452F30DD7E9830B56 /* GoogleAds-IMA-iOS-SDK */,
-				92FE085301316E9BFA45978583F7151E /* Pods-bidscubeSdk */,
 				C12B0A37DB5D13133FC9EE036AE9E8F9 /* Pods-testApp-ios */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5CCAAA55768AA630797E85CAD7A76AB5 /* Resources */ = {
+		8899D319FF87306C925978BA3FCF249A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C69445CD1AEFF118C527FDFAC4F099A5 /* Resources */ = {
+		BEC15EB5469E4AC1A354D24002AC811F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -316,7 +510,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		34C560B906D648F5E1173388CD967FBB /* [CP] Copy XCFrameworks */ = {
+		0767D10B049CB169F35806FA0DC22F33 /* [CP] Copy XCFrameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/AppLovinSDK/AppLovinSDK-xcframeworks-input-files.xcfilelist",
+			);
+			name = "[CP] Copy XCFrameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/AppLovinSDK/AppLovinSDK-xcframeworks-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/AppLovinSDK/AppLovinSDK-xcframeworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3A200D985E42F9E98559BC1EA99A14E /* [CP] Copy XCFrameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -324,13 +535,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/GoogleAds-IMA-iOS-SDK/GoogleAds-IMA-iOS-SDK-xcframeworks-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy XCFrameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/GoogleAds-IMA-iOS-SDK/GoogleAds-IMA-iOS-SDK-xcframeworks-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -340,124 +547,98 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		209AA63AE8F38E1BEAF675196101275B /* Sources */ = {
+		78510407BE70BA79B6C7B782F9277D47 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFC3018EFBD575B45474763B7991CC0D /* Pods-bidscubeSdk-dummy.m in Sources */,
+				A2EB6E18A2112275236A93539CEA00C0 /* Pods-testApp-ios-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6A7AFF3A34E1BDA9C8E305F4782A39D5 /* Sources */ = {
+		E6F86DF3EE491305E68F60ACD061F79D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D2374A6B4036431E3354F4CAF0CA906 /* Pods-testApp-ios-dummy.m in Sources */,
+				01A1A79B7ACBF94A388E097C8C3CBC7C /* AdPosition.swift in Sources */,
+				DBBD96FE4BA9F08EE9A7585C3D761F5B /* AdType.swift in Sources */,
+				157ADBEB654C2F0B82F38415D9855BBE /* AdViewController.swift in Sources */,
+				CDE41276C6A0B2325FC68E5C065A3CCE /* ALBidscubeMediationAdapter.swift in Sources */,
+				B84448E309AB5F27AF825432B4F23A25 /* BannerAdView.swift in Sources */,
+				311F6B6172C7EBC281D22791F4707714 /* BidscubeSDK.swift in Sources */,
+				F0931D3A331E6C3FDE6F8F7A23153BE1 /* BidscubeSDK+SwiftUI.swift in Sources */,
+				8EF6685AAF89474AAD0F45194FD52266 /* BidscubeSDKAppLovin-dummy.m in Sources */,
+				BA38629E8346FC0A199AC1154E1CA744 /* Callbacks.swift in Sources */,
+				E75394C8506B56E39441A1F36DC96D0A /* ConsentTestView.swift in Sources */,
+				8FCEC89382FEB39FD6D34006C1874F85 /* Constants.swift in Sources */,
+				C47A4C64F2F1AD644E0E77CB350B177C /* ContentView.swift in Sources */,
+				13DCA6773A5B997EB4B5545632A3CF5B /* ConversionTracker.swift in Sources */,
+				B10C12335A5AF422EDDCF67EE3D6AE5F /* CustomAdRenderView.swift in Sources */,
+				0B27EC135675B4C1025E05BA6BFA299E /* DeviceInfo.swift in Sources */,
+				8D9A6BEC16E48C7CDE680B110B928A92 /* ImageAdView.swift in Sources */,
+				D728228EF841884B1FA418254B5C022D /* IMAVideoAdHandler.swift in Sources */,
+				1E11EBB03182A25964FC0E3CA558E5DA /* IMAViewController.swift in Sources */,
+				098F5FAB6B073C9C34F84751F9BB9E31 /* Logger.swift in Sources */,
+				726E2D1B8CF6B92954BD1320E5FB4B3E /* NativeAdView.swift in Sources */,
+				F5C1FA46030FF20B90E94423A37FDF6B /* NetworkManager.swift in Sources */,
+				3A90E6529C9D67DD8DEAF3590240421B /* SDKConfig.swift in Sources */,
+				5418F6C8621BFC645CE8C2B9AA916217 /* SDKLogger.swift in Sources */,
+				CD1A9F0B9BD8BACEFFB8C844151A9C5A /* SDKTestView.swift in Sources */,
+				B05E9C46CAA2B21BEF004D97D0004CCD /* SKAdNetworkManager.swift in Sources */,
+				CC01459F21DC2D61C42459C725283439 /* SKAdNetworkModels.swift in Sources */,
+				CD13FCA597AEB6A87461BAC10912C44B /* SKAdNetworkTestView.swift in Sources */,
+				134326BBEFB8454BD433D6B486E378DB /* URLBuilder.swift in Sources */,
+				6A41BEB6AB86C4B85815D8CDD2BAFB1E /* VideoAdView.swift in Sources */,
+				27BFBEC00D7FD0E63E92FC8326321E15 /* ViewController.swift in Sources */,
+				D4555459C1666003C764C6FA588D1581 /* WindowedAdTestView.swift in Sources */,
+				9D8A3B63C5B7CE4BABA996E6DED5CC7A /* WindowedAdTestViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1B47A6A34E8C48FDB849CF49C741EE52 /* PBXTargetDependency */ = {
+		058EC034496DD943CB07A2E72EC1114F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "GoogleAds-IMA-iOS-SDK";
 			target = 7362DAB47E2EFA5452F30DD7E9830B56 /* GoogleAds-IMA-iOS-SDK */;
-			targetProxy = B5B7224B94ABB4B69CE82597F903A924 /* PBXContainerItemProxy */;
+			targetProxy = 81915E809BC83943D1EDF7E87EE51CC4 /* PBXContainerItemProxy */;
 		};
-		4BEBB8CEA855DD469CD0A485DEEF25AB /* PBXTargetDependency */ = {
+		15A026F9DF2E8B16477FBAC9A444FF92 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AppLovinSDK;
+			target = 5BC46914A3617E8E5EA6E625B5DD1684 /* AppLovinSDK */;
+			targetProxy = 687D0C52EF3F862C25D924A1F44EF463 /* PBXContainerItemProxy */;
+		};
+		A23B5550C48534EA80FE0999487BCEA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "GoogleAds-IMA-iOS-SDK";
 			target = 7362DAB47E2EFA5452F30DD7E9830B56 /* GoogleAds-IMA-iOS-SDK */;
-			targetProxy = 20001E26796AA3CCFD30EB8F3E778483 /* PBXContainerItemProxy */;
+			targetProxy = 0554475C466D6285E8FE0ECC343F91FD /* PBXContainerItemProxy */;
+		};
+		CDAC909894B90AD673EB84808A07CC5D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AppLovinSDK;
+			target = 5BC46914A3617E8E5EA6E625B5DD1684 /* AppLovinSDK */;
+			targetProxy = 24ED395D22D7CD226652DC8D0A991D18 /* PBXContainerItemProxy */;
+		};
+		E9ACFEECCA1050CEC894A329D493BCE9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BidscubeSDKAppLovin;
+			target = B59807D1116E1C456EA0B5B0F98013DC /* BidscubeSDKAppLovin */;
+			targetProxy = 518EE47F257E84AA1EEE8CA3E8C104E3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1D5BC78EA08EECD29948052C51AE7AFD /* Debug */ = {
+		0FE5F59836831E6ED0A2877A1885C41E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 507784022D3720DF9764DB39FBB15DA1 /* Pods-bidscubeSdk.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				INFOPLIST_FILE = "Target Support Files/Pods-bidscubeSdk/Pods-bidscubeSdk-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-bidscubeSdk/Pods-bidscubeSdk.modulemap";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		23FEC00B4BDEAB59D1867377C48A6382 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 16BAAFFA38E6BF24815E9483FBDBA6F7 /* Pods-testApp-ios.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				INFOPLIST_FILE = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios.modulemap";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		397821470EF467AF59EE3ED57355E7B3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A6BFB4F3EE671709E6E175F392525ED /* GoogleAds-IMA-iOS-SDK.debug.xcconfig */;
+			baseConfigurationReference = 189DC1A90F3ECCD6021CBCC4DB86D4ED /* GoogleAds-IMA-iOS-SDK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -467,7 +648,45 @@
 			};
 			name = Debug;
 		};
-		8DE5143C03248BB6CD542DE3963D6F3A /* Debug */ = {
+		1DD59F2B9C32973216F4B44112C50638 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 245BED2B7335B70B2F50CDBCCADB109F /* AppLovinSDK.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		27288512AE1F909EA4E50A2743AB12A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21580BC397117F05B69A643B7CE821B1 /* GoogleAds-IMA-iOS-SDK.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4BC7450F9457737EE3E637BA155B56F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -502,7 +721,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -521,12 +739,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -534,44 +752,25 @@
 			};
 			name = Debug;
 		};
-		8FA2EF7178C9AAE16B24004BFD6B816D /* Debug */ = {
+		8693EEEAACECA3A60E2F7B067E179812 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E19EA140ADB9829D2CEF996D21523D20 /* Pods-testApp-ios.debug.xcconfig */;
+			baseConfigurationReference = 223F35044DD750F01AB81370EDF10D8D /* AppLovinSDK.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				INFOPLIST_FILE = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios.modulemap";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		9E406C6AAF85E580207CD97B0044DEAB /* Release */ = {
+		8B5A46FF8D3C1289CDEE3BAFACABCD2A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -606,7 +805,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -622,11 +820,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -634,49 +832,123 @@
 			};
 			name = Release;
 		};
-		BB3F37CA90A81958071071F0680056BD /* Release */ = {
+		9161E344373F91321B3603266DE4192E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2E22BAAFBA5A779062D117430C20E9E /* GoogleAds-IMA-iOS-SDK.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		E7D2D236A40602BE93C425008BBC5ADF /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7AB5675A5A12FA5E4927F5B80132C029 /* Pods-bidscubeSdk.release.xcconfig */;
+			baseConfigurationReference = D2F8B28CF05C3E7F5E6C01E0DACF6722 /* BidscubeSDKAppLovin.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				INFOPLIST_FILE = "Target Support Files/Pods-bidscubeSdk/Pods-bidscubeSdk-Info.plist";
+				EXCLUDED_SOURCE_FILE_NAMES = (
+					"bidscubeSdk/Tests/*.swift",
+					bidscubeSdk/Views/ContentView.swift,
+					bidscubeSdk/Views/SDKTestView.swift,
+				);
+				GCC_PREFIX_HEADER = "Target Support Files/BidscubeSDKAppLovin/BidscubeSDKAppLovin-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/BidscubeSDKAppLovin/BidscubeSDKAppLovin-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/BidscubeSDKAppLovin/BidscubeSDKAppLovin.modulemap";
+				OTHER_SWIFT_FLAGS = "$(inherited) -module-alias BidscubeSDK=BidscubeSDKAppLovin";
+				PRODUCT_MODULE_NAME = BidscubeSDKAppLovin;
+				PRODUCT_NAME = BidscubeSDKAppLovin;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DAC70F926FDF8F0F386B9419163A78B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F4682846EFF5821C6601340B2903819 /* BidscubeSDKAppLovin.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				EXCLUDED_SOURCE_FILE_NAMES = (
+					"bidscubeSdk/Tests/*.swift",
+					bidscubeSdk/Views/ContentView.swift,
+					bidscubeSdk/Views/SDKTestView.swift,
+				);
+				GCC_PREFIX_HEADER = "Target Support Files/BidscubeSDKAppLovin/BidscubeSDKAppLovin-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/BidscubeSDKAppLovin/BidscubeSDKAppLovin-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/BidscubeSDKAppLovin/BidscubeSDKAppLovin.modulemap";
+				OTHER_SWIFT_FLAGS = "$(inherited) -module-alias BidscubeSDK=BidscubeSDKAppLovin";
+				PRODUCT_MODULE_NAME = BidscubeSDKAppLovin;
+				PRODUCT_NAME = BidscubeSDKAppLovin;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		EEAB5A6F7251684FFE6131104443ECBB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E5B1189754BD2A91B763F2902985C6F /* Pods-testApp-ios.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				INFOPLIST_FILE = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-bidscubeSdk/Pods-bidscubeSdk.modulemap";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
+				MODULEMAP_FILE = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -691,23 +963,62 @@
 			};
 			name = Release;
 		};
+		FE74D95BE3A2896111602C955DD05763 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD33998D5517CA625604187496F0A1B7 /* Pods-testApp-ios.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				INFOPLIST_FILE = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		359E58A66C5DC3FAC4E2FB8A4DCB70A9 /* Build configuration list for PBXNativeTarget "Pods-testApp-ios" */ = {
+		0D641BEEC72E247FDC0CE3A2DEFF1862 /* Build configuration list for PBXNativeTarget "Pods-testApp-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8FA2EF7178C9AAE16B24004BFD6B816D /* Debug */,
-				23FEC00B4BDEAB59D1867377C48A6382 /* Release */,
+				FE74D95BE3A2896111602C955DD05763 /* Debug */,
+				EEAB5A6F7251684FFE6131104443ECBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3ABA5F09EC43807FFA362AE56AD22924 /* Build configuration list for PBXAggregateTarget "GoogleAds-IMA-iOS-SDK" */ = {
+		1137672E97496FACD0DD9E48E86C50EF /* Build configuration list for PBXAggregateTarget "AppLovinSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				397821470EF467AF59EE3ED57355E7B3 /* Debug */,
-				BB3F37CA90A81958071071F0680056BD /* Release */,
+				8693EEEAACECA3A60E2F7B067E179812 /* Debug */,
+				1DD59F2B9C32973216F4B44112C50638 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -715,17 +1026,26 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8DE5143C03248BB6CD542DE3963D6F3A /* Debug */,
-				9E406C6AAF85E580207CD97B0044DEAB /* Release */,
+				4BC7450F9457737EE3E637BA155B56F7 /* Debug */,
+				8B5A46FF8D3C1289CDEE3BAFACABCD2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		62328EC2C9AB993970D18E6848889763 /* Build configuration list for PBXNativeTarget "Pods-bidscubeSdk" */ = {
+		69614541FE60FDDFA89A77798B04D194 /* Build configuration list for PBXAggregateTarget "GoogleAds-IMA-iOS-SDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1D5BC78EA08EECD29948052C51AE7AFD /* Debug */,
-				E7D2D236A40602BE93C425008BBC5ADF /* Release */,
+				0FE5F59836831E6ED0A2877A1885C41E /* Debug */,
+				27288512AE1F909EA4E50A2743AB12A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D598D5A816EF14DDA2605E3A31F7934A /* Build configuration list for PBXNativeTarget "BidscubeSDKAppLovin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9161E344373F91321B3603266DE4192E /* Debug */,
+				DAC70F926FDF8F0F386B9419163A78B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

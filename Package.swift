@@ -1,5 +1,5 @@
 // swift-tools-version:6.0
-// This package is iOS-only and requires iOS 13.0+
+// iOS-only library; minimum iOS 13.0 (aligned with SPM/CocoaPods and AppLovin MAX adapter use).
 import PackageDescription
 
 let package = Package(

@@ -10,6 +10,7 @@ public final class VideoAdView: UIView {
     private weak var callback: AdCallback?
     private weak var parentViewController: UIViewController?
     private var clickURL: String?
+    private var videoAdFormat: VideoAdFormat = .interstitial
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -63,9 +64,10 @@ public final class VideoAdView: UIView {
     }
     
 
-    public func setPlacementInfo(_ placementId: String, callback: AdCallback?) {
+    public func setPlacementInfo(_ placementId: String, callback: AdCallback?, videoAdFormat: VideoAdFormat = .interstitial) {
         self.placementId = placementId
         self.callback = callback
+        self.videoAdFormat = videoAdFormat
     }
     
     public func setParentViewController(_ viewController: UIViewController?) {
@@ -76,6 +78,43 @@ public final class VideoAdView: UIView {
     public func cleanup() {
         imaVideoHandler?.cleanup()
         imaVideoHandler = nil
+    }
+
+    /// Invoked when the fullscreen `AdViewController` asks to dismiss (system back button or ✕): maps to skip-when-needed + close.
+    public func finalizeDismissalFromFullscreenHost(completion: (() -> Void)? = nil) {
+        if let handler = imaVideoHandler {
+            handler.userInitiatedDismissFromHost(completion: completion)
+        } else {
+            callback?.onAdClosed(placementId)
+            dismissHostAdViewController(completion: completion)
+        }
+    }
+
+    private func dismissHostAdViewController(completion: (() -> Void)? = nil) {
+        guard let host = parentViewController else {
+            completion?()
+            return
+        }
+        if host.presentingViewController != nil {
+            host.dismiss(animated: true, completion: completion)
+        } else if let nav = host.navigationController, nav.viewControllers.count > 1 {
+            nav.popViewController(animated: true)
+            completion?()
+        } else {
+            completion?()
+        }
+    }
+
+    private func reportVideoPayloadFailure(code: Int, message: String) {
+        loadingLabel.isHidden = false
+        loadingLabel.text = message
+        callback?.onAdFailed(placementId, errorCode: code, errorMessage: message)
+    }
+
+    private static func contentLikelyContainsVAST(_ content: String) -> Bool {
+        let trimmed = content.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return false }
+        return trimmed.range(of: "<VAST", options: .caseInsensitive) != nil
     }
     
     public func refreshIMASetup() {
@@ -95,7 +134,7 @@ public final class VideoAdView: UIView {
         cleanup()
         
         imaVideoHandler = IMAVideoAdHandler(vastXML: vastXML, clickURL: clickURL)
-        imaVideoHandler?.setPlacementInfo(placementId, callback: callback)
+        imaVideoHandler?.setPlacementInfo(placementId, callback: callback, videoAdFormat: videoAdFormat)
         imaVideoHandler?.setParentViewController(parentViewController)
         
         if let handler = imaVideoHandler {
@@ -134,7 +173,7 @@ public final class VideoAdView: UIView {
         cleanup()
         
         imaVideoHandler = IMAVideoAdHandler(vastURL: vastURL, clickURL: clickURL)
-        imaVideoHandler?.setPlacementInfo(placementId, callback: callback)
+        imaVideoHandler?.setPlacementInfo(placementId, callback: callback, videoAdFormat: videoAdFormat)
         imaVideoHandler?.setParentViewController(parentViewController)
         
         if let handler = imaVideoHandler {
@@ -170,42 +209,58 @@ public final class VideoAdView: UIView {
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                
+
                 if let error = error {
                     self.loadingLabel.text = "Error: \(error.localizedDescription)"
+                    self.callback?.onAdFailed(self.placementId, errorCode: Constants.ErrorCodes.networkError, errorMessage: error.localizedDescription)
                     return
                 }
-                
-                guard let data = data,
-                      let content = String(data: data, encoding: .utf8) else {
-                    self.loadingLabel.text = "Error: Invalid response"
-                    return
-                }
-                
-                do {
-                    if let jsonData = content.data(using: .utf8),
-                       let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
-                       let adm = json["adm"] as? String {
-                        
-                        if let positionValue = json["position"] as? Int,
-                           let position = bidscubeSdk.AdPosition(rawValue: positionValue) {
-                            print("🔍 VideoAdView: Received position from server: \(positionValue) - \(self.displayName(for: position))")
-                            DispatchQueue.main.async {
-                                BidscubeSDK.setResponseAdPosition(position)
-                            }
-                        }
-                        
-                        if adm.hasPrefix("http") {
-                            self.loadVASTFromURL(adm)
-                        } else {
-                            self.loadVASTContent(adm)
-                        }
-                    } else {
-                        self.loadVASTContent(content)
+
+                if let http = response as? HTTPURLResponse {
+                    guard (200...299).contains(http.statusCode) else {
+                        self.reportVideoPayloadFailure(Constants.ErrorCodes.invalidResponse, message: "Invalid HTTP response (\(http.statusCode))")
+                        return
                     }
-                } catch {
-                    self.loadVASTContent(content)
                 }
+
+                guard let data = data, !data.isEmpty else {
+                    self.reportVideoPayloadFailure(Constants.ErrorCodes.invalidResponse, message: Constants.ErrorMessages.invalidResponse)
+                    return
+                }
+
+                guard let content = String(data: data, encoding: .utf8) else {
+                    self.reportVideoPayloadFailure(Constants.ErrorCodes.invalidResponse, message: Constants.ErrorMessages.invalidResponse)
+                    return
+                }
+
+                if let jsonData = content.data(using: .utf8),
+                   let json = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
+                   let adm = json["adm"] as? String,
+                   !adm.isEmpty {
+
+                    if let positionValue = json["position"] as? Int,
+                       let position = bidscubeSdk.AdPosition(rawValue: positionValue) {
+                        BidscubeSDK.setResponseAdPosition(position)
+                    }
+
+                    let trimmedAdm = adm.trimmingCharacters(in: .whitespacesAndNewlines)
+                    if trimmedAdm.hasPrefix("http://") || trimmedAdm.hasPrefix("https://") {
+                        self.loadVASTFromURL(trimmedAdm)
+                    } else if Self.contentLikelyContainsVAST(trimmedAdm) {
+                        self.loadVASTContent(trimmedAdm)
+                    } else {
+                        self.reportVideoPayloadFailure(Constants.ErrorCodes.invalidAdMarkup, message: Constants.ErrorMessages.invalidAdMarkup)
+                    }
+                    return
+                }
+
+                let trimmed = content.trimmingCharacters(in: .whitespacesAndNewlines)
+                if Self.contentLikelyContainsVAST(trimmed) {
+                    self.loadVASTContent(trimmed)
+                    return
+                }
+
+                self.reportVideoPayloadFailure(Constants.ErrorCodes.invalidAdMarkup, message: Constants.ErrorMessages.invalidAdMarkup)
             }
         }.resume()
     }

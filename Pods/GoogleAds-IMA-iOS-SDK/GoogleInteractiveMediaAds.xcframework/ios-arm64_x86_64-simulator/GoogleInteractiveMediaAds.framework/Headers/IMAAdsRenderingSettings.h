@@ -116,16 +116,19 @@ extern const NSInteger kIMAAutodetectBitrate;
 @property(nonatomic) BOOL enablePreloading;
 
 /**
- * Specifies the optional UIViewController that will be used to open links in-app.
- * When nil, tapping the video ad "Learn More" button or companion ads
- * will result in opening Safari browser. Setting this allows the SDK to open links in-app. This
- * field is ignored on tvOS, where Safari is not available.
+ * Specifies the optional UIViewController that the SDK uses to present an in-app browser or app
+ * store. When nil, tapping the video ad "Learn More" button or companion ads results in opening a
+ * Safari browser. Setting this allows the SDK to open links in-app. This field is ignored on tvOS,
+ * where Safari is not available. If provided, the SDK presents the app store in this view
+ * controller for SKAdNetwork ads. If left nil, it is presented in the view controller provided
+ * to the ad display container.
  */
 @property(nonatomic, weak, nullable) UIViewController *linkOpenerPresentingController;
 
 /**
  * The IMALinkOpenerDelegate to be notified when a link is opened/closed.
- * Web links are unavailable on tvOS, but this delegate will be used to notify for deep links.
+ * SKAdNetwork and web links are unavailable on tvOS, but this delegate is
+ * used to notify for deep links.
  */
 @property(nonatomic, weak, nullable) id<IMALinkOpenerDelegate> linkOpenerDelegate;
 

@@ -9,9 +9,6 @@ NS_ASSUME_NONNULL_BEGIN
 /** Data object describing a stream request for a pod serving stream. */
 @interface IMAPodStreamRequest : IMAStreamRequest
 
-/** The network code for the stream request. */
-@property(nonatomic, copy, readonly) NSString *networkCode;
-
 /** The custom asset key for the stream request. */
 @property(nonatomic, copy, readonly) NSString *customAssetKey;
 

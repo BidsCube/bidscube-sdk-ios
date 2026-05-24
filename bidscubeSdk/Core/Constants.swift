@@ -26,7 +26,7 @@ public struct Constants {
     }
     
     public static let userAgentPrefix = "BidscubeSDK-iOS"
-    public static let sdkVersion = "1.2.1"
+    public static let sdkVersion = "1.2.3"
     
     public struct ErrorCodes {
         public static let invalidURL = -1
@@ -35,6 +35,10 @@ public struct Constants {
         public static let parsingError = -4
         public static let timeoutError = -5
         public static let consentError = -6
+        /// No usable key window / host view controller to present fullscreen video from.
+        public static let presenterUnavailable = -7
+        /// VAST/XML or markup could not be used for playback.
+        public static let invalidAdMarkup = -8
     }
     
     public struct ErrorMessages {
@@ -44,6 +48,8 @@ public struct Constants {
         public static let timeoutError = "Request timed out"
         public static let consentRequired = "User consent required"
         public static let sdkNotInitialized = "SDK not initialized"
+        public static let presenterUnavailable = "No view controller available to present the video ad"
+        public static let invalidAdMarkup = "Invalid video ad markup or VAST payload"
     }
     
     public struct LogPrefixes {

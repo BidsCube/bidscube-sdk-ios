@@ -12,31 +12,47 @@ A comprehensive iOS SDK for displaying image, video, and native ads in iOS appli
 - **Production-ready** with comprehensive logging
 
 ## Requirements
-- iOS 14.0+ (CocoaPods) / iOS 13.0+ (SPM target)
+- iOS **13.0+** (Swift Package Manager and CocoaPods; single minimum for all integrations)
 - Xcode 15.0+
 - Swift 6.0+
 - CocoaPods 1.10.0+ or Swift Package Manager
 
+### AppLovin MAX mediation
+**Versions are separate:** the BidsCube iOS library is **`bidscubeSdk`** (e.g. **1.2.3**). The AppLovin pod **`AppLovinMediationBidscubeAdapter`** has its **own** version (e.g. **1.0.3**) and declares `bidscubeSdk ~> 1.2` — CocoaPods installs **bidscubeSdk** transitively; you do **not** add `pod 'bidscubeSdk'` when you already use the adapter. Also add **AppLovinSDK** (≥ 13.0). Deployment target iOS 13.0+.
+
 ## Installation
 ### Swift Package Manager (recommended)
 1. File → **Add Package Dependencies** → `https://github.com/bidscube/bidscube-sdk-ios.git`
-2. Pick version `1.2.2` (or `from: "1.2.2"` in `Package.swift`)
+2. Pick BidsCube library version **1.2.3** (or `from: "1.2.3"` in `Package.swift`)
 ```swift
 dependencies: [
-    .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "1.2.2")
+    .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "1.2.3")
 ]
 ```
 
 ### CocoaPods
 ```ruby
-platform :ios, '14.0'
+platform :ios, '13.0'
 use_frameworks!
 
 target 'YourApp' do
-  pod 'bidscubeSdk', '~> 1.2.2'
+  pod 'bidscubeSdk', '~> 1.2.3'
 end
 ```
 Run `pod install`.
+
+### CocoaPods + AppLovin MAX (example)
+Adapter pod version (e.g. **1.0.3**) ≠ `bidscubeSdk` version (**1.2.3**). Only adapter + AppLovinSDK; `bidscubeSdk` comes transitively.
+
+```ruby
+platform :ios, '13.0'
+use_frameworks!
+
+target 'YourApp' do
+  pod 'AppLovinSDK', '~> 13.0'
+  pod 'AppLovinMediationBidscubeAdapter', '~> 1.0.3' # resolves bidscubeSdk ~> 1.2
+end
+```
 
 ### Manual Installation
 1. Download the repo.
@@ -323,6 +339,15 @@ let config = SDKConfig.Builder()
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
+
+### Version 1.2.3
+- **Video (IMA/VAST):** correct lifecycle callbacks from real playback (`LOADED`, `STARTED`, `COMPLETE`, `SKIPPED`); removed timer/fake completions.
+- **Interstitial vs rewarded:** `VideoAdFormat`, `showInterstitialVideoAd` / `showRewardedVideoAd`, inline `getInterstitialVideoAdView` / `getRewardedVideoAdView`; legacy `showVideoAd` / `getVideoAdView` remain **interstitial**-compatible.
+- **`onUserRewarded`:** only for rewarded format, only after IMA `.COMPLETE` (never on skip/close/failure).
+- **Dismiss / skip:** closing mid-play reports `onVideoAdSkipped`; `onAdClosed` fires once.
+- **`onAdLoading`:** deduplicated between fullscreen presenter and nested views.
+- **Errors:** richer `onAdFailed` from video fetch/markup parsing; simulator presentation errors (`presenterUnavailable`).
+- **Logging:** `SDKLogger` safe on iOS 13 (`os.Logger` gated to iOS 14+).
 
 ### Version 1.2.2
 - Fire Native `imptrackers` on ad display with one-time guard per load

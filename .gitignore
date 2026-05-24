@@ -1,6 +1,14 @@
-# Xcode
+# Xcode — user & UI state
 .DS_Store
-*/build/*
+**/.DS_Store
+xcuserdata/
+*.xccheckout
+*.xcscmblueprint
+*.xcuserstate
+*.moved-aside
+**/build/*
+
+# Xcode project cruft (legacy editors)
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -9,24 +17,40 @@
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-xcuserdata/
-*.moved-aside
-*.xccheckout
-*.xcscmblueprint
+
+# Do NOT use `*.xcworkspace` here — the CocoaPods/app workspace (`*.xcworkspace`) must stay trackable.
+
+# Local Xcode / SPM derived data mistakenly placed inside the repo
+.derived*/
+DerivedData/
+*.xcresult
 
 # Swift Package Manager
 .build/
 Packages/
 Package.resolved
 .swiftpm/
+**/.swiftpm/
 
-# CocoaPods
+# SPM / Xcode caches under ad-hoc derived folders
+**/SourcePackages/
+
+# Cocoapods
 Pods/
-*.xcworkspace
-!default.xcworkspace
 
+# IDEA / tooling
 .idea
 .prettierignore
 .prettierrc
 .code-workspace
 
+# Deliverables / archives at repo root
+*.zip
+*.ipa
+*.dSYM.zip
+
+# Local Xcode `build/` output (often at repo root)
+build/
+
+# Optional: SPM disabled source copies
+*.swift.disabled

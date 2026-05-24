@@ -37,6 +37,49 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param contentSourceID    the content source ID for this stream
  * @param videoID            the video identifier for this stream
+ * @param networkCode        the network code for the stream (optional but recommended).
+ * @param adDisplayContainer the IMAAdDisplayContainer for rendering the ad UI
+ * @param videoDisplay       the IMAVideoDisplay for playing the stream
+ * @param userContext The user context for tracking requests (optional)
+ *
+ * @return the IMAVODStreamRequest instance
+ */
+- (instancetype)initWithContentSourceID:(NSString *)contentSourceID
+                                videoID:(NSString *)videoID
+                            networkCode:(nullable NSString *)networkCode
+                     adDisplayContainer:(IMAAdDisplayContainer *)adDisplayContainer
+                           videoDisplay:(id<IMAVideoDisplay>)videoDisplay
+                            userContext:(nullable id)userContext;
+
+/**
+ * Initializes a stream request instance with the given content source ID and video ID.
+ * Uses the given ad display container to display the stream. This is used for on-demand streams.
+ * Uses the picture in picture proxy to track PIP events.
+ *
+ * @param contentSourceID       the content source ID for this stream
+ * @param videoID               the video identifier for this stream
+ * @param networkCode           the network code for the stream (optional but recommended).
+ * @param adDisplayContainer    the IMAAdDisplayContainer for rendering the ad UI
+ * @param videoDisplay          the IMAVideoDisplay for playing the stream
+ * @param pictureInPictureProxy the IMAPictureInPictureProxy for tracking PIP events
+ * @param userContext The user context for tracking requests (optional)
+ *
+ * @return the IMAVODStreamRequest instance
+ */
+- (instancetype)initWithContentSourceID:(NSString *)contentSourceID
+                                videoID:(NSString *)videoID
+                            networkCode:(nullable NSString *)networkCode
+                     adDisplayContainer:(IMAAdDisplayContainer *)adDisplayContainer
+                           videoDisplay:(id<IMAVideoDisplay>)videoDisplay
+                  pictureInPictureProxy:(nullable IMAPictureInPictureProxy *)pictureInPictureProxy
+                            userContext:(nullable id)userContext;
+
+/**
+ * Initializes a stream request instance with the given content source ID and video ID.
+ * Uses the given ad display container to display the stream. This is used for on-demand streams.
+ *
+ * @param contentSourceID    the content source ID for this stream
+ * @param videoID            the video identifier for this stream
  * @param adDisplayContainer the IMAAdDisplayContainer for rendering the ad UI
  * @param videoDisplay       the IMAVideoDisplay for playing the stream
  * @param userContext The user context for tracking requests (optional)
@@ -47,7 +90,10 @@ NS_ASSUME_NONNULL_BEGIN
                                 videoID:(NSString *)videoID
                      adDisplayContainer:(IMAAdDisplayContainer *)adDisplayContainer
                            videoDisplay:(id<IMAVideoDisplay>)videoDisplay
-                            userContext:(nullable id)userContext;
+                            userContext:(nullable id)userContext
+    DEPRECATED_MSG_ATTRIBUTE(
+        "Use contentSourceID:videoId:networkCode:adDisplayContainer:videoDisplay:userContext: "
+        "instead.");
 
 /**
  * Initializes a stream request instance with the given content source ID and video ID.
@@ -68,7 +114,10 @@ NS_ASSUME_NONNULL_BEGIN
                      adDisplayContainer:(IMAAdDisplayContainer *)adDisplayContainer
                            videoDisplay:(id<IMAVideoDisplay>)videoDisplay
                   pictureInPictureProxy:(nullable IMAPictureInPictureProxy *)pictureInPictureProxy
-                            userContext:(nullable id)userContext;
+                            userContext:(nullable id)userContext
+    DEPRECATED_MSG_ATTRIBUTE("Use "
+                             "initWithContentSourceID:videoID:networkCode:adDisplayContainer:"
+                             "videoDisplay:pictureInPictureProxy:userContext: instead.");
 
 /**
  * :nodoc:

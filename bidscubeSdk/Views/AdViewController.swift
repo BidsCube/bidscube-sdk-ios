@@ -52,12 +52,31 @@ private class AdCallbackWrapper: AdCallback {
     func onVideoAdSkipped(_ placementId: String) {
         originalCallback?.onVideoAdSkipped(placementId)
     }
+    
+    func onUserRewarded(_ placementId: String) {
+        originalCallback?.onUserRewarded(placementId)
+    }
+
+    func onVideoAdSkippable(_ placementId: String) {
+        originalCallback?.onVideoAdSkippable(placementId)
+    }
+
+    func onInstallButtonClicked(_ placementId: String, buttonText: String) {
+        originalCallback?.onInstallButtonClicked(placementId, buttonText: buttonText)
+    }
+
+    func onAdRenderOverride(adm: String, position: AdPosition) {
+        originalCallback?.onAdRenderOverride(adm: adm, position: position)
+    }
 }
 
 public final class AdViewController: UIViewController {
     
     private let placementId: String
     private let adType: AdType
+    private let videoAdFormat: VideoAdFormat
+    /// When true, `loadAd` does not emit `onAdLoading` for video — the presenter (e.g. `BidscubeSDK.presentVideoAd`) owns that callback once.
+    private let suppressVideoLoadingCallback: Bool
     private let callback: AdCallback?
     private var adView: UIView?
     private var backButton: UIButton!
@@ -70,9 +89,17 @@ public final class AdViewController: UIViewController {
     private var doubleTapGestureRecognizer: UITapGestureRecognizer?
     private var isVideoPlaying = false
     
-    public init(placementId: String, adType: AdType, callback: AdCallback? = nil) {
+    public init(
+        placementId: String,
+        adType: AdType,
+        videoAdFormat: VideoAdFormat = .interstitial,
+        suppressVideoLoadingCallback: Bool = false,
+        callback: AdCallback? = nil
+    ) {
         self.placementId = placementId
         self.adType = adType
+        self.videoAdFormat = videoAdFormat
+        self.suppressVideoLoadingCallback = suppressVideoLoadingCallback
         self.callback = callback
         super.init(nibName: nil, bundle: nil)
     }
@@ -171,7 +198,9 @@ public final class AdViewController: UIViewController {
     }
     
     private func loadAd() {
-        callback?.onAdLoading(placementId)
+        if !(suppressVideoLoadingCallback && adType == .video) {
+            callback?.onAdLoading(placementId)
+        }
         
         
         let timeoutDuration: TimeInterval = (adType == .video) ? 10.0 : 5.0
@@ -183,7 +212,7 @@ public final class AdViewController: UIViewController {
         let errorHandlingCallback = AdCallbackWrapper(
             originalCallback: callback,
             errorHandler: { [weak self] placementId, errorCode, errorMessage in
-                self?.handleAdError(placementId, errorCode: errorCode, errorMessage: errorMessage)
+                self?.handleAdErrorFromAdPipeline(placementId, errorCode: errorCode, errorMessage: errorMessage)
             },
             successHandler: { [weak self] placementId in
                 self?.handleAdSuccess(placementId)
@@ -194,13 +223,17 @@ public final class AdViewController: UIViewController {
         case .image:
             adView = BidscubeSDK.getImageAdView(placementId, errorHandlingCallback)
         case .video:
-            adView = BidscubeSDK.getVideoAdView(placementId, errorHandlingCallback)
+            adView = BidscubeSDK.makeVideoAdViewForFullscreenHosting(
+                placementId: placementId,
+                callback: errorHandlingCallback,
+                videoAdFormat: videoAdFormat
+            )
         case .native:
             adView = BidscubeSDK.getNativeAdView(placementId, errorHandlingCallback)
         }
         
         guard let adView = adView else {
-            handleAdError(placementId, errorCode: -1, errorMessage: "Failed to create ad view")
+            handleAdFailure(placementId, errorCode: -1, errorMessage: "Failed to create ad view", notifyCallback: true)
             return
         }
         
@@ -222,7 +255,7 @@ public final class AdViewController: UIViewController {
         guard !hasAdLoaded else { return }
         
         print("🔍 AdViewController: Ad loading timeout")
-        handleAdError(placementId, errorCode: -2, errorMessage: "Ad loading timeout")
+        handleAdFailure(placementId, errorCode: -2, errorMessage: "Ad loading timeout", notifyCallback: true)
     }
     
     private func handleAdSuccess(_ placementId: String) {
@@ -233,7 +266,13 @@ public final class AdViewController: UIViewController {
         print("🔍 AdViewController: Ad loaded successfully")
     }
     
-    private func handleAdError(_ placementId: String, errorCode: Int, errorMessage: String) {
+    /// Handling for failures coming from wrapped `AdCallback` — `wrapper` already notifies the publisher via `originalCallback`; only update chrome here.
+    private func handleAdErrorFromAdPipeline(_ placementId: String, errorCode: Int, errorMessage: String) {
+        handleAdFailure(placementId, errorCode: errorCode, errorMessage: errorMessage, notifyCallback: false)
+    }
+    
+    /// Central failure UX; set `notifyCallback` when failure did not originate from `AdCallback` (timer, fatal setup).
+    private func handleAdFailure(_ placementId: String, errorCode: Int, errorMessage: String, notifyCallback: Bool) {
         print("🔍 AdViewController: Ad failed - \(errorMessage)")
         
         
@@ -250,7 +289,9 @@ public final class AdViewController: UIViewController {
         }
         
         
-        callback?.onAdFailed(placementId, errorCode: errorCode, errorMessage: errorMessage)
+        if notifyCallback {
+            callback?.onAdFailed(placementId, errorCode: errorCode, errorMessage: errorMessage)
+        }
     }
     
     private func showBackButtonOnError() {
@@ -594,8 +635,13 @@ public final class AdViewController: UIViewController {
     }
     
     @objc private func backButtonTapped() {
+        if let videoAdView = adView as? VideoAdView {
+            videoAdView.finalizeDismissalFromFullscreenHost()
+            return
+        }
+
         callback?.onAdClosed(placementId)
-        
+
         if let navigationController = navigationController, navigationController.viewControllers.count > 1 {
             navigationController.popViewController(animated: true)
         } else {
@@ -604,9 +650,13 @@ public final class AdViewController: UIViewController {
     }
     
     @objc private func closeButtonTapped() {
-        
+        if let videoAdView = adView as? VideoAdView {
+            videoAdView.finalizeDismissalFromFullscreenHost()
+            return
+        }
+
         callback?.onAdClosed(placementId)
-        
+
         if let navigationController = navigationController, navigationController.viewControllers.count > 1 {
             navigationController.popViewController(animated: true)
         } else {
@@ -729,24 +779,40 @@ public final class AdViewController: UIViewController {
 
 public extension AdViewController {
     
-    static func presentAd(placementId: String,
-                          adType: AdType,
-                          from viewController: UIViewController,
-                          callback: AdCallback? = nil) {
-        let adViewController = AdViewController(placementId: placementId,
-                                                adType: adType,
-                                                callback: callback)
+    static func presentAd(
+        placementId: String,
+        adType: AdType,
+        videoAdFormat: VideoAdFormat = .interstitial,
+        from viewController: UIViewController,
+        callback: AdCallback? = nil
+    ) {
+        let suppressVideoLoading = (adType == .video)
+        let adViewController = AdViewController(
+            placementId: placementId,
+            adType: adType,
+            videoAdFormat: videoAdFormat,
+            suppressVideoLoadingCallback: suppressVideoLoading,
+            callback: callback
+        )
         adViewController.modalPresentationStyle = .fullScreen
         viewController.present(adViewController, animated: true)
     }
     
-    static func pushAd(placementId: String,
-                       adType: AdType,
-                       onto navigationController: UINavigationController,
-                       callback: AdCallback? = nil) {
-        let adViewController = AdViewController(placementId: placementId,
-                                                adType: adType,
-                                                callback: callback)
+    static func pushAd(
+        placementId: String,
+        adType: AdType,
+        videoAdFormat: VideoAdFormat = .interstitial,
+        onto navigationController: UINavigationController,
+        callback: AdCallback? = nil
+    ) {
+        let suppressVideoLoading = (adType == .video)
+        let adViewController = AdViewController(
+            placementId: placementId,
+            adType: adType,
+            videoAdFormat: videoAdFormat,
+            suppressVideoLoadingCallback: suppressVideoLoading,
+            callback: callback
+        )
         navigationController.pushViewController(adViewController, animated: true)
     }
 }

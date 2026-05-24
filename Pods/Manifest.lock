@@ -1,16 +1,34 @@
 PODS:
-  - GoogleAds-IMA-iOS-SDK (3.18.5)
+  - AppLovinSDK (13.6.2)
+  - BidscubeSDKAppLovin (1.0.3):
+    - AppLovinSDK (< 14.0, >= 13.0.0)
+    - GoogleAds-IMA-iOS-SDK (~> 3.19)
+  - GoogleAds-IMA-iOS-SDK (3.27.4)
 
 DEPENDENCIES:
-  - GoogleAds-IMA-iOS-SDK (~> 3.18.4)
+  - AppLovinSDK (< 14.0, >= 13.0.0)
+  - BidscubeSDKAppLovin (from `https://github.com/BidsCube/AppLovin-SDK-for-BidsCube-iOS.git`, branch `main`)
 
 SPEC REPOS:
   trunk:
+    - AppLovinSDK
     - GoogleAds-IMA-iOS-SDK
 
-SPEC CHECKSUMS:
-  GoogleAds-IMA-iOS-SDK: 7dbef0755db43698f2f6a3a7ac51a88571945399
+EXTERNAL SOURCES:
+  BidscubeSDKAppLovin:
+    :branch: main
+    :git: https://github.com/BidsCube/AppLovin-SDK-for-BidsCube-iOS.git
 
-PODFILE CHECKSUM: afa335801b430fb091586e550efce26ca4017b87
+CHECKOUT OPTIONS:
+  BidscubeSDKAppLovin:
+    :commit: 89ccfd34aaccf2b2b6062b9f94837371c3389d26
+    :git: https://github.com/BidsCube/AppLovin-SDK-for-BidsCube-iOS.git
+
+SPEC CHECKSUMS:
+  AppLovinSDK: 91a47db42b6c0e2b83224006aa46b0b88c62c16f
+  BidscubeSDKAppLovin: 57d659aee9176716494b40f1bfb3442e67c60794
+  GoogleAds-IMA-iOS-SDK: 1c696013d47bc3cafa48b7de9c8196941bd3105b
+
+PODFILE CHECKSUM: cff3b3d4164c81f04ac0de3b495aa47c8845711e
 
 COCOAPODS: 1.16.2

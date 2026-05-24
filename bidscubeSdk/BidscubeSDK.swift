@@ -54,6 +54,68 @@ public final class BidscubeSDK {
         }
     }
 
+    private static func findTopViewController(from vc: UIViewController) -> UIViewController {
+        if let presented = vc.presentedViewController {
+            return findTopViewController(from: presented)
+        }
+        if let nav = vc as? UINavigationController, let visible = nav.visibleViewController {
+            return findTopViewController(from: visible)
+        }
+        if let tab = vc as? UITabBarController, let selected = tab.selectedViewController {
+            return findTopViewController(from: selected)
+        }
+        return vc
+    }
+
+    private static func topViewControllerForPresentation() -> UIViewController? {
+        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return nil }
+        guard let root = scene.windows.first(where: { $0.isKeyWindow })?.rootViewController
+                ?? scene.windows.first?.rootViewController else {
+            return nil
+        }
+        return findTopViewController(from: root)
+    }
+
+    /// Fullscreen flows already emit `onAdLoading` via `presentAd`/`push…`; use this from `AdViewController` to avoid doubling that callback.
+    internal static func makeVideoAdViewForFullscreenHosting(
+        placementId: String,
+        callback: AdCallback?,
+        videoAdFormat: VideoAdFormat
+    ) -> UIView {
+        videoAdHostView(
+            placementId: placementId,
+            callback: callback,
+            videoAdFormat: videoAdFormat,
+            reportOnAdLoading: false
+        )
+    }
+
+    private static func videoAdHostView(
+        placementId: String,
+        callback: AdCallback?,
+        videoAdFormat: VideoAdFormat,
+        reportOnAdLoading: Bool
+    ) -> UIView {
+        if reportOnAdLoading {
+            callback?.onAdLoading(placementId)
+        }
+
+        let view = createOnMainThread { VideoAdView() }
+
+        guard let url = buildRequestURL(placementId: placementId, adType: .video) else {
+            Logger.error("Failed to build request URL for video ad")
+            callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
+            return view
+        }
+
+        if let videoAdView = view as? VideoAdView {
+            videoAdView.setPlacementInfo(placementId, callback: callback, videoAdFormat: videoAdFormat)
+            videoAdView.loadVideoAdFromURL(url)
+        }
+
+        return view
+    }
+
     public static func isInitialized() -> Bool {
         return configuration != nil
     }
@@ -272,85 +334,64 @@ public final class BidscubeSDK {
         return view
     }
 
-    public static func showVideoAd(_ placementId: String, _ callback: AdCallback?) {
+    public static func showInterstitialVideoAd(
+        _ placementId: String,
+        from viewController: UIViewController,
+        callback: AdCallback? = nil
+    ) {
+        presentAd(placementId, .video, from: viewController, callback)
+    }
+
+    /// Presents fullscreen rewarded video (`onUserRewarded` only after IMA `.COMPLETE`).
+    public static func showRewardedVideoAd(
+        _ placementId: String,
+        from viewController: UIViewController,
+        callback: AdCallback? = nil
+    ) {
         callback?.onAdLoading(placementId)
-        
-        // Build GET URL with SKAdNetwork parameters
-        let includeSKAdNetworks = configuration?.enableSKAdNetwork ?? false
-        
-        guard let url = URLBuilder.buildAdRequestURL(placementId: placementId, adType: .video, position: getEffectiveAdPosition(), timeoutMs: configuration?.defaultAdTimeoutMs ?? Constants.defaultTimeoutMs, debug: configuration?.enableDebugMode ?? false, includeSKAdNetworks: includeSKAdNetworks) else {
-            callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
+        AdViewController.presentAd(
+            placementId: placementId,
+            adType: .video,
+            videoAdFormat: .rewarded,
+            from: viewController,
+            callback: callback
+        )
+    }
+
+    /// Presents fullscreen interstitial video using the current key window’s top controller (backward compatible legacy entry point).
+    public static func showVideoAd(_ placementId: String, _ callback: AdCallback?) {
+        guard let host = topViewControllerForPresentation() else {
+            callback?.onAdFailed(
+                placementId,
+                errorCode: Constants.ErrorCodes.presenterUnavailable,
+                errorMessage: Constants.ErrorMessages.presenterUnavailable
+            )
             return
         }
-        
-        NetworkManager.shared.get(url: url) { result in
-            switch result {
-            case .success(let data):
-                guard let content = String(data: data, encoding: .utf8) else {
-                    callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidResponse, errorMessage: Constants.ErrorMessages.invalidResponse)
-                    return
-                }
-                
-                
-                do {
-                    if let jsonData = content.data(using: .utf8),
-                               let json = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
-                               let adm = json["adm"] as? String,
-                               let positionValue = json["position"] as? Int,
-                               let position = AdPosition(rawValue: positionValue) {
-                                callback?.onAdRenderOverride(adm: adm, position: position)
-                                return
-                            }
-                } catch {
-                    self.responseAdPosition = .fullScreen
-                }
-                
-                callback?.onAdLoaded(placementId)
-                callback?.onAdDisplayed(placementId)
-                callback?.onVideoAdStarted(placementId)
-                callback?.onVideoAdCompleted(placementId)
-                
-            case .failure(let error):
-                callback?.onAdFailed(placementId, errorCode: error.errorCode, errorMessage: error.localizedDescription)
-            }
-        }
+        showInterstitialVideoAd(placementId, from: host, callback: callback)
+    }
+
+    /// Inline interstitial video ad view (`VideoAdFormat.interstitial`).
+    public static func getInterstitialVideoAdView(
+        _ placementId: String,
+        _ callback: AdCallback?
+    ) -> UIView {
+        videoAdHostView(placementId: placementId, callback: callback, videoAdFormat: .interstitial, reportOnAdLoading: true)
+    }
+
+    /// Rewarded placement view; emits `onUserRewarded` only after natural IMA completion (not skip/close/failure).
+    public static func getRewardedVideoAdView(
+        _ placementId: String,
+        _ callback: AdCallback?
+    ) -> UIView {
+        videoAdHostView(placementId: placementId, callback: callback, videoAdFormat: .rewarded, reportOnAdLoading: true)
     }
 
     public static func getVideoAdView(
         _ placementId: String,
         _ callback: AdCallback?
     ) -> UIView {
-       
-        let view = createOnMainThread { VideoAdView() }
-        
-        callback?.onAdLoading(placementId)
-        
-        
-        let adType: AdType = .video
-        guard let url = buildRequestURL(placementId: placementId, adType: adType) else {
-            Logger.error("Failed to build request URL for \(adType)")
-            callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
-            return view
-        }
-        
-        
-        if let videoAdView = view as? VideoAdView {
-            videoAdView.setPlacementInfo(placementId, callback: callback)
-            videoAdView.loadVideoAdFromURL(url)
-        }
-        
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.responseAdPosition = .fullScreen
-            callback?.onAdLoaded(placementId)
-            callback?.onAdDisplayed(placementId)
-            callback?.onVideoAdStarted(placementId)
-            
-           
-            callback?.onVideoAdCompleted(placementId)
-        }
-        
-        return view
+        getInterstitialVideoAdView(placementId, callback)
     }
 
 
@@ -459,12 +500,30 @@ public final class BidscubeSDK {
     
     
     public static func presentVideoAd(_ placementId: String, from viewController: UIViewController, callback: AdCallback? = nil) {
-        AdViewController.presentAd(placementId: placementId, adType: .video, from: viewController, callback: callback)
+        presentAd(placementId, .video, from: viewController, callback)
+    }
+
+    /// Pushes rewarded video on a navigation stack.
+    public static func pushRewardedVideoAd(_ placementId: String, onto navigationController: UINavigationController, callback: AdCallback? = nil) {
+        callback?.onAdLoading(placementId)
+        AdViewController.pushAd(
+            placementId: placementId,
+            adType: .video,
+            videoAdFormat: .rewarded,
+            onto: navigationController,
+            callback: callback
+        )
     }
     
     
     public static func pushVideoAd(_ placementId: String, onto navigationController: UINavigationController, callback: AdCallback? = nil) {
-        AdViewController.pushAd(placementId: placementId, adType: .video, onto: navigationController, callback: callback)
+        callback?.onAdLoading(placementId)
+        AdViewController.pushAd(
+            placementId: placementId,
+            adType: .video,
+            onto: navigationController,
+            callback: callback
+        )
     }
     
     
@@ -480,11 +539,22 @@ public final class BidscubeSDK {
     
     
     
-    public static func getAdViewController(_ placementId: String, _ adType: AdType, _ callback: AdCallback?) -> UIViewController {
+    public static func getAdViewController(
+        _ placementId: String,
+        _ adType: AdType,
+        _ callback: AdCallback?,
+        videoAdFormat: VideoAdFormat = .interstitial
+    ) -> UIViewController {
         Logger.info("getAdViewController called for placement: \(placementId), type: \(adType)")
         
         return createOnMainThread {
-            AdViewController(placementId: placementId, adType: adType, callback: callback)
+            AdViewController(
+                placementId: placementId,
+                adType: adType,
+                videoAdFormat: videoAdFormat,
+                suppressVideoLoadingCallback: false,
+                callback: callback
+            )
         }
     }
     
@@ -492,7 +562,17 @@ public final class BidscubeSDK {
     public static func presentAd(_ placementId: String, _ adType: AdType, from viewController: UIViewController, _ callback: AdCallback?) {
         Logger.info("presentAd called for placement: \(placementId), type: \(adType)")
         
-        AdViewController.presentAd(placementId: placementId, adType: adType, from: viewController, callback: callback)
+        if adType == .video {
+            callback?.onAdLoading(placementId)
+        }
+
+        AdViewController.presentAd(
+            placementId: placementId,
+            adType: adType,
+            videoAdFormat: .interstitial,
+            from: viewController,
+            callback: callback
+        )
     }
     
     

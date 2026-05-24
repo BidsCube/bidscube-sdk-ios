@@ -19,6 +19,16 @@ public final class IMAVideoAdHandler: UIView {
     private weak var callback: AdCallback?
     private weak var parentViewController: UIViewController?
     
+    /// Interstitial vs rewarded (reward fires only after IMA `.COMPLETE` for rewarded).
+    private var videoAdFormat: VideoAdFormat = .interstitial
+    
+    private var hasStarted = false
+    private var hasCompleted = false
+    private var hasEmittedClosed = false
+    private var hasRewarded = false
+    /// True after IMA `.SKIPPED` or after we synthesize skip for early user dismiss mid-playback.
+    private var skipReported = false
+    
     private var closeButton: UIButton?
     
     public init(vastURL: String, clickURL: String? = nil) {
@@ -41,9 +51,10 @@ public final class IMAVideoAdHandler: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func setPlacementInfo(_ placementId: String, callback: AdCallback?) {
+    public func setPlacementInfo(_ placementId: String, callback: AdCallback?, videoAdFormat: VideoAdFormat = .interstitial) {
         self.placementId = placementId
         self.callback = callback
+        self.videoAdFormat = videoAdFormat
     }
     
     public func setParentViewController(_ viewController: UIViewController?) {
@@ -67,20 +78,66 @@ public final class IMAVideoAdHandler: UIView {
         }
     }
     
+    /// Host `AdViewController` back/close taps (no reward; may synthesize skip if playback started but did not finish).
+    public func userInitiatedDismissFromHost(completion: (() -> Void)? = nil) {
+        userInitiatedDismiss(completion: completion)
+    }
+
+    /// Report skip once if playback has started but the creative has not completed.
+    private func reportSkipIfPlaybackStartedIncomplete() {
+        guard !skipReported else { return }
+        guard hasStarted, !hasCompleted else { return }
+        skipReported = true
+        callback?.onVideoAdSkipped(placementId)
+    }
+    
+    /// Emit `onAdClosed` at most once.
+    private func emitAdClosedIfNeeded() {
+        guard !hasEmittedClosed else { return }
+        hasEmittedClosed = true
+        callback?.onAdClosed(placementId)
+    }
+
+    private func dismissHostingViewController(completion: (() -> Void)? = nil) {
+        if let viewController = findViewController() {
+            if viewController.presentingViewController != nil {
+                viewController.dismiss(animated: true, completion: completion)
+            } else if let navigationController = viewController.navigationController,
+                      navigationController.viewControllers.count > 1 {
+                navigationController.popViewController(animated: true)
+                completion?()
+            } else {
+                completion?()
+            }
+        } else {
+            completion?()
+        }
+    }
+
+    private var isUserDismissalRunning = false
+    
+    private func userInitiatedDismiss(completion: (() -> Void)? = nil) {
+        guard !isUserDismissalRunning else {
+            completion?()
+            return
+        }
+        isUserDismissalRunning = true
+        reportSkipIfPlaybackStartedIncomplete()
+        emitAdClosedIfNeeded()
+        cleanup()
+        dismissHostingViewController(completion: completion)
+    }
+
+    /// Release IMA and player resources. Safe to call multiple times while tearing down playback.
     public func cleanup() {
         adsManager?.destroy()
         adsManager = nil
-        
         adsLoader = nil
-        
         adDisplayContainer = nil
-        
         contentPlayer = nil
         playerLayer = nil
         contentPlayhead = nil
-        
         gestureRecognizers?.forEach { removeGestureRecognizer($0) }
-        
         backgroundColor = .clear
     }
     
@@ -131,7 +188,7 @@ public final class IMAVideoAdHandler: UIView {
             adsLoader.requestAds(with: adsRequest)
         } else {
             print("Error: IMAVideoAdHandler: No VAST URL or XML content provided")
-            callback?.onAdFailed(placementId, errorCode: -1, errorMessage: "No VAST content provided")
+            callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidAdMarkup, errorMessage: Constants.ErrorMessages.invalidAdMarkup)
         }
     }
     
@@ -247,15 +304,7 @@ public final class IMAVideoAdHandler: UIView {
     }
     
     private func closeAd() {
-        callback?.onAdClosed(placementId)
-        
-        if let viewController = findViewController() {
-            if viewController.presentingViewController != nil {
-                viewController.dismiss(animated: true, completion: nil)
-            } else if let navigationController = viewController.navigationController {
-                navigationController.popViewController(animated: true)
-            }
-        }
+        userInitiatedDismiss()
     }
     
     private func showCloseButton() {
@@ -402,8 +451,6 @@ extension IMAVideoAdHandler: IMAAdsLoaderDelegate {
         
         adsManager?.delegate = self
         adsManager?.initialize(with: nil)
-        
-        callback?.onAdLoaded(placementId)
     }
     
     public func adsLoader(_ loader: IMAAdsLoader, failedWith adErrorData: IMAAdLoadingErrorData) {
@@ -437,6 +484,7 @@ extension IMAVideoAdHandler: IMAAdsLoaderDelegate {
             userFriendlyMessage = errorMessage
         }
         
+        cleanup()
         callback?.onAdFailed(placementId, errorCode: errorCode, errorMessage: userFriendlyMessage)
     }
 }
@@ -451,10 +499,14 @@ extension IMAVideoAdHandler: IMAAdsManagerDelegate {
             print("📺 IMAVideoAdHandler: Ad loaded, starting playback")
             print("   - AdDisplayContainer: \(adDisplayContainer?.description ?? "nil")")
             print("   - ViewController: \(adDisplayContainer?.adContainerViewController?.description ?? "nil")")
+            callback?.onAdLoaded(placementId)
             adsManager.start()
             
         case .STARTED:
+            guard !hasStarted else { break }
+            hasStarted = true
             print("▶️ IMAVideoAdHandler: Ad started playing")
+            callback?.onAdDisplayed(placementId)
             callback?.onVideoAdStarted(placementId)
             hideCloseButton()
             
@@ -465,8 +517,14 @@ extension IMAVideoAdHandler: IMAAdsManagerDelegate {
             }
             
         case .COMPLETE:
+            guard !hasCompleted else { break }
+            hasCompleted = true
             print("🏁 IMAVideoAdHandler: Ad completed")
             callback?.onVideoAdCompleted(placementId)
+            if videoAdFormat == .rewarded && !hasRewarded {
+                hasRewarded = true
+                callback?.onUserRewarded(placementId)
+            }
             showCloseButton()
             
             
@@ -477,6 +535,8 @@ extension IMAVideoAdHandler: IMAAdsManagerDelegate {
             }
             
         case .SKIPPED:
+            guard !skipReported else { break }
+            skipReported = true
             print("⏭️ IMAVideoAdHandler: Ad skipped")
             callback?.onVideoAdSkipped(placementId)
             showCloseButton()
@@ -516,8 +576,10 @@ extension IMAVideoAdHandler: IMAAdsManagerDelegate {
     }
     
     public func adsManager(_ adsManager: IMAAdsManager, didReceive error: IMAAdError) {
-        print("Error: IMAVideoAdHandler: Ad error: \(error.message)")
-        callback?.onAdFailed(placementId, errorCode: error.code.rawValue, errorMessage: error.message!)
+        let message = error.message ?? Constants.ErrorMessages.invalidResponse
+        print("Error: IMAVideoAdHandler: Ad error: \(message)")
+        cleanup()
+        callback?.onAdFailed(placementId, errorCode: error.code.rawValue, errorMessage: message)
     }
     
     public func adsManagerDidRequestContentPause(_ adsManager: IMAAdsManager) {
