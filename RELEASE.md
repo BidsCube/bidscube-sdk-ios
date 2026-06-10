@@ -7,7 +7,7 @@
 - `README.md` (приклади SPM/CocoaPods)
 - анонс у секції **Changelog** в `README.md`
 
-Тег у Git має збігатися з підом: **`v{VERSION}`**, наприклад **`v1.2.3`** (поле `:tag => "v#{spec.version}"` у podspec).
+Тег у Git має збігатися з підом: **`v{VERSION}`**, наприклад **`v1.3.0`** (поле `:tag => "v#{spec.version}"` у podspec).
 
 ---
 
@@ -15,7 +15,7 @@
 
 1. Збірка в Xcode: схема **`bidscubeSdk`** (+ за потреби **`testApp-ios`**) під **Simulator** і/або пристрій.
 2. Переконатися, що **`pod install`** у репозиторії проходить (якщо використовується workspace з Pods).
-3. Лінт подспеки (локально):
+3. Лінт podspec (локально):
    ```bash
    cd bidscube-sdk-ios
    pod spec lint bidscubeSdk.podspec --allow-warnings --verbose
@@ -26,24 +26,26 @@
 
 ## Git: коміт і тег
 
-1. Перевірити диф лише файлів версії й документації (+ потрібні зміни коду релізу).
-2. Закомітити (повідомлення на кшталт: `release: bidscubeSdk 1.2.3`).
+1. Перевірити диф — **не комітити** `build/`, `.build/`, `Pods/` (якщо не оновлювали навмисно), `*.xcuserstate`.
+2. Закомітити (повідомлення на кшталт: `release: bidscubeSdk 1.3.0`).
 3. Створити анотований тег:
    ```bash
-   git tag -a v1.2.3 -m "bidscubeSdk 1.2.3"
+   git tag -a v1.3.0 -m "bidscubeSdk 1.3.0"
    ```
 4. Пушнути гілку і теги:
    ```bash
    git push origin main
-   git push origin v1.2.3
+   git push origin v1.3.0
    ```
    (замість `main` — ваша основна гілка релізів)
+
+Після push тегу **`v1.3.0`** GitHub Actions (`.github/workflows/publish.yml`) автоматично опублікує CocoaPods + створить GitHub Release.
 
 ---
 
 ## Swift Package Manager (SPM)
 
-Після того як тег **`v1.2.3`** з’явився на **`https://github.com/bidscube/bidscube-sdk-ios`**, SPM-клієнти знайдуть версію за semver тегами. Нові інтеграції роблять `from: "1.2.3"` або вибирають версію в Xcode **Add Package**.
+Після того як тег **`v1.3.0`** з’явився на **`https://github.com/bidscube/bidscube-sdk-ios`**, SPM-клієнти знайдуть версію за semver тегами. Нові інтеграції роблять `from: "1.3.0"` або вибирають версію в Xcode **Add Package**.
 
 Нічого додатково пушити для trunk SPM не потрібно — достатньо тегу на репозиторії.
 
@@ -59,7 +61,7 @@ pod trunk register YOU@DOMAIN.com 'Your Name'
 pod trunk me
 ```
 
-Публікація:
+Публікація (якщо CI не спрацював):
 
 ```bash
 cd bidscube-sdk-ios
@@ -68,18 +70,17 @@ pod trunk push bidscubeSdk.podspec
 
 Примітка:
 
-- Перший успішний `pod trunk push` публікує pod **`bidscubeSdk`** із версією з podspec (`1.2.3`).
-- Якщо podspec вказує `spec.source.tag => v1.2.3`, цей тег **має існувати** у remote на момент `pod trunk push` або валідація/користувачі з git source можуть упасти.
+- Podspec вказує `spec.source.tag => v1.3.0` — цей тег **має існувати** у remote на момент `pod trunk push`.
 
 ---
 
 ## GitHub Release (рекомендовано)
 
-У вебінтерфейсі репозиторію: **Releases → Draft a new release** → Tag **`v1.2.3`**, опис з пунктів з Changelog для **1.2.3**, прикріпити за потреби збіркові артефакти (не обов’язково для SPM/Pods).
+У вебінтерфейсі репозиторію: **Releases → Draft a new release** → Tag **`v1.3.0`**, опис з пунктів Changelog для **1.3.0** (або дочекатися auto-release від Actions).
 
 ---
 
 ## Після релізу
 
-- Оновити **AppLovin adapter** доку або podspec там, якщо потрібна явна нижня межа вашого релізу (наприклад `bidscubeSdk ~> 1.2`).
+- Оновити **AppLovin adapter** podspec/доку, якщо потрібна явна нижня межа (`bidscubeSdk ~> 1.3`).
 - Перевірити кеш CocoaPods CDN через кілька хвилин: `pod search bidscubeSdk`.

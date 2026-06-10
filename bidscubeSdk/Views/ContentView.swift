@@ -73,6 +73,10 @@ final class TestAdDelegate: AdCallback, ConsentCallback {
         SDKLogger.d("TestAdDelegate", "Video ad skippable: \(placementId)")
     }
 
+    func onEndCardShown(_ placementId: String) {
+        SDKLogger.d("TestAdDelegate", "End card shown: \(placementId)")
+    }
+
     func onInstallButtonClicked(_ placementId: String, buttonText: String) {
         SDKLogger.d("TestAdDelegate", "Install button clicked: \(placementId) - \(buttonText)")
     }
@@ -159,6 +163,17 @@ struct ContentView: View {
                         .padding()
                         .frame(maxWidth: .infinity)
                         .background(Color(hex: 0x9C27B0))
+                        .cornerRadius(12)
+                        .shadow(radius: 4)
+                }
+
+                NavigationLink(destination: VideoInterstitialTestView()) {
+                    Text("Video Interstitial Test")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color(hex: 0x007AFF))
                         .cornerRadius(12)
                         .shadow(radius: 4)
                 }

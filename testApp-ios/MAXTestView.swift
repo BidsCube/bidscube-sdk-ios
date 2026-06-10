@@ -3,7 +3,7 @@ import Combine
 import SwiftUI
 import UIKit
 
-struct ContentView: View {
+struct MAXMediationTestView: View {
     @State private var bannerAdUnitId = ""
     @State private var mrecAdUnitId = ""
     @State private var interstitialAdUnitId = ""

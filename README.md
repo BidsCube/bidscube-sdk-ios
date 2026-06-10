@@ -18,15 +18,15 @@ A comprehensive iOS SDK for displaying image, video, and native ads in iOS appli
 - CocoaPods 1.10.0+ or Swift Package Manager
 
 ### AppLovin MAX mediation
-**Versions are separate:** the BidsCube iOS library is **`bidscubeSdk`** (e.g. **1.2.3**). The AppLovin pod **`AppLovinMediationBidscubeAdapter`** has its **own** version (e.g. **1.0.3**) and declares `bidscubeSdk ~> 1.2` — CocoaPods installs **bidscubeSdk** transitively; you do **not** add `pod 'bidscubeSdk'` when you already use the adapter. Also add **AppLovinSDK** (≥ 13.0). Deployment target iOS 13.0+.
+**Versions are separate:** the BidsCube iOS library is **`bidscubeSdk`** (e.g. **1.3.0**). The AppLovin pod **`AppLovinMediationBidscubeAdapter`** has its **own** version (e.g. **1.0.3**) and declares `bidscubeSdk ~> 1.2` — CocoaPods installs **bidscubeSdk** transitively; you do **not** add `pod 'bidscubeSdk'` when you already use the adapter. Also add **AppLovinSDK** (≥ 13.0). Deployment target iOS 13.0+.
 
 ## Installation
 ### Swift Package Manager (recommended)
 1. File → **Add Package Dependencies** → `https://github.com/bidscube/bidscube-sdk-ios.git`
-2. Pick BidsCube library version **1.2.3** (or `from: "1.2.3"` in `Package.swift`)
+2. Pick BidsCube library version **1.3.0** (or `from: "1.3.0"` in `Package.swift`)
 ```swift
 dependencies: [
-    .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "1.2.3")
+    .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "1.3.0")
 ]
 ```
 
@@ -36,13 +36,13 @@ platform :ios, '13.0'
 use_frameworks!
 
 target 'YourApp' do
-  pod 'bidscubeSdk', '~> 1.2.3'
+  pod 'bidscubeSdk', '~> 1.3.0'
 end
 ```
 Run `pod install`.
 
 ### CocoaPods + AppLovin MAX (example)
-Adapter pod version (e.g. **1.0.3**) ≠ `bidscubeSdk` version (**1.2.3**). Only adapter + AppLovinSDK; `bidscubeSdk` comes transitively.
+Adapter pod version (e.g. **1.0.3**) ≠ `bidscubeSdk` version (**1.3.0**). Only adapter + AppLovinSDK; `bidscubeSdk` comes transitively.
 
 ```ruby
 platform :ios, '13.0'
@@ -339,6 +339,13 @@ let config = SDKConfig.Builder()
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
+
+### Version 1.3.0
+- **Video interstitial (IMA/VAST):** fullscreen interstitial with custom skip overlay, preview end card, and VAST metadata parsing (companion image, click-through, skip offset).
+- **Preview flow:** end card after skip/complete when VAST has companion preview; without companion — no skip button, closes after video.
+- **`onEndCardShown`:** new callback when preview/end-card screen is displayed.
+- **APIs:** `showInterstitialVideoAd`, `presentAd(.video)`, `pushVideoAd`, inline `getInterstitialVideoAdView`; test helpers `presentTestVideoInterstitial`, `presentTestEndCardPreview`, `BidscubeSDKVideoInterstitialQA` fixtures.
+- **Test app:** Video Interstitial QA tab with Case 1 / Case 2 and preview-only screens.
 
 ### Version 1.2.3
 - **Video (IMA/VAST):** correct lifecycle callbacks from real playback (`LOADED`, `STARTED`, `COMPLETE`, `SKIPPED`); removed timer/fake completions.

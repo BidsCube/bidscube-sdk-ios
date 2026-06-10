@@ -14,6 +14,7 @@ public protocol AdCallback: AnyObject {
     /// Called only for rewarded video, only after IMA reports natural completion (`.COMPLETE`). Never on skip, close, or failure.
     func onUserRewarded(_ placementId: String)
     func onVideoAdSkippable(_ placementId: String)
+    func onEndCardShown(_ placementId: String)
     func onInstallButtonClicked(_ placementId: String, buttonText: String)
     /// Called when the SDK wants to let the app handle custom ad rendering.
     /// - Parameters:
@@ -28,6 +29,7 @@ public extension AdCallback {
     func onVideoAdSkipped(_ placementId: String) {}
     func onUserRewarded(_ placementId: String) {}
     func onVideoAdSkippable(_ placementId: String) {}
+    func onEndCardShown(_ placementId: String) {}
     func onInstallButtonClicked(_ placementId: String, buttonText: String) {}
     func onAdRenderOverride(adm: String, position: AdPosition) {}
 }

@@ -29,6 +29,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0472AACA2EDDF5E300C51A5A /* bidscubeSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,12 +49,12 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Controller/ViewController.swift,
+				Controller/WindowedAdTestViewController.swift,
 				Tests/ConsentTestView.swift,
 				Tests/SKAdNetworkTestView.swift,
 				Tests/WindowedAdTestView.swift,
 				Views/ContentView.swift,
 				Views/SDKTestView.swift,
-				Views/VideoAdView.swift,
 			);
 			target = 0472AAB32EDDF5E200C51A5A /* bidscubeSdk */;
 		};
@@ -145,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0472AAC92EDDF5E300C51A5A /* bidscubeSdk.framework in Frameworks */,
 				83C597C3AACF24F90F93CF42 /* Pods_testApp_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,11 +226,13 @@
 				0472AA842EDDF3DA00C51A5A /* Sources */,
 				0472AA852EDDF3DA00C51A5A /* Frameworks */,
 				0472AA862EDDF3DA00C51A5A /* Resources */,
+				0472AACE2EDDF5E300C51A5A /* Embed Frameworks */,
 				60E5F364EC961EFAAC056A8B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0472AAC82EDDF5E300C51A5A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				041A51DF2E7013FA00DC462A /* testApp-ios */,
@@ -252,9 +256,12 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				0472AAB52EDDF5E200C51A5A /* bidscubeSdk */,
+				04A38F702E69C68500FC2662 /* bidscubeSdk */,
 			);
 			name = bidscubeSdk;
+			packageProductDependencies = (
+				0472AB762EDDF66600C51A5A /* GoogleInteractiveMediaAds */,
+			);
 			productName = bidscubeSdk;
 			productReference = 0472AAB42EDDF5E200C51A5A /* bidscubeSdk.framework */;
 			productType = "com.apple.product-type.framework";
@@ -471,7 +478,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -510,7 +517,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -537,7 +544,6 @@
 		};
 		04A38F842E69C68500FC2662 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15C415F0AA61BF2D21006DE4 /* Pods-testApp-ios.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -606,7 +612,6 @@
 		};
 		04A38F852E69C68500FC2662 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 464F057DEC84650EABE83A3E /* Pods-testApp-ios.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -708,6 +713,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0472AB762EDDF66600C51A5A /* GoogleInteractiveMediaAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0472AB752EDDF66600C51A5A /* XCRemoteSwiftPackageReference "swift-package-manager-google-interactive-media-ads-ios" */;
+			productName = GoogleInteractiveMediaAds;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 04A38F652E69C68500FC2662 /* Project object */;
 }

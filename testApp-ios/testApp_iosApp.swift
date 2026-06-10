@@ -2,12 +2,11 @@
 //  testApp_iosApp.swift
 //  testApp-ios
 //
-//  Created by Vladyslav Humennyi on 09/09/2025.
-//
 
 import SwiftUI
+#if canImport(AppLovinSDK)
 import AppLovinSDK
-import Foundation
+#endif
 
 @main
 struct testApp_iosApp: App {
@@ -17,11 +16,12 @@ struct testApp_iosApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TestAppRootView()
         }
     }
 
     private func initializeMaxSdkIfPossible() {
+        #if canImport(AppLovinSDK)
         guard let sdkClass = NSClassFromString("ALSdk") as? NSObject.Type else {
             return
         }
@@ -49,5 +49,6 @@ struct testApp_iosApp: App {
         if shared.responds(to: initializeSelector) {
             _ = shared.perform(initializeSelector)
         }
+        #endif
     }
 }

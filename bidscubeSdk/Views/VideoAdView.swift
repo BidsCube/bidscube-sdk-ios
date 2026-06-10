@@ -218,18 +218,18 @@ public final class VideoAdView: UIView {
 
                 if let http = response as? HTTPURLResponse {
                     guard (200...299).contains(http.statusCode) else {
-                        self.reportVideoPayloadFailure(Constants.ErrorCodes.invalidResponse, message: "Invalid HTTP response (\(http.statusCode))")
+                        self.reportVideoPayloadFailure(code:Constants.ErrorCodes.invalidResponse, message: "Invalid HTTP response (\(http.statusCode))")
                         return
                     }
                 }
 
                 guard let data = data, !data.isEmpty else {
-                    self.reportVideoPayloadFailure(Constants.ErrorCodes.invalidResponse, message: Constants.ErrorMessages.invalidResponse)
+                    self.reportVideoPayloadFailure(code:Constants.ErrorCodes.invalidResponse, message: Constants.ErrorMessages.invalidResponse)
                     return
                 }
 
                 guard let content = String(data: data, encoding: .utf8) else {
-                    self.reportVideoPayloadFailure(Constants.ErrorCodes.invalidResponse, message: Constants.ErrorMessages.invalidResponse)
+                    self.reportVideoPayloadFailure(code:Constants.ErrorCodes.invalidResponse, message: Constants.ErrorMessages.invalidResponse)
                     return
                 }
 
@@ -249,7 +249,7 @@ public final class VideoAdView: UIView {
                     } else if Self.contentLikelyContainsVAST(trimmedAdm) {
                         self.loadVASTContent(trimmedAdm)
                     } else {
-                        self.reportVideoPayloadFailure(Constants.ErrorCodes.invalidAdMarkup, message: Constants.ErrorMessages.invalidAdMarkup)
+                        self.reportVideoPayloadFailure(code:Constants.ErrorCodes.invalidAdMarkup, message: Constants.ErrorMessages.invalidAdMarkup)
                     }
                     return
                 }
@@ -260,7 +260,7 @@ public final class VideoAdView: UIView {
                     return
                 }
 
-                self.reportVideoPayloadFailure(Constants.ErrorCodes.invalidAdMarkup, message: Constants.ErrorMessages.invalidAdMarkup)
+                self.reportVideoPayloadFailure(code:Constants.ErrorCodes.invalidAdMarkup, message: Constants.ErrorMessages.invalidAdMarkup)
             }
         }.resume()
     }

@@ -339,7 +339,7 @@ public final class BidscubeSDK {
         from viewController: UIViewController,
         callback: AdCallback? = nil
     ) {
-        presentAd(placementId, .video, from: viewController, callback)
+        VideoInterstitialPresenter.present(placementId: placementId, from: viewController, callback: callback)
     }
 
     /// Presents fullscreen rewarded video (`onUserRewarded` only after IMA `.COMPLETE`).
@@ -376,7 +376,9 @@ public final class BidscubeSDK {
         _ placementId: String,
         _ callback: AdCallback?
     ) -> UIView {
-        videoAdHostView(placementId: placementId, callback: callback, videoAdFormat: .interstitial, reportOnAdLoading: true)
+        createOnMainThread {
+            VideoInterstitialInlineContainerView(placementId: placementId, callback: callback)
+        }
     }
 
     /// Rewarded placement view; emits `onUserRewarded` only after natural IMA completion (not skip/close/failure).
@@ -517,13 +519,7 @@ public final class BidscubeSDK {
     
     
     public static func pushVideoAd(_ placementId: String, onto navigationController: UINavigationController, callback: AdCallback? = nil) {
-        callback?.onAdLoading(placementId)
-        AdViewController.pushAd(
-            placementId: placementId,
-            adType: .video,
-            onto: navigationController,
-            callback: callback
-        )
+        VideoInterstitialPresenter.push(placementId: placementId, onto: navigationController, callback: callback)
     }
     
     
@@ -561,9 +557,10 @@ public final class BidscubeSDK {
     
     public static func presentAd(_ placementId: String, _ adType: AdType, from viewController: UIViewController, _ callback: AdCallback?) {
         Logger.info("presentAd called for placement: \(placementId), type: \(adType)")
-        
+
         if adType == .video {
-            callback?.onAdLoading(placementId)
+            VideoInterstitialPresenter.present(placementId: placementId, from: viewController, callback: callback)
+            return
         }
 
         AdViewController.presentAd(
@@ -974,6 +971,74 @@ public final class BidscubeSDK {
     public static func debugInfoPlistStructure() -> String {
         return SKAdNetworkManager.debugInfoPlistStructure()
     }
+
+    /// Presents a local test interstitial using inline VAST (demo/test configuration only).
+    public static func presentTestVideoInterstitial(
+        from viewController: UIViewController,
+        vastXML: String,
+        metadata: VideoInterstitialMetadata? = nil,
+        placementId: String = "test-interstitial",
+        callback: AdCallback? = nil
+    ) {
+        let resolvedMetadata = metadata ?? VastMetadataParser.parse(vastXML)
+        VideoInterstitialPresenter.presentTestInterstitial(
+            content: .inlineVAST(vastXML),
+            metadata: resolvedMetadata,
+            from: viewController,
+            placementId: placementId,
+            callback: callback
+        )
+    }
+
+    /// Presents a live IMA ad-tag interstitial (demo/test configuration only).
+    public static func presentTestVideoInterstitialFromAdTag(
+        from viewController: UIViewController,
+        adTagUrl: String? = nil,
+        metadata: VideoInterstitialMetadata = VideoInterstitialMetadata(),
+        placementId: String = "test-interstitial-tag",
+        callback: AdCallback? = nil
+    ) {
+        let resolvedTag = adTagUrl ?? VideoInterstitialTestVAST.liveIMAAdTag
+        VideoInterstitialPresenter.presentTestInterstitial(
+            content: .adTagUrl(resolvedTag),
+            metadata: metadata,
+            from: viewController,
+            placementId: placementId,
+            callback: callback
+        )
+    }
+
+    /// Opens preview/end-card screen only — no video (demo/test configuration only).
+    public static func presentTestEndCardPreview(
+        from viewController: UIViewController,
+        vastXML: String? = nil,
+        metadata: VideoInterstitialMetadata? = nil,
+        placementId: String = "test-end-card-preview",
+        callback: AdCallback? = nil
+    ) {
+        if let vastXML {
+            VideoInterstitialPresenter.presentTestEndCardPreview(
+                vastXML: vastXML,
+                from: viewController,
+                metadata: metadata,
+                placementId: placementId,
+                callback: callback
+            )
+        } else {
+            VideoInterstitialPresenter.presentTestEndCardPreview(
+                metadata: metadata ?? VideoInterstitialMetadata(),
+                from: viewController,
+                placementId: placementId,
+                callback: callback
+            )
+        }
+    }
+}
+
+/// Hardcoded QA VAST fixtures for the test app (not for production).
+public enum BidscubeSDKVideoInterstitialQA {
+    public static let vastWithoutPreview = VideoInterstitialTestVAST.qaWithoutPreview
+    public static let vastWithPreview = VideoInterstitialTestVAST.qaWithPreview
 }
 
 

@@ -61,6 +61,10 @@ private class AdCallbackWrapper: AdCallback {
         originalCallback?.onVideoAdSkippable(placementId)
     }
 
+    func onEndCardShown(_ placementId: String) {
+        originalCallback?.onEndCardShown(placementId)
+    }
+
     func onInstallButtonClicked(_ placementId: String, buttonText: String) {
         originalCallback?.onInstallButtonClicked(placementId, buttonText: buttonText)
     }
