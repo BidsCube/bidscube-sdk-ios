@@ -29,6 +29,13 @@ let package = Package(
                 )
             ],
             path: "bidscubeSdk",
+            exclude: [
+                "Tests",
+                "Controller/ViewController.swift",
+                "Controller/WindowedAdTestViewController.swift",
+                "Views/ContentView.swift",
+                "Views/SDKTestView.swift"
+            ],
             publicHeadersPath: "include",
             cSettings: [
                 .headerSearchPath("include"),

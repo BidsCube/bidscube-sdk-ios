@@ -110,12 +110,6 @@ public final class VideoAdView: UIView {
         loadingLabel.text = message
         callback?.onAdFailed(placementId, errorCode: code, errorMessage: message)
     }
-
-    private static func contentLikelyContainsVAST(_ content: String) -> Bool {
-        let trimmed = content.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return false }
-        return trimmed.range(of: "<VAST", options: .caseInsensitive) != nil
-    }
     
     public func refreshIMASetup() {
         imaVideoHandler?.refreshIMASetup()
@@ -233,34 +227,23 @@ public final class VideoAdView: UIView {
                     return
                 }
 
-                if let jsonData = content.data(using: .utf8),
-                   let json = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
-                   let adm = json["adm"] as? String,
-                   !adm.isEmpty {
-
-                    if let positionValue = json["position"] as? Int,
-                       let position = bidscubeSdk.AdPosition(rawValue: positionValue) {
-                        BidscubeSDK.setResponseAdPosition(position)
-                    }
-
-                    let trimmedAdm = adm.trimmingCharacters(in: .whitespacesAndNewlines)
-                    if trimmedAdm.hasPrefix("http://") || trimmedAdm.hasPrefix("https://") {
-                        self.loadVASTFromURL(trimmedAdm)
-                    } else if Self.contentLikelyContainsVAST(trimmedAdm) {
-                        self.loadVASTContent(trimmedAdm)
-                    } else {
-                        self.reportVideoPayloadFailure(code:Constants.ErrorCodes.invalidAdMarkup, message: Constants.ErrorMessages.invalidAdMarkup)
-                    }
+                let config = BidscubeSDK.getConfiguration()
+                guard let resolved = VideoAdPayloadResolver.resolve(content: content, config: config) else {
+                    self.reportVideoPayloadFailure(code: Constants.ErrorCodes.invalidAdMarkup, message: Constants.ErrorMessages.invalidAdMarkup)
                     return
                 }
 
-                let trimmed = content.trimmingCharacters(in: .whitespacesAndNewlines)
-                if Self.contentLikelyContainsVAST(trimmed) {
-                    self.loadVASTContent(trimmed)
+                if let adTagUrl = resolved.adTagUrl {
+                    self.loadVASTFromURL(adTagUrl)
                     return
                 }
 
-                self.reportVideoPayloadFailure(code:Constants.ErrorCodes.invalidAdMarkup, message: Constants.ErrorMessages.invalidAdMarkup)
+                if let vastContent = resolved.adsResponse ?? resolved.vastXml {
+                    self.loadVASTContent(vastContent)
+                    return
+                }
+
+                self.reportVideoPayloadFailure(code: Constants.ErrorCodes.invalidAdMarkup, message: Constants.ErrorMessages.invalidAdMarkup)
             }
         }.resume()
     }

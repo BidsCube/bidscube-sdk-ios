@@ -9,11 +9,28 @@
 /* Begin PBXBuildFile section */
 		0472AAC92EDDF5E300C51A5A /* bidscubeSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0472AAB42EDDF5E200C51A5A /* bidscubeSdk.framework */; };
 		0472AACA2EDDF5E300C51A5A /* bidscubeSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0472AAB42EDDF5E200C51A5A /* bidscubeSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		04ORTB112E69C68500FC2662 /* OpenRTBPodConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ORTB012E69C68500FC2662 /* OpenRTBPodConfig.swift */; };
+		04ORTB122E69C68500FC2662 /* OpenRTBVideoObjectParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ORTB022E69C68500FC2662 /* OpenRTBVideoObjectParser.swift */; };
+		04ORTB132E69C68500FC2662 /* OpenRTBPodModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ORTB032E69C68500FC2662 /* OpenRTBPodModels.swift */; };
+		04ORTB142E69C68500FC2662 /* OpenRTBPoddedResponseNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ORTB042E69C68500FC2662 /* OpenRTBPoddedResponseNormalizer.swift */; };
+		04ORTB152E69C68500FC2662 /* PoddedPlaybackPlanBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ORTB052E69C68500FC2662 /* PoddedPlaybackPlanBuilder.swift */; };
+		04ORTB162E69C68500FC2662 /* VastAdSequenceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ORTB062E69C68500FC2662 /* VastAdSequenceParser.swift */; };
+		04ORTB172E69C68500FC2662 /* VastPodComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ORTB072E69C68500FC2662 /* VastPodComposer.swift */; };
+		04ORTB182E69C68500FC2662 /* VideoAdPayloadResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ORTB082E69C68500FC2662 /* VideoAdPayloadResolver.swift */; };
+		04ORTB192E69C68500FC2662 /* OpenRTBBidRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ORTB092E69C68500FC2662 /* OpenRTBBidRequestBuilder.swift */; };
+		04ORTB402E69C68500FC2662 /* bidscubeSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0472AAB42EDDF5E200C51A5A /* bidscubeSdk.framework */; };
 		83C597C3AACF24F90F93CF42 /* Pods_testApp_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC1FF7AE42E6B912D9D4CBF /* Pods_testApp_ios.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		0472AAC72EDDF5E300C51A5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04A38F652E69C68500FC2662 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0472AAB32EDDF5E200C51A5A;
+			remoteInfo = bidscubeSdk;
+		};
+		04ORTB382E69C68500FC2662 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 04A38F652E69C68500FC2662 /* Project object */;
 			proxyType = 1;
@@ -39,6 +56,16 @@
 /* Begin PBXFileReference section */
 		0472AA882EDDF3DA00C51A5A /* testApp-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "testApp-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0472AAB42EDDF5E200C51A5A /* bidscubeSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = bidscubeSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		04ORTB012E69C68500FC2662 /* OpenRTBPodConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OpenRTBPodConfig.swift; path = bidscubeSdk/Core/OpenRTBPodConfig.swift; sourceTree = "<group>"; };
+		04ORTB022E69C68500FC2662 /* OpenRTBVideoObjectParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OpenRTBVideoObjectParser.swift; path = bidscubeSdk/OpenRTB/OpenRTBVideoObjectParser.swift; sourceTree = "<group>"; };
+		04ORTB032E69C68500FC2662 /* OpenRTBPodModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OpenRTBPodModels.swift; path = bidscubeSdk/OpenRTB/OpenRTBPodModels.swift; sourceTree = "<group>"; };
+		04ORTB042E69C68500FC2662 /* OpenRTBPoddedResponseNormalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OpenRTBPoddedResponseNormalizer.swift; path = bidscubeSdk/OpenRTB/OpenRTBPoddedResponseNormalizer.swift; sourceTree = "<group>"; };
+		04ORTB052E69C68500FC2662 /* PoddedPlaybackPlanBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PoddedPlaybackPlanBuilder.swift; path = bidscubeSdk/OpenRTB/PoddedPlaybackPlanBuilder.swift; sourceTree = "<group>"; };
+		04ORTB062E69C68500FC2662 /* VastAdSequenceParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VastAdSequenceParser.swift; path = bidscubeSdk/OpenRTB/VastAdSequenceParser.swift; sourceTree = "<group>"; };
+		04ORTB072E69C68500FC2662 /* VastPodComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VastPodComposer.swift; path = bidscubeSdk/OpenRTB/VastPodComposer.swift; sourceTree = "<group>"; };
+		04ORTB082E69C68500FC2662 /* VideoAdPayloadResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoAdPayloadResolver.swift; path = bidscubeSdk/OpenRTB/VideoAdPayloadResolver.swift; sourceTree = "<group>"; };
+		04ORTB092E69C68500FC2662 /* OpenRTBBidRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OpenRTBBidRequestBuilder.swift; path = bidscubeSdk/OpenRTB/OpenRTBBidRequestBuilder.swift; sourceTree = "<group>"; };
+		04ORTB342E69C68500FC2662 /* bidscubeSdkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bidscubeSdkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15C415F0AA61BF2D21006DE4 /* Pods-testApp-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp-ios.debug.xcconfig"; path = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		464F057DEC84650EABE83A3E /* Pods-testApp-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp-ios.release.xcconfig"; path = "Target Support Files/Pods-testApp-ios/Pods-testApp-ios.release.xcconfig"; sourceTree = "<group>"; };
 		CCC1FF7AE42E6B912D9D4CBF /* Pods_testApp_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testApp_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +77,15 @@
 			membershipExceptions = (
 				Controller/ViewController.swift,
 				Controller/WindowedAdTestViewController.swift,
+				Core/OpenRTBPodConfig.swift,
+				OpenRTB/OpenRTBBidRequestBuilder.swift,
+				OpenRTB/OpenRTBPodModels.swift,
+				OpenRTB/OpenRTBPoddedResponseNormalizer.swift,
+				OpenRTB/OpenRTBVideoObjectParser.swift,
+				OpenRTB/PoddedPlaybackPlanBuilder.swift,
+				OpenRTB/VastAdSequenceParser.swift,
+				OpenRTB/VastPodComposer.swift,
+				OpenRTB/VideoAdPayloadResolver.swift,
 				Tests/ConsentTestView.swift,
 				Tests/SKAdNetworkTestView.swift,
 				Tests/WindowedAdTestView.swift,
@@ -136,7 +172,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 			);
-			path = bidscubeSdkTests;
+			path = Tests/bidscubeSdkTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -158,6 +194,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		04ORTB322E69C68500FC2662 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04ORTB402E69C68500FC2662 /* bidscubeSdk.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -166,6 +210,7 @@
 			children = (
 				04A38F702E69C68500FC2662 /* bidscubeSdk */,
 				04A38F7C2E69C68500FC2662 /* bidscubeSdkTests */,
+				04ORTB002E69C68500FC2662 /* OpenRTB */,
 				041A51DF2E7013FA00DC462A /* testApp-ios */,
 				041A51FA2E7013FC00DC462A /* testApp-iosUITests */,
 				0472AA892EDDF3DA00C51A5A /* testApp */,
@@ -184,8 +229,25 @@
 			children = (
 				0472AA882EDDF3DA00C51A5A /* testApp-ios.app */,
 				0472AAB42EDDF5E200C51A5A /* bidscubeSdk.framework */,
+				04ORTB342E69C68500FC2662 /* bidscubeSdkTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		04ORTB002E69C68500FC2662 /* OpenRTB */ = {
+			isa = PBXGroup;
+			children = (
+				04ORTB012E69C68500FC2662 /* OpenRTBPodConfig.swift */,
+				04ORTB022E69C68500FC2662 /* OpenRTBVideoObjectParser.swift */,
+				04ORTB032E69C68500FC2662 /* OpenRTBPodModels.swift */,
+				04ORTB042E69C68500FC2662 /* OpenRTBPoddedResponseNormalizer.swift */,
+				04ORTB052E69C68500FC2662 /* PoddedPlaybackPlanBuilder.swift */,
+				04ORTB062E69C68500FC2662 /* VastAdSequenceParser.swift */,
+				04ORTB072E69C68500FC2662 /* VastPodComposer.swift */,
+				04ORTB082E69C68500FC2662 /* VideoAdPayloadResolver.swift */,
+				04ORTB092E69C68500FC2662 /* OpenRTBBidRequestBuilder.swift */,
+			);
+			name = OpenRTB;
 			sourceTree = "<group>";
 		};
 		6CC2E2A6DC67467EA91C0309 /* Frameworks */ = {
@@ -266,6 +328,27 @@
 			productReference = 0472AAB42EDDF5E200C51A5A /* bidscubeSdk.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		04ORTB302E69C68500FC2662 /* bidscubeSdkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04ORTB352E69C68500FC2662 /* Build configuration list for PBXNativeTarget "bidscubeSdkTests" */;
+			buildPhases = (
+				04ORTB312E69C68500FC2662 /* Sources */,
+				04ORTB322E69C68500FC2662 /* Frameworks */,
+				04ORTB332E69C68500FC2662 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04ORTB392E69C68500FC2662 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				04A38F7C2E69C68500FC2662 /* bidscubeSdkTests */,
+			);
+			name = bidscubeSdkTests;
+			productName = bidscubeSdkTests;
+			productReference = 04ORTB342E69C68500FC2662 /* bidscubeSdkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -303,6 +386,7 @@
 			targets = (
 				0472AA872EDDF3DA00C51A5A /* testApp-ios */,
 				0472AAB32EDDF5E200C51A5A /* bidscubeSdk */,
+				04ORTB302E69C68500FC2662 /* bidscubeSdkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -316,6 +400,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0472AAB22EDDF5E200C51A5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04ORTB332E69C68500FC2662 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -378,6 +469,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04ORTB112E69C68500FC2662 /* OpenRTBPodConfig.swift in Sources */,
+				04ORTB122E69C68500FC2662 /* OpenRTBVideoObjectParser.swift in Sources */,
+				04ORTB132E69C68500FC2662 /* OpenRTBPodModels.swift in Sources */,
+				04ORTB142E69C68500FC2662 /* OpenRTBPoddedResponseNormalizer.swift in Sources */,
+				04ORTB152E69C68500FC2662 /* PoddedPlaybackPlanBuilder.swift in Sources */,
+				04ORTB162E69C68500FC2662 /* VastAdSequenceParser.swift in Sources */,
+				04ORTB172E69C68500FC2662 /* VastPodComposer.swift in Sources */,
+				04ORTB182E69C68500FC2662 /* VideoAdPayloadResolver.swift in Sources */,
+				04ORTB192E69C68500FC2662 /* OpenRTBBidRequestBuilder.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04ORTB312E69C68500FC2662 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +495,11 @@
 			isa = PBXTargetDependency;
 			target = 0472AAB32EDDF5E200C51A5A /* bidscubeSdk */;
 			targetProxy = 0472AAC72EDDF5E300C51A5A /* PBXContainerItemProxy */;
+		};
+		04ORTB392E69C68500FC2662 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0472AAB32EDDF5E200C51A5A /* bidscubeSdk */;
+			targetProxy = 04ORTB382E69C68500FC2662 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -542,6 +654,51 @@
 			};
 			name = Release;
 		};
+		04ORTB362E69C68500FC2662 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bidscube.ios.bidscubeSdkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/bidscubeSdk.framework/bidscubeSdk";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+			};
+			name = Debug;
+		};
+		04ORTB372E69C68500FC2662 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bidscube.ios.bidscubeSdkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/bidscubeSdk.framework/bidscubeSdk";
+				VALIDATE_PRODUCT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+			};
+			name = Release;
+		};
 		04A38F842E69C68500FC2662 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -688,6 +845,15 @@
 			buildConfigurations = (
 				0472AACC2EDDF5E300C51A5A /* Debug */,
 				0472AACD2EDDF5E300C51A5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04ORTB352E69C68500FC2662 /* Build configuration list for PBXNativeTarget "bidscubeSdkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04ORTB362E69C68500FC2662 /* Debug */,
+				04ORTB372E69C68500FC2662 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

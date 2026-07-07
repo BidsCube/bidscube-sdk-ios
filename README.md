@@ -7,6 +7,7 @@ A comprehensive iOS SDK for displaying image, video, and native ads in iOS appli
 - **Image, Video, and Native ad support**
 - **Multiple ad positions** (header, footer, sidebar, fullscreen)
 - **VAST video ad support** with IMA SDK integration
+- **OpenRTB 2.6-style podded video response parsing** (response-side only; legacy GET requests unchanged)
 - **Banner ad management**
 - **Error handling and timeout management**
 - **Production-ready** with comprehensive logging
@@ -18,15 +19,15 @@ A comprehensive iOS SDK for displaying image, video, and native ads in iOS appli
 - CocoaPods 1.10.0+ or Swift Package Manager
 
 ### AppLovin MAX mediation
-**Versions are separate:** the BidsCube iOS library is **`bidscubeSdk`** (e.g. **1.3.0**). The AppLovin pod **`AppLovinMediationBidscubeAdapter`** has its **own** version (e.g. **1.0.3**) and declares `bidscubeSdk ~> 1.2` — CocoaPods installs **bidscubeSdk** transitively; you do **not** add `pod 'bidscubeSdk'` when you already use the adapter. Also add **AppLovinSDK** (≥ 13.0). Deployment target iOS 13.0+.
+**Versions are separate:** the BidsCube iOS library is **`bidscubeSdk`** (e.g. **1.2.5**). The AppLovin pod **`AppLovinMediationBidscubeAdapter`** has its **own** version (e.g. **1.0.3**) and declares `bidscubeSdk ~> 1.2` — CocoaPods installs **bidscubeSdk** transitively; you do **not** add `pod 'bidscubeSdk'` when you already use the adapter. Also add **AppLovinSDK** (≥ 13.0). Deployment target iOS 13.0+.
 
 ## Installation
 ### Swift Package Manager (recommended)
 1. File → **Add Package Dependencies** → `https://github.com/bidscube/bidscube-sdk-ios.git`
-2. Pick BidsCube library version **1.3.0** (or `from: "1.3.0"` in `Package.swift`)
+2. Pick BidsCube library version **1.2.5** (or `from: "1.2.5"` in `Package.swift`)
 ```swift
 dependencies: [
-    .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "1.3.0")
+    .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "1.2.5")
 ]
 ```
 
@@ -36,13 +37,13 @@ platform :ios, '13.0'
 use_frameworks!
 
 target 'YourApp' do
-  pod 'bidscubeSdk', '~> 1.3.0'
+  pod 'bidscubeSdk', '~> 1.2.5'
 end
 ```
 Run `pod install`.
 
 ### CocoaPods + AppLovin MAX (example)
-Adapter pod version (e.g. **1.0.3**) ≠ `bidscubeSdk` version (**1.3.0**). Only adapter + AppLovinSDK; `bidscubeSdk` comes transitively.
+Adapter pod version (e.g. **1.0.3**) ≠ `bidscubeSdk` version (**1.2.5**). Only adapter + AppLovinSDK; `bidscubeSdk` comes transitively.
 
 ```ruby
 platform :ios, '13.0'
@@ -77,6 +78,32 @@ let config = SDKConfig.Builder()
 
 BidscubeSDK.initialize(config: config)
 ```
+
+### OpenRTB 2.6-style podded video responses
+
+The iOS SDK supports **OpenRTB 2.6-style podded video response parsing**. This is **response-side only** — it is **not** a full OpenRTB bid-request client yet. Ad requests still use the existing legacy GET flow (`c=v`, `m=xml`).
+
+Supported response shapes:
+
+- Root `adm` (VAST XML or VAST ad tag URL)
+- Raw inline VAST XML
+- `openrtb.video`, `openRtb.video`, or root `video` pod metadata
+- Podded bids via `bids[]` or `seatbid[].bid[]` (including bid-level `ext`)
+
+Supported pod modes: **structured**, **dynamic**, **hybrid**, and single-ad fallback.
+
+Optional configuration:
+
+```swift
+SDKConfig.Builder()
+    .openRtbPodMetadataEnabled(true)              // default: true
+    .videoPodDurationValidationMode(.lenient)     // or .strict
+    .videoPodSkipPolicy(.skipCurrentAndContinue)
+    .videoPodContinueOnSlotError(true)
+    .videoPodShowCounter(true)
+```
+
+Set `openRtbPodMetadataEnabled(false)` to disable pod parsing and keep legacy root-`adm`/raw-VAST behavior only.
 
 ### 2. Request Ads
 
@@ -340,7 +367,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
-### Version 1.3.0
+### Version 1.2.5
+- **OpenRTB 2.6-style podded video:** response parsing for `bids[]`, `seatbid[].bid[]`, and `openrtb.video` / `openRtb.video` / root `video`; composes multi-slot inline VAST for IMA playback. Legacy GET requests unchanged; not a full OpenRTB bid-request client.
+- **OpenRTB config:** optional `openRtbPodMetadataEnabled`, pod validation mode, skip policy, and related builder flags on `SDKConfig`.
+- **Packaging:** SPM/CocoaPods exclude demo/test views under `bidscubeSdk/Tests/` and sample controllers from the production SDK.
+- **Tests:** OpenRTB normalizer, playback plan builder, payload resolver, and VAST pod composer unit tests.
+
+### Version 1.2.4
 - **Video interstitial (IMA/VAST):** fullscreen interstitial with custom skip overlay, preview end card, and VAST metadata parsing (companion image, click-through, skip offset).
 - **Preview flow:** end card after skip/complete when VAST has companion preview; without companion — no skip button, closes after video.
 - **`onEndCardShown`:** new callback when preview/end-card screen is displayed.

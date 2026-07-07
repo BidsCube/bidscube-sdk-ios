@@ -10,6 +10,11 @@ public final class SDKConfig {
     public let enableSKAdNetwork: Bool
     public let skAdNetworkId: String?
     public let skAdNetworkConversionValue: Int
+    public let openRtbPodMetadataEnabled: Bool
+    public let videoPodDurationValidationMode: OpenRTBPodDurationValidationMode
+    public let videoPodSkipPolicy: OpenRTBPodSkipPolicy
+    public let videoPodContinueOnSlotError: Bool
+    public let videoPodShowCounter: Bool
 
     private init(enableLogging: Bool,
                  enableDebugMode: Bool,
@@ -19,6 +24,11 @@ public final class SDKConfig {
                  enableSKAdNetwork: Bool,
                  skAdNetworkId: String?,
                  skAdNetworkConversionValue: Int,
+                 openRtbPodMetadataEnabled: Bool,
+                 videoPodDurationValidationMode: OpenRTBPodDurationValidationMode,
+                 videoPodSkipPolicy: OpenRTBPodSkipPolicy,
+                 videoPodContinueOnSlotError: Bool,
+                 videoPodShowCounter: Bool
 ) {
         self.enableLogging = enableLogging
         self.enableDebugMode = enableDebugMode
@@ -28,6 +38,11 @@ public final class SDKConfig {
         self.enableSKAdNetwork = enableSKAdNetwork
         self.skAdNetworkId = skAdNetworkId
         self.skAdNetworkConversionValue = skAdNetworkConversionValue
+        self.openRtbPodMetadataEnabled = openRtbPodMetadataEnabled
+        self.videoPodDurationValidationMode = videoPodDurationValidationMode
+        self.videoPodSkipPolicy = videoPodSkipPolicy
+        self.videoPodContinueOnSlotError = videoPodContinueOnSlotError
+        self.videoPodShowCounter = videoPodShowCounter
     }
 
     public final class Builder {
@@ -39,6 +54,11 @@ public final class SDKConfig {
         private var enableSKAdNetwork: Bool = false
         private var skAdNetworkId: String? = nil
         private var skAdNetworkConversionValue: Int = 0
+        private var openRtbPodMetadataEnabled: Bool = true
+        private var videoPodDurationValidationMode: OpenRTBPodDurationValidationMode = .lenient
+        private var videoPodSkipPolicy: OpenRTBPodSkipPolicy = .skipCurrentAndContinue
+        private var videoPodContinueOnSlotError: Bool = true
+        private var videoPodShowCounter: Bool = true
 
         public init() {}
 
@@ -89,7 +109,36 @@ public final class SDKConfig {
             self.skAdNetworkConversionValue = max(0, min(value, 63))
             return self
         }
-        
+
+        @discardableResult
+        public func openRtbPodMetadataEnabled(_ value: Bool) -> Builder {
+            self.openRtbPodMetadataEnabled = value
+            return self
+        }
+
+        @discardableResult
+        public func videoPodDurationValidationMode(_ value: OpenRTBPodDurationValidationMode) -> Builder {
+            self.videoPodDurationValidationMode = value
+            return self
+        }
+
+        @discardableResult
+        public func videoPodSkipPolicy(_ value: OpenRTBPodSkipPolicy) -> Builder {
+            self.videoPodSkipPolicy = value
+            return self
+        }
+
+        @discardableResult
+        public func videoPodContinueOnSlotError(_ value: Bool) -> Builder {
+            self.videoPodContinueOnSlotError = value
+            return self
+        }
+
+        @discardableResult
+        public func videoPodShowCounter(_ value: Bool) -> Builder {
+            self.videoPodShowCounter = value
+            return self
+        }
 
         public func build() -> SDKConfig {
             SDKConfig(
@@ -101,6 +150,11 @@ public final class SDKConfig {
                 enableSKAdNetwork: enableSKAdNetwork,
                 skAdNetworkId: skAdNetworkId,
                 skAdNetworkConversionValue: skAdNetworkConversionValue,
+                openRtbPodMetadataEnabled: openRtbPodMetadataEnabled,
+                videoPodDurationValidationMode: videoPodDurationValidationMode,
+                videoPodSkipPolicy: videoPodSkipPolicy,
+                videoPodContinueOnSlotError: videoPodContinueOnSlotError,
+                videoPodShowCounter: videoPodShowCounter
             )
         }
     }

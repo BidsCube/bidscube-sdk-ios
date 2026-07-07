@@ -168,45 +168,16 @@ enum VideoInterstitialPresenter {
     }
 
     private static func resolvePayload(from content: String) -> LoadedPayload? {
-        var vastXml: String?
-
-        if let jsonData = content.data(using: .utf8),
-           let json = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
-           let adm = json["adm"] as? String,
-           !adm.isEmpty {
-            if let positionValue = json["position"] as? Int,
-               let position = AdPosition(rawValue: positionValue) {
-                BidscubeSDK.setResponseAdPosition(position)
-            }
-            let trimmedAdm = adm.trimmingCharacters(in: .whitespacesAndNewlines)
-            if trimmedAdm.hasPrefix("http://") || trimmedAdm.hasPrefix("https://") {
-                return LoadedPayload(
-                    metadata: VideoInterstitialMetadata(),
-                    adTagUrl: trimmedAdm,
-                    adsResponse: nil,
-                    vastXml: nil
-                )
-            }
-            if contentLikelyContainsVAST(trimmedAdm) {
-                vastXml = trimmedAdm
-            } else {
-                return nil
-            }
-        } else {
-            let trimmed = content.trimmingCharacters(in: .whitespacesAndNewlines)
-            if contentLikelyContainsVAST(trimmed) {
-                vastXml = trimmed
-            } else {
-                return nil
-            }
+        let config = BidscubeSDK.getConfiguration()
+        guard let resolved = VideoAdPayloadResolver.resolve(content: content, config: config) else {
+            return nil
         }
 
-        guard let vastXml else { return nil }
-        let metadata = VastMetadataParser.parse(vastXml)
-        return LoadedPayload(metadata: metadata, adTagUrl: nil, adsResponse: vastXml, vastXml: vastXml)
-    }
-
-    private static func contentLikelyContainsVAST(_ content: String) -> Bool {
-        content.range(of: "<VAST", options: .caseInsensitive) != nil
+        return LoadedPayload(
+            metadata: resolved.metadata,
+            adTagUrl: resolved.adTagUrl,
+            adsResponse: resolved.adsResponse,
+            vastXml: resolved.vastXml ?? resolved.adsResponse
+        )
     }
 }

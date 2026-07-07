@@ -1,5 +1,7 @@
 # Реліз iOS SDK (`bidscubeSdk`) — чеклист і пуш
 
+**Внутрішня документація для команди:** [`doc/README.md`](doc/README.md)
+
 Поточна версія в репозиторії зазначена в:
 
 - `bidscubeSdk/Core/Constants.swift` → `Constants.sdkVersion`
@@ -7,7 +9,7 @@
 - `README.md` (приклади SPM/CocoaPods)
 - анонс у секції **Changelog** в `README.md`
 
-Тег у Git має збігатися з підом: **`v{VERSION}`**, наприклад **`v1.3.0`** (поле `:tag => "v#{spec.version}"` у podspec).
+Тег у Git має збігатися з підом: **`v{VERSION}`**, наприклад **`v1.2.5`** (поле `:tag => "v#{spec.version}"` у podspec).
 
 ---
 
@@ -26,26 +28,54 @@
 
 ## Git: коміт і тег
 
-1. Перевірити диф — **не комітити** `build/`, `.build/`, `Pods/` (якщо не оновлювали навмисно), `*.xcuserstate`.
-2. Закомітити (повідомлення на кшталт: `release: bidscubeSdk 1.3.0`).
+1. Перевірити диф — **не комітити** `build/`, `.build/`, `.swiftpm/`, `Pods/` (якщо не оновлювали навмисно), `DerivedData/`, `.derivedData*`, `__MACOSX/`, `.DS_Store`, `xcuserdata/`, `*.xcuserstate`, `.git/`.
+
+### Чистий source archive (без build/Pods)
+
+Для релізного ZIP або перевірки вмісту репозиторію:
+
+```bash
+cd bidscube-sdk-ios
+git archive --format=zip --prefix=bidscube-sdk-ios/ HEAD \
+  -o bidscube-sdk-ios-source.zip
+```
+
+Або експорт каталогу з виключеннями:
+
+```bash
+tar -czf bidscube-sdk-ios-source.tar.gz \
+  --exclude='.git' \
+  --exclude='.build' \
+  --exclude='build' \
+  --exclude='Pods' \
+  --exclude='DerivedData' \
+  --exclude='.derivedData*' \
+  --exclude='__MACOSX' \
+  --exclude='.DS_Store' \
+  --exclude='xcuserdata' \
+  --exclude='.swiftpm' \
+  .
+```
+
+2. Закомітити (повідомлення на кшталт: `release: bidscubeSdk 1.2.5`).
 3. Створити анотований тег:
    ```bash
-   git tag -a v1.3.0 -m "bidscubeSdk 1.3.0"
+   git tag -a v1.2.5 -m "bidscubeSdk 1.2.5"
    ```
 4. Пушнути гілку і теги:
    ```bash
    git push origin main
-   git push origin v1.3.0
+   git push origin v1.2.5
    ```
    (замість `main` — ваша основна гілка релізів)
 
-Після push тегу **`v1.3.0`** GitHub Actions (`.github/workflows/publish.yml`) автоматично опублікує CocoaPods + створить GitHub Release.
+Після push тегу **`v1.2.5`** GitHub Actions (`.github/workflows/publish.yml`) автоматично опублікує CocoaPods + створить GitHub Release.
 
 ---
 
 ## Swift Package Manager (SPM)
 
-Після того як тег **`v1.3.0`** з’явився на **`https://github.com/bidscube/bidscube-sdk-ios`**, SPM-клієнти знайдуть версію за semver тегами. Нові інтеграції роблять `from: "1.3.0"` або вибирають версію в Xcode **Add Package**.
+Після того як тег **`v1.2.5`** з’явився на **`https://github.com/bidscube/bidscube-sdk-ios`**, SPM-клієнти знайдуть версію за semver тегами. Нові інтеграції роблять `from: "1.2.5"` або вибирають версію в Xcode **Add Package**.
 
 Нічого додатково пушити для trunk SPM не потрібно — достатньо тегу на репозиторії.
 
@@ -70,17 +100,17 @@ pod trunk push bidscubeSdk.podspec
 
 Примітка:
 
-- Podspec вказує `spec.source.tag => v1.3.0` — цей тег **має існувати** у remote на момент `pod trunk push`.
+- Podspec вказує `spec.source.tag => v1.2.5` — цей тег **має існувати** у remote на момент `pod trunk push`.
 
 ---
 
 ## GitHub Release (рекомендовано)
 
-У вебінтерфейсі репозиторію: **Releases → Draft a new release** → Tag **`v1.3.0`**, опис з пунктів Changelog для **1.3.0** (або дочекатися auto-release від Actions).
+У вебінтерфейсі репозиторію: **Releases → Draft a new release** → Tag **`v1.2.5`**, опис з пунктів Changelog для **1.2.5** (або дочекатися auto-release від Actions).
 
 ---
 
 ## Після релізу
 
-- Оновити **AppLovin adapter** podspec/доку, якщо потрібна явна нижня межа (`bidscubeSdk ~> 1.3`).
+- Оновити **AppLovin adapter** podspec/доку, якщо потрібна явна нижня межа (`bidscubeSdk ~> 1.2`).
 - Перевірити кеш CocoaPods CDN через кілька хвилин: `pod search bidscubeSdk`.

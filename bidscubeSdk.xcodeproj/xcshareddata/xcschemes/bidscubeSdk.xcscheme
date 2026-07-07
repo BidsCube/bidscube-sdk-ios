@@ -20,6 +20,20 @@
                ReferencedContainer = "container:bidscubeSdk.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "04ORTB302E69C68500FC2662"
+               BuildableName = "bidscubeSdkTests.xctest"
+               BlueprintName = "bidscubeSdkTests"
+               ReferencedContainer = "container:bidscubeSdk.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -41,7 +55,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "04A38F772E69C68500FC2662"
+               BlueprintIdentifier = "04ORTB302E69C68500FC2662"
                BuildableName = "bidscubeSdkTests.xctest"
                BlueprintName = "bidscubeSdkTests"
                ReferencedContainer = "container:bidscubeSdk.xcodeproj">
