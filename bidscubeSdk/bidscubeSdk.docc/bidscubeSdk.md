@@ -1,102 +1,77 @@
 # ``bidscubeSdk``
 
-A lightweight iOS SDK for displaying image, video, and native ads with optional consent handling. Mirrors the Android API for easy cross‑platform integration.
+Bidscube iOS SDK is a lightweight ad SDK for displaying image, banner, native, and video ads on iOS.
 
 ## Overview
 
-- Initialize once with `SDKConfig`
-- Optional consent flow (GDPR/CCPA)
-- Show ads or obtain embeddable views
-- Manual ad positioning override
+Current capabilities:
 
-## Quick Start
+- Image ads
+- Banner ads
+- Native ads
+- Video ads
+- Interstitial video
+- Rewarded video
+- Inline/embedded video ad views
+- SKAdNetwork helper methods
+- Optional consent helper stubs
+- OpenRTB 2.6-style podded video response parsing
 
-### Initialize
+The SDK uses the existing legacy GET ad request flow.
+OpenRTB support is response-side parsing only.
+The SDK does not currently build or POST OpenRTB bid requests.
 
-```swift
-import bidscubeSdk
+## Package structure
 
-let config = SDKConfig.Builder()
-    .enableLogging(true)
-    .enableDebugMode(false)
-    .defaultAdTimeout(30_000)
-    .defaultAdPosition(.unknown)
-    .build()
+**Core:**
 
-BidscubeSDK.initialize(config: config)
-```
+- `SDKConfig`
+- `Callbacks`
+- `Constants`
+- `SKAdNetworkManager`
 
-### Show an Image Ad
+**Networking:**
 
-```swift
-class MyAdDelegate: AdCallback {
-    func onAdLoading(_ placementId: String) {}
-    func onAdLoaded(_ placementId: String) {}
-    func onAdDisplayed(_ placementId: String) {}
-    func onAdClicked(_ placementId: String) {}
-    func onAdClosed(_ placementId: String) {}
-    func onAdFailed(_ placementId: String, errorCode: Int, errorMessage: String) {}
-}
+- `URLBuilder`
+- `NetworkManager`
+- `DeviceInfo`
 
-let callback = MyAdDelegate()
-BidscubeSDK.showImageAd("20212", callback)
-```
+**Views:**
 
-### Get an Ad View
+- `ImageAdView`
+- `BannerAdView`
+- `NativeAdView`
+- `VideoAdView`
+- `VideoInterstitial/*`
 
-```swift
-let view = BidscubeSDK.getImageAdView("20212", callback)
-```
+**OpenRTB:**
 
-### Video and Native
+- `OpenRTBVideoObjectParser`
+- `OpenRTBPoddedResponseNormalizer`
+- `PoddedPlaybackPlanBuilder`
+- `VastPodComposer`
+- `VideoAdPayloadResolver`
 
-```swift
-BidscubeSDK.showVideoAd("20213", callback)
-BidscubeSDK.showSkippableVideoAd("20213", "Install Now", callback)
-let nativeView = BidscubeSDK.getNativeAdView("20214", callback)
-```
+## Topics
 
-## Ad Positioning
+### Getting Started
 
-- Response-based position is honored when available
-- Manual override:
+- <doc:Installation>
+- <doc:Initialization>
 
-```swift
-BidscubeSDK.setAdPosition(.header)
-let effective = BidscubeSDK.getEffectiveAdPosition()
-```
+### Ad Formats
 
-Positions:
-- `.unknown`, `.aboveTheFold`, `.dependOnScreenSize`, `.belowTheFold`, `.header`, `.footer`, `.sidebar`, `.fullScreen`
+- <doc:ImageAds>
+- <doc:BannerAds>
+- <doc:NativeAds>
+- <doc:VideoAds>
 
-## Consent (Stubbed)
+### Advanced Video
 
-```swift
-BidscubeSDK.requestConsentInfoUpdate(callback: self)
-// In callback, if required, present form
-BidscubeSDK.showConsentForm(self)
-```
+- <doc:OpenRTB-2.6-Podded-Video>
 
-Helpers:
+### Platform Features
 
-```swift
-_ = BidscubeSDK.isConsentRequired()
-_ = BidscubeSDK.hasAdsConsent()
-_ = BidscubeSDK.hasAnalyticsConsent()
-_ = BidscubeSDK.getConsentStatusSummary()
-```
-
-## NativeAdView customization
-
-```swift
-let nativeView = NativeAdView()
-nativeView.setCTAText("Shop Now")
-nativeView.setCustomStyle(.white, .black, .systemBlue)
-nativeView.setCTAButton("Install", .systemBlue, .white)
-```
-
-## Cleanup
-
-```swift
-BidscubeSDK.cleanup()
-```
+- <doc:Callbacks>
+- <doc:SKAdNetwork>
+- <doc:Troubleshooting>

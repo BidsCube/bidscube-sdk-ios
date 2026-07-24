@@ -1,16 +1,23 @@
 # BidsCube iOS SDK
 
-A comprehensive iOS SDK for displaying image, video, and native ads in iOS applications. The SDK supports various ad formats and positions with easy integration.
+Bidscube iOS SDK is a lightweight ad SDK for displaying image, banner, native, and video ads on iOS.
+
+**Current version:** `1.2.6` · **Package:** `bidscubeSdk` · **Minimum iOS:** 13.0
+
+In-repo documentation: `bidscubeSdk/bidscubeSdk.docc/` (DocC) and `doc/` (developer guides).
 
 ## Features
 
-- **Image, Video, and Native ad support**
-- **Multiple ad positions** (header, footer, sidebar, fullscreen)
-- **VAST video ad support** with IMA SDK integration
+- Image, banner, native, and video ads
+- Interstitial video, rewarded video, and inline/embedded video ad views
+- Multiple ad positions (header, footer, sidebar, fullscreen)
+- VAST video ad support with **Google IMA**
 - **OpenRTB 2.6-style podded video response parsing** (response-side only; legacy GET requests unchanged)
-- **Banner ad management**
-- **Error handling and timeout management**
-- **Production-ready** with comprehensive logging
+- SKAdNetwork helper methods
+- Banner ad management
+- Error handling and timeout management
+
+The SDK uses the existing legacy GET ad request flow. OpenRTB support is response-side parsing only. The SDK does not currently build or POST OpenRTB bid requests.
 
 ## Requirements
 - iOS **13.0+** (Swift Package Manager and CocoaPods; single minimum for all integrations)
@@ -19,15 +26,15 @@ A comprehensive iOS SDK for displaying image, video, and native ads in iOS appli
 - CocoaPods 1.10.0+ or Swift Package Manager
 
 ### AppLovin MAX mediation
-**Versions are separate:** the BidsCube iOS library is **`bidscubeSdk`** (e.g. **1.2.5**). The AppLovin pod **`AppLovinMediationBidscubeAdapter`** has its **own** version (e.g. **1.0.3**) and declares `bidscubeSdk ~> 1.2` — CocoaPods installs **bidscubeSdk** transitively; you do **not** add `pod 'bidscubeSdk'` when you already use the adapter. Also add **AppLovinSDK** (≥ 13.0). Deployment target iOS 13.0+.
+**Versions are separate:** the BidsCube iOS library is **`bidscubeSdk`** (e.g. **1.2.6**). The AppLovin pod **`AppLovinMediationBidscubeAdapter`** has its **own** version (e.g. **1.0.3**) and declares `bidscubeSdk ~> 1.2` — CocoaPods installs **bidscubeSdk** transitively; you do **not** add `pod 'bidscubeSdk'` when you already use the adapter. Also add **AppLovinSDK** (≥ 13.0). Deployment target iOS 13.0+.
 
 ## Installation
 ### Swift Package Manager (recommended)
 1. File → **Add Package Dependencies** → `https://github.com/bidscube/bidscube-sdk-ios.git`
-2. Pick BidsCube library version **1.2.5** (or `from: "1.2.5"` in `Package.swift`)
+2. Pick BidsCube library version **1.2.6** (or `from: "1.2.6"` in `Package.swift`)
 ```swift
 dependencies: [
-    .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "1.2.5")
+    .package(url: "https://github.com/bidscube/bidscube-sdk-ios.git", from: "1.2.6")
 ]
 ```
 
@@ -37,13 +44,13 @@ platform :ios, '13.0'
 use_frameworks!
 
 target 'YourApp' do
-  pod 'bidscubeSdk', '~> 1.2.5'
+  pod 'bidscubeSdk', '~> 1.2.6'
 end
 ```
 Run `pod install`.
 
 ### CocoaPods + AppLovin MAX (example)
-Adapter pod version (e.g. **1.0.3**) ≠ `bidscubeSdk` version (**1.2.5**). Only adapter + AppLovinSDK; `bidscubeSdk` comes transitively.
+Adapter pod version (e.g. **1.0.3**) ≠ `bidscubeSdk` version (**1.2.6**). Only adapter + AppLovinSDK; `bidscubeSdk` comes transitively.
 
 ```ruby
 platform :ios, '13.0'
@@ -105,7 +112,13 @@ SDKConfig.Builder()
 
 Set `openRtbPodMetadataEnabled(false)` to disable pod parsing and keep legacy root-`adm`/raw-VAST behavior only.
 
-### 2. Request Ads
+### 2. Default initialization (optional)
+
+```swift
+BidscubeSDK.initialize()
+```
+
+### 3. Request ads
 
 ```swift
 // Set up callback delegate
@@ -155,49 +168,41 @@ let adDelegate = AdDelegate()
 ### Image Ads
 
 ```swift
-// Get image ad view
-let imageAdView = BidscubeSDK.getImageAdView("your_image_placement_id", adDelegate)
+BidscubeSDK.showImageAd("your_image_placement_id", adDelegate)
 
-// Add to your view hierarchy
+let imageAdView = BidscubeSDK.getImageAdView("your_image_placement_id", adDelegate)
 view.addSubview(imageAdView)
-imageAdView.translatesAutoresizingMaskIntoConstraints = false
+```
+
+### Banner Ads
+
+```swift
+BidscubeSDK.showHeaderBanner("your_banner_placement_id", in: viewController, callback: adDelegate)
+BidscubeSDK.showFooterBanner("your_banner_placement_id", in: viewController, callback: adDelegate)
+let banner = BidscubeSDK.getBannerAdView("your_banner_placement_id", position: .header, callback: adDelegate)
+```
 
 ### Video Ads
 
 ```swift
-// Get video ad view
-let videoAdView = BidscubeSDK.getVideoAdView("your_video_placement_id", adDelegate)
+BidscubeSDK.showInterstitialVideoAd("your_video_placement_id", from: viewController, callback: adDelegate)
+BidscubeSDK.showRewardedVideoAd("your_video_placement_id", from: viewController, callback: adDelegate)
+BidscubeSDK.showVideoAd("your_video_placement_id", adDelegate) // legacy; uses key window
 
-// Add to your view hierarchy
-view.addSubview(videoAdView)
-videoAdView.translatesAutoresizingMaskIntoConstraints = false
-
-// Set constraints
-NSLayoutConstraint.activate([
-    videoAdView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-    videoAdView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-    videoAdView.widthAnchor.constraint(equalToConstant: 320),
-    videoAdView.heightAnchor.constraint(equalToConstant: 240)
-])
+let interstitialView = BidscubeSDK.getInterstitialVideoAdView("your_video_placement_id", adDelegate)
+let rewardedView = BidscubeSDK.getRewardedVideoAdView("your_video_placement_id", adDelegate)
+let videoView = BidscubeSDK.getVideoAdView("your_video_placement_id", adDelegate)
 ```
+
+Video playback uses Google IMA. The SDK passes either an ad tag URL or inline VAST XML as `adsResponse`. `onUserRewarded` is only for rewarded video and only after natural completion — not on skip, close, or failure.
 
 ### Native Ads
 
 ```swift
-// Get native ad view
+BidscubeSDK.showNativeAd("your_native_placement_id", adDelegate)
+
 let nativeAdView = BidscubeSDK.getNativeAdView("your_native_placement_id", adDelegate)
-
-// Add to your view hierarchy
 view.addSubview(nativeAdView)
-nativeAdView.translatesAutoresizingMaskIntoConstraints = false
-
-// Set constraints
-NSLayoutConstraint.activate([
-    nativeAdView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-    nativeAdView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-    nativeAdView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-    nativeAdView.heightAnchor.constraint(equalToConstant: 300)
-])
 ```
 
 ## Placement IDs
@@ -324,9 +329,10 @@ See the in-repo demo `bidscubeSdk/Views/CustomAdRenderView.swift` for a working 
    - Check console logs for error messages
 
 2. **Video ads not playing**:
-   - Ensure IMA SDK is properly integrated
-   - Check VAST response format
-   - Verify video URL is accessible
+   - Ensure GoogleInteractiveMediaAds (SPM) or GoogleAds-IMA-iOS-SDK (CocoaPods) is resolved
+   - Check response contains raw VAST, root `adm`, or supported OpenRTB-like podded JSON
+   - Verify VAST contains playable media or a valid ad tag URL
+   - Set `openRtbPodMetadataEnabled(true)` when using podded JSON responses
 
 3. **Build errors**:
    - Ensure iOS 13.0+ deployment target
@@ -366,6 +372,10 @@ let config = SDKConfig.Builder()
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
+
+### Version 1.2.6
+- **`user_id` on ad requests:** `SDKConfig.Builder().userId(_:)` sends the publisher user identifier as query parameter `user_id` on all legacy GET ad requests (image, banner, native, video).
+- **Documentation:** DocC catalog and internal `doc/` updates.
 
 ### Version 1.2.5
 - **OpenRTB 2.6-style podded video:** response parsing for `bids[]`, `seatbid[].bid[]`, and `openrtb.video` / `openRtb.video` / root `video`; composes multi-slot inline VAST for IMA playback. Legacy GET requests unchanged; not a full OpenRTB bid-request client.

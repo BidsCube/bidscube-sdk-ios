@@ -220,7 +220,8 @@ public final class BidscubeSDK {
             position: position,
             timeoutMs: timeout,
             debug: debug,
-            ctaText: ctaText
+            ctaText: ctaText,
+            userId: config.userId
         )
     }
     public static func showImageAd(_ placementId: String, _ callback: AdCallback?) {
@@ -230,7 +231,15 @@ public final class BidscubeSDK {
         // Build POST URL and request body
         let includeSKAdNetworks = configuration?.enableSKAdNetwork ?? false
         
-        guard let url = URLBuilder.buildAdRequestURL(placementId: placementId, adType: .image, position: getEffectiveAdPosition(), timeoutMs: configuration?.defaultAdTimeoutMs ?? Constants.defaultTimeoutMs, debug: configuration?.enableDebugMode ?? false, includeSKAdNetworks: includeSKAdNetworks) else {
+        guard let url = URLBuilder.buildAdRequestURL(
+            placementId: placementId,
+            adType: .image,
+            position: getEffectiveAdPosition(),
+            timeoutMs: configuration?.defaultAdTimeoutMs ?? Constants.defaultTimeoutMs,
+            debug: configuration?.enableDebugMode ?? false,
+            includeSKAdNetworks: includeSKAdNetworks,
+            userId: configuration?.userId
+        ) else {
             print("Failed to build URL for placementId: \(placementId)")
             callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
             return
@@ -403,7 +412,15 @@ public final class BidscubeSDK {
         // Build GET URL with SKAdNetwork parameters
         let includeSKAdNetworks = configuration?.enableSKAdNetwork ?? false
         
-        guard let url = URLBuilder.buildAdRequestURL(placementId: placementId, adType: .native, position: getEffectiveAdPosition(), timeoutMs: configuration?.defaultAdTimeoutMs ?? Constants.defaultTimeoutMs, debug: configuration?.enableDebugMode ?? false, includeSKAdNetworks: includeSKAdNetworks) else {
+        guard let url = URLBuilder.buildAdRequestURL(
+            placementId: placementId,
+            adType: .native,
+            position: getEffectiveAdPosition(),
+            timeoutMs: configuration?.defaultAdTimeoutMs ?? Constants.defaultTimeoutMs,
+            debug: configuration?.enableDebugMode ?? false,
+            includeSKAdNetworks: includeSKAdNetworks,
+            userId: configuration?.userId
+        ) else {
             callback?.onAdFailed(placementId, errorCode: Constants.ErrorCodes.invalidURL, errorMessage: Constants.ErrorMessages.failedToBuildURL)
             return
         }

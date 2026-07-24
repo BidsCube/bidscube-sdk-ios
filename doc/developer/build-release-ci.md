@@ -10,14 +10,14 @@ All must match before release:
 
 | File | Field |
 |------|-------|
-| `bidscubeSdk/Core/Constants.swift` | `sdkVersion = "1.2.4"` |
-| `bidscubeSdk.podspec` | `spec.version = "1.2.4"` |
-| `README.md` | Examples + Changelog header |
-| Git tag | `v1.2.4` |
+| `bidscubeSdk/Core/Constants.swift` | `sdkVersion = "X.Y.Z"` |
+| `bidscubeSdk.podspec` | `spec.version = "X.Y.Z"` |
+| `README.md` / `doc/README.md` | Current version and install snippets |
+| Git tag | `vX.Y.Z` |
 
 Helper script (optional):
 ```bash
-./scripts/update-version.sh 1.2.4
+./scripts/update-version.sh 1.2.5
 ```
 Review diff manually — script also adds generic changelog line.
 
@@ -52,18 +52,23 @@ pod spec lint bidscubeSdk.podspec --allow-warnings --verbose
 See [`RELEASE.md`](../../RELEASE.md) for full checklist.
 
 ```bash
-# 1. Stage SDK + doc changes (NOT build/, Pods/, *.xcuserstate)
-git add bidscubeSdk/ testApp-ios/ Tests/ doc/ README.md RELEASE.md bidscubeSdk.podspec
+./scripts/update-version.sh 1.2.5
 
-# 2. Commit
-git commit -m "release: bidscubeSdk 1.2.4"
-
-# 3. Tag
-git tag -a v1.2.4 -m "bidscubeSdk 1.2.4"
-
-# 4. Push
+git commit -m "release: bidscubeSdk 1.2.5"
+git tag -a v1.2.5 -m "bidscubeSdk 1.2.5"
 git push origin main
-git push origin v1.2.4
+git push origin v1.2.5
+```
+
+Or use placeholders:
+
+```bash
+VERSION=1.2.5
+./scripts/update-version.sh "$VERSION"
+git commit -m "release: bidscubeSdk $VERSION"
+git tag -a "v$VERSION" -m "bidscubeSdk $VERSION"
+git push origin main
+git push origin "v$VERSION"
 ```
 
 ---
@@ -97,9 +102,9 @@ Success notification.
 
 | Channel | Consumer action |
 |---------|-----------------|
-| **SPM** | `.package(url: "…", from: "1.2.4")` |
-| **CocoaPods** | `pod 'bidscubeSdk', '~> 1.2.4'` |
-| **MAX adapter** | `AppLovinMediationBidscubeAdapter` pulls SDK transitively |
+| **SPM** | `.package(url: "…", from: "1.2.5")` |
+| **CocoaPods** | `pod 'bidscubeSdk', '~> 1.2.5'` |
+| **MAX adapter** | Separately distributed Bidscube MAX mediation adapter; pulls `bidscubeSdk` transitively when configured — do not duplicate the SDK pod |
 
 Tag must exist on GitHub before CocoaPods trunk validation succeeds (podspec `source.tag`).
 
@@ -137,5 +142,5 @@ Video interstitial module is **included** in framework.
 ## Rollback
 
 CocoaPods versions cannot be deleted easily. If bad release:
-1. Ship **1.2.5** fix forward
+1. Ship **1.2.6** fix forward
 2. Yank only as last resort via CocoaPods trunk (requires owner)

@@ -1,6 +1,6 @@
 # Architecture
 
-System design of the BidsCube iOS SDK (v1.2.4).
+System design of the BidsCube iOS SDK (v1.2.5).
 
 ---
 
@@ -63,6 +63,25 @@ flowchart TB
 | **Core** | Types, callbacks, constants, SKAdNetwork, logging |
 
 No separate service/repository layer — views often call URLSession directly.
+
+---
+
+## Video response flow (1.2.5)
+
+```
+NetworkManager → raw response → VideoAdPayloadResolver
+  → OpenRTB pod parsing (when enabled) OR legacy root adm / raw VAST fallback
+  → IMA playback
+```
+
+| Component | Role |
+|-----------|------|
+| `OpenRTB/VideoAdPayloadResolver.swift` | Entry point for video payload resolution |
+| `OpenRTBPoddedResponseNormalizer` | Normalizes `bids[]`, `seatbid[].bid[]` |
+| `PoddedPlaybackPlanBuilder` | Builds ordered pod playback slots |
+| `VastPodComposer` | Composes multi-slot inline VAST for IMA `adsResponse` |
+
+Response-side OpenRTB 2.6-style pod parsing only. The SDK does **not** build or POST OpenRTB bid requests (`OpenRTBBidRequestBuilder` is a placeholder).
 
 ---
 

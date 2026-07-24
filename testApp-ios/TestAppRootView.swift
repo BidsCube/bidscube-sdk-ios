@@ -24,7 +24,11 @@ struct TestAppRootView: View {
         }
         .onAppear {
             if !BidscubeSDK.isInitialized() {
-                BidscubeSDK.initialize()
+                let config = SDKConfig.Builder()
+                    .enableLogging(true)
+                    .userId("test-app-user-001")
+                    .build()
+                BidscubeSDK.initialize(config: config)
             }
             BidscubeSDK.requestConsentInfoUpdate(callback: delegate)
         }

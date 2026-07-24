@@ -4,6 +4,27 @@ Common issues for internal support and engineering.
 
 ---
 
+## OpenRTB podded video (1.2.5)
+
+### JSON returned but no video
+
+| Cause | Fix |
+|-------|-----|
+| `openRtbPodMetadataEnabled(false)` | Set true unless intentionally disabling pod logic |
+| Missing usable `adm` on bids | Each slot needs inline VAST XML or ad tag URL |
+| Unsupported shape | Use root `adm`, `bids[]`, or `seatbid[].bid[]` |
+| Missing pod metadata | Add `openrtb.video`, `openRtb.video`, or root `video` |
+
+### Pod order wrong
+
+Ordering priority: (1) `slotinpod`, (2) VAST `<Ad sequence>`, (3) response order. See [openrtb-podded-video.md](openrtb-podded-video.md).
+
+### Mixed URL/XML pod
+
+Current limitation: composer uses the first URL slot and logs a warning. Prefer all-inline VAST slots for multi-ad pods.
+
+---
+
 ## Video interstitial
 
 ### Black screen, no video

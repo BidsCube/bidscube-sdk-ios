@@ -40,7 +40,7 @@ Configured via `SDKConfig.Builder.baseURL(_:)` or `Constants.baseURL`.
 | Video | `v` | `xml` | — | VAST; includes `app_version`, width, height |
 | Native | `n` | `api` | `json` | JSON native object |
 
-Optional: `cta_text`, repeated `skadnet` entries from Info.plist `SKAdNetworkItems`.
+Optional: `user_id` (from `SDKConfig.Builder.userId(_:)`), `cta_text`, repeated `skadnet` entries from Info.plist `SKAdNetworkItems`.
 
 ### Debug mode
 

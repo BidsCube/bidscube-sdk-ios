@@ -40,6 +40,23 @@ Complete map of the `bidscubeSdk` module and supporting repo files.
 
 ---
 
+## OpenRTB — podded video (`bidscubeSdk/OpenRTB/`)
+
+| File | Description |
+|------|-------------|
+| `VideoAdPayloadResolver.swift` | Resolves JSON, root ADM, raw VAST for video playback |
+| `OpenRTBVideoObjectParser.swift` | Parses `openrtb.video` / `openRtb.video` / root `video` |
+| `OpenRTBPoddedResponseNormalizer.swift` | Normalizes `bids[]`, `seatbid[].bid[]` |
+| `PoddedPlaybackPlanBuilder.swift` | Ordered playback slots |
+| `VastAdSequenceParser.swift` | VAST `<Ad sequence>` extraction |
+| `VastPodComposer.swift` | Multi-slot inline VAST → single VAST for IMA |
+| `OpenRTBPodModels.swift` | Internal pod/slot models |
+| `OpenRTBBidRequestBuilder.swift` | **Placeholder** — future POST client (not wired) |
+
+Public config enums: `Core/OpenRTBPodConfig.swift`. See [openrtb-podded-video.md](openrtb-podded-video.md).
+
+---
+
 ## Views — general ads (`bidscubeSdk/Views/`)
 
 | File | Description |
@@ -116,7 +133,7 @@ Complete map of the `bidscubeSdk` module and supporting repo files.
 | File | Description |
 |------|-------------|
 | `Package.swift` | SPM: iOS 13+, IMA from Google SPM |
-| `bidscubeSdk.podspec` | CocoaPods spec v1.2.4 |
+| `bidscubeSdk.podspec` | CocoaPods spec v1.2.5; version must match `Constants.sdkVersion` and the release tag |
 | `Podfile` | Test app dependencies |
 | `bidscubeSdk.xcodeproj/project.pbxproj` | Targets, exclusions, IMA SPM link |
 | `.github/workflows/publish.yml` | Tag-triggered CocoaPods + GitHub Release |

@@ -1,6 +1,8 @@
 # Video Interstitial — Developer Deep Dive
 
-Complete technical reference for the video interstitial module (release 1.2.4).
+Complete technical reference for the video interstitial module (introduced in release **1.2.4**).
+
+The video interstitial module was introduced in 1.2.4 and is still used in **1.2.5**. In 1.2.5, video responses may also be resolved through the OpenRTB 2.6-style podded video parser before being passed to the IMA playback flow.
 
 ---
 
@@ -59,6 +61,18 @@ sequenceDiagram
         VC->>App: onAdClosed
     end
 ```
+
+---
+
+## OpenRTB 1.2.5 interaction
+
+For video responses, `VideoAdPayloadResolver` first attempts OpenRTB-style pod parsing when `openRtbPodMetadataEnabled` is true.
+
+If pod parsing succeeds, selected inline VAST slots are composed through `VastPodComposer` and passed to IMA.
+
+If parsing fails, the SDK falls back to legacy root `adm` or raw VAST.
+
+See [openrtb-podded-video.md](openrtb-podded-video.md).
 
 ---
 

@@ -28,6 +28,14 @@ Complete reference for public static methods on `BidscubeSDK` (`bidscubeSdk/Bids
 | `enableSKAdNetwork(_:)` | false in builder, true in `initialize()` | SKAdNetwork on init |
 | `skAdNetworkId(_:)` | nil | Optional network ID |
 | `skAdNetworkConversionValue(_:)` | 0 | Initial conversion value 0–63 |
+| `userId(_:)` | nil | Publisher user id; sent as `user_id` on ad requests |
+| `openRtbPodMetadataEnabled(_:)` | true | Enable OpenRTB pod metadata parsing on video responses |
+| `videoPodDurationValidationMode(_:)` | `.lenient` | `.lenient` or `.strict` slot duration checks |
+| `videoPodSkipPolicy(_:)` | `.skipCurrentAndContinue` | Pod behaviour on skip |
+| `videoPodContinueOnSlotError(_:)` | true | Continue pod after slot failure |
+| `videoPodShowCounter(_:)` | true | Show pod slot counter in UI |
+
+See [openrtb-podded-video.md](openrtb-podded-video.md).
 
 ---
 

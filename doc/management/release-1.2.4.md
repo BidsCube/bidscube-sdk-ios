@@ -1,5 +1,7 @@
 # Release 1.2.4 — Summary
 
+> Historical release note. Current SDK documentation should use **1.2.5** unless explicitly discussing the 1.2.4 video interstitial release.
+
 **Version:** 1.2.4  
 **Tag:** `v1.2.4`  
 **Type:** Patch/minor feature release (video interstitial + preview end card)

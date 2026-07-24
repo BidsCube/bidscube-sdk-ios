@@ -11,8 +11,8 @@ How each ad format works inside the SDK.
 | Banner | `.image` | `b` | JS/HTML | `BannerAdView` | `getBannerAdView`, `showHeaderBanner`, … |
 | Image | `.image` | `b` | JSON/HTML | `ImageAdView` / `BannerAdView` | `showImageAd`, `getImageAdView` |
 | Native | `.native` | `n` | JSON | `NativeAdView` | `showNativeAd`, `getNativeAdView` |
-| Video interstitial | `.video` | `v` | XML/VAST | `VideoInterstitialViewController` | `showInterstitialVideoAd` |
-| Video rewarded | `.video` | `v` | XML/VAST | `VideoAdView` + `IMAVideoAdHandler` | `showRewardedVideoAd` |
+| Video interstitial | `.video` | `v` | VAST / OpenRTB JSON | `VideoInterstitialViewController` | `showInterstitialVideoAd` |
+| Video rewarded | `.video` | `v` | VAST / OpenRTB JSON | `VideoAdView` + IMA | `showRewardedVideoAd` |
 
 ---
 
@@ -59,7 +59,17 @@ How each ad format works inside the SDK.
 
 ---
 
-## Video interstitial (new — 1.2.4)
+## OpenRTB podded video (1.2.5)
+
+**Implementation:** `OpenRTB/*`, shared `VideoAdPayloadResolver`
+
+- Response-side only — legacy GET unchanged.
+- Composes multi-slot inline VAST for Google IMA `adsResponse`.
+- See [openrtb-podded-video.md](openrtb-podded-video.md).
+
+---
+
+## Video interstitial (1.2.4+)
 
 **Implementation:** `Views/VideoInterstitial/*`
 
@@ -131,9 +141,9 @@ Demo: `CustomAdRenderView.swift`
 
 Test app includes `MAXTestView` — separate from SDK core.
 
-Production apps use **`AppLovinMediationBidscubeAdapter`** pod which pulls `bidscubeSdk` transitively.
+If integrating through AppLovin MAX, use the separately distributed Bidscube MAX mediation adapter. Do not add a duplicate direct `bidscubeSdk` dependency if the adapter already pulls the SDK transitively.
 
-Adapter version ≠ SDK version. See public README.
+Adapter version ≠ SDK version. The adapter is distributed separately from this repository. See public README.
 
 ---
 

@@ -36,7 +36,7 @@ Optional methods have empty default implementations in `AdCallback` extension â€
 
 | Callback | When |
 |----------|------|
-| `onInstallButtonClicked(placementId, buttonText)` | **Defined but never emitted** â€” end card uses `onAdClicked` |
+| `onInstallButtonClicked(placementId, buttonText)` | **Reserved for future CTA-specific reporting.** Current end card CTA taps are reported through `onAdClicked` |
 | `onAdRenderOverride(adm, position)` | Image/native JSON has both `adm` and `position` |
 
 ---

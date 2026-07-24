@@ -15,6 +15,8 @@ public final class SDKConfig {
     public let videoPodSkipPolicy: OpenRTBPodSkipPolicy
     public let videoPodContinueOnSlotError: Bool
     public let videoPodShowCounter: Bool
+    /// Publisher user identifier sent as `user_id` on ad requests.
+    public let userId: String?
 
     private init(enableLogging: Bool,
                  enableDebugMode: Bool,
@@ -28,7 +30,8 @@ public final class SDKConfig {
                  videoPodDurationValidationMode: OpenRTBPodDurationValidationMode,
                  videoPodSkipPolicy: OpenRTBPodSkipPolicy,
                  videoPodContinueOnSlotError: Bool,
-                 videoPodShowCounter: Bool
+                 videoPodShowCounter: Bool,
+                 userId: String?
 ) {
         self.enableLogging = enableLogging
         self.enableDebugMode = enableDebugMode
@@ -43,6 +46,7 @@ public final class SDKConfig {
         self.videoPodSkipPolicy = videoPodSkipPolicy
         self.videoPodContinueOnSlotError = videoPodContinueOnSlotError
         self.videoPodShowCounter = videoPodShowCounter
+        self.userId = userId
     }
 
     public final class Builder {
@@ -59,6 +63,7 @@ public final class SDKConfig {
         private var videoPodSkipPolicy: OpenRTBPodSkipPolicy = .skipCurrentAndContinue
         private var videoPodContinueOnSlotError: Bool = true
         private var videoPodShowCounter: Bool = true
+        private var userId: String? = nil
 
         public init() {}
 
@@ -140,6 +145,18 @@ public final class SDKConfig {
             return self
         }
 
+        /// Sets the publisher user id sent to the ad server as query parameter `user_id`.
+        @discardableResult
+        public func userId(_ value: String?) -> Builder {
+            if let value {
+                let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+                self.userId = trimmed.isEmpty ? nil : trimmed
+            } else {
+                self.userId = nil
+            }
+            return self
+        }
+
         public func build() -> SDKConfig {
             SDKConfig(
                 enableLogging: enableLogging,
@@ -154,7 +171,8 @@ public final class SDKConfig {
                 videoPodDurationValidationMode: videoPodDurationValidationMode,
                 videoPodSkipPolicy: videoPodSkipPolicy,
                 videoPodContinueOnSlotError: videoPodContinueOnSlotError,
-                videoPodShowCounter: videoPodShowCounter
+                videoPodShowCounter: videoPodShowCounter,
+                userId: userId
             )
         }
     }

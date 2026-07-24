@@ -9,7 +9,8 @@ public struct URLBuilder {
         timeoutMs: Int,
         debug: Bool,
         ctaText: String? = nil,
-        includeSKAdNetworks: Bool = true
+        includeSKAdNetworks: Bool = true,
+        userId: String? = nil
     ) -> URL? {
         return buildAdRequestURL(
             base: Constants.baseURL,
@@ -19,7 +20,8 @@ public struct URLBuilder {
             timeoutMs: timeoutMs,
             debug: debug,
             ctaText: ctaText,
-            includeSKAdNetworks: includeSKAdNetworks
+            includeSKAdNetworks: includeSKAdNetworks,
+            userId: userId
         )
     }
 
@@ -31,7 +33,8 @@ public struct URLBuilder {
         timeoutMs: Int,
         debug: Bool,
         ctaText: String? = nil,
-        includeSKAdNetworks: Bool = true
+        includeSKAdNetworks: Bool = true,
+        userId: String? = nil
     ) -> URL? {
         guard var components = URLComponents(string: base) else {
             logError("Failed to create URL components from base: \(base)")
@@ -40,6 +43,10 @@ public struct URLBuilder {
 
         var queryItems = buildCommonQueryItems(placementId: placementId, adType: adType)
         queryItems.append(contentsOf: buildPrivacyQueryItems())
+
+        if let userId = userId?.trimmingCharacters(in: .whitespacesAndNewlines), !userId.isEmpty {
+            queryItems.append(URLQueryItem(name: Constants.QueryParams.userId, value: userId))
+        }
 
         if let ctaText = ctaText {
             queryItems.append(URLQueryItem(name: Constants.QueryParams.ctaText, value: ctaText))
